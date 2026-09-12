@@ -1,0 +1,164 @@
+<section class="stats-section">
+
+    <!-- Resume Score -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            <i class="fas fa-file-alt"></i>
+        </div>
+
+        <h3>Resume Score</h3>
+
+        <h2>
+
+            {% if session.analysis %}
+
+                {{ session.analysis.resume_score }}%
+
+            {% else %}
+
+                --
+
+            {% endif %}
+
+        </h2>
+
+        <p>
+
+            {% if session.analysis %}
+
+                AI evaluated your resume quality.
+
+            {% else %}
+
+                Upload a resume to view your score.
+
+            {% endif %}
+
+        </p>
+
+    </div>
+
+    <!-- ATS Score -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            <i class="fas fa-user-check"></i>
+        </div>
+
+        <h3>ATS Score</h3>
+
+        <h2>
+
+            {% if session.analysis %}
+
+                {{ session.analysis.ats_score }}%
+
+            {% else %}
+
+                --
+
+            {% endif %}
+
+        </h2>
+
+        <p>
+
+            {% if session.analysis %}
+
+                ATS compatibility calculated.
+
+            {% else %}
+
+                Analyze your resume first.
+
+            {% endif %}
+
+        </p>
+
+    </div>
+
+    <!-- Career -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            <i class="fas fa-briefcase"></i>
+        </div>
+
+        <h3>Career</h3>
+
+        <h2 style="font-size:22px;">
+
+            {% if session.analysis %}
+
+                {{ session.analysis.predicted_job }}
+
+            {% else %}
+
+                --
+
+            {% endif %}
+
+        </h2>
+
+        <p>
+
+            {% if session.analysis %}
+
+                AI predicted your best career.
+
+            {% else %}
+
+                Upload resume to predict.
+
+            {% endif %}
+
+        </p>
+
+    </div>
+
+    <!-- Skills -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            <i class="fas fa-code"></i>
+        </div>
+
+        <h3>Skills</h3>
+
+        <h2>
+
+            {% if session.analysis %}
+
+                {{ session.analysis.skills|length }}
+
+            {% else %}
+
+                --
+
+            {% endif %}
+
+        </h2>
+
+        <p>
+
+            {% if session.analysis %}
+
+                Skills detected successfully.
+
+            {% else %}
+
+                Waiting for resume.
+
+            {% endif %}
+
+        </p>
+
+    </div>
+
+</section>
+

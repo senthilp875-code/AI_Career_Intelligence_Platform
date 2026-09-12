@@ -1,0 +1,60 @@
+{% extends "admin/base.html" %}
+{% block title %}Settings | TalentIQ AI{% endblock %}
+{% block page_heading %}Platform Configuration{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px;">
+    <section class="admin-panel">
+        <div class="admin-panel-header">
+            <h2><i class="fas fa-sliders text-primary"></i> Application Settings</h2>
+        </div>
+        
+        <form method="POST" class="admin-search-wrap" style="flex-direction: column; display: flex; gap: 1.5rem; background: white;">
+            <div class="admin-settings-form" style="width: 100%; max-width: 100%;">
+                <div class="mb-4">
+                    <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 1.25rem; color: var(--text-main); border-left: 4px solid var(--primary); padding-left: 0.75rem;">General Branding</h3>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label>Platform Name</label>
+                        <input type="text" name="app_name" value="{{ settings.get('app_name', 'TalentIQ AI') }}" required style="width: 100%; margin-bottom: 0;">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 1.25rem; color: var(--text-main); border-left: 4px solid var(--primary); padding-left: 0.75rem;">AI Intelligence Engine</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div>
+                            <label>AI Provider</label>
+                            <input type="text" name="ai_provider" value="{{ settings.get('ai_provider', 'local') }}" style="width: 100%; margin-bottom: 0;">
+                        </div>
+                        <div>
+                            <label>AI Model Version</label>
+                            <input type="text" name="ai_model" value="{{ settings.get('ai_model', 'career-assistant-v2') }}" style="width: 100%; margin-bottom: 0;">
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label>Maximum Chat Token Length</label>
+                        <input type="number" name="ai_max_message_length" min="100" max="5000"
+                               value="{{ settings.get('ai_max_message_length', '1000') }}" style="width: 100%; margin-bottom: 0;">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 1.25rem; color: var(--text-main); border-left: 4px solid var(--primary); padding-left: 0.75rem;">File Processing</h3>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label>Supported Extensions (comma-separated)</label>
+                        <input type="text" name="supported_file_types" value="{{ supported_exts }}" placeholder="pdf, docx, doc" style="width: 100%; margin-bottom: 0;">
+                        <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">Current extensions allowed for resume uploads.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="padding-top: 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: flex-end;">
+                <button type="submit" class="admin-btn">
+                    <i class="fas fa-cloud-arrow-up"></i> Save Configuration
+                </button>
+            </div>
+        </form>
+    </section>
+</div>
+{% endblock %}
+

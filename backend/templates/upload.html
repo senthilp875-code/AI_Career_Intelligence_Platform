@@ -1,0 +1,231 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}
+Upload Resume | TalentIQ AI
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/upload.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ================= LOADING OVERLAY ================= -->
+
+<div id="loadingOverlay" class="loading-overlay">
+
+    <div class="loading-card">
+
+        <div class="loading-logo">
+            🤖
+        </div>
+
+        <h2>TalentIQ AI</h2>
+
+        <p>Analyzing your resume...</p>
+
+        <div class="loading-spinner"></div>
+
+        <div class="loading-progress">
+
+            <div class="loading-bar"></div>
+
+        </div>
+
+        <div class="loading-steps">
+
+            <p>✅ Reading Resume</p>
+            <p>✅ Detecting Skills</p>
+            <p>✅ Calculating ATS Score</p>
+            <p>✅ Predicting Career</p>
+            <p>✅ Generating AI Report</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= MAIN PAGE ================= -->
+
+<div class="upload-page">
+
+    <div class="upload-header">
+
+        <span class="upload-badge">
+
+            <i class="fas fa-robot"></i>
+
+            AI Resume Analysis
+
+        </span>
+
+        <h1>Upload Your Resume</h1>
+
+        <p>
+
+            Upload your latest resume and let TalentIQ AI analyze your
+            skills, ATS score, career opportunities, interview preparation,
+            and personalized recommendations.
+
+        </p>
+
+    </div>
+
+    <div class="upload-card">
+
+        <form id="uploadForm"
+              action="/upload"
+              method="POST"
+              enctype="multipart/form-data">
+
+            <label class="upload-box">
+
+                <input
+                    id="resumeInput"
+                    type="file"
+                    name="resume"
+                    accept=".pdf,.doc,.docx"
+                    required>
+
+                <i class="fas fa-cloud-upload-alt"></i>
+
+                <h2>Drag & Drop Resume</h2>
+
+                <p>or click here to browse files</p>
+
+                <small>
+                    Supported: PDF, DOC, DOCX (Max 10 MB)
+                </small>
+
+            </label>
+            <div id="fileName" class="selected-file">
+
+               No file selected
+
+            </div>
+
+            <button
+                type="submit"
+                class="analyze-btn">
+
+                <i class="fas fa-brain"></i>
+
+                Analyze Resume
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="upload-features">
+
+        <div class="feature-card">
+
+            <i class="fas fa-user-check"></i>
+
+            <h3>ATS Analysis</h3>
+
+            <p>
+                Measure how well your resume performs
+                in Applicant Tracking Systems.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <i class="fas fa-brain"></i>
+
+            <h3>AI Skill Detection</h3>
+
+            <p>
+                Detect technical skills, soft skills,
+                and missing competencies automatically.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <i class="fas fa-route"></i>
+
+            <h3>Career Prediction</h3>
+
+            <p>
+                Receive career predictions,
+                interview preparation,
+                and job recommendations.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+
+const uploadForm = document.getElementById("uploadForm");
+const resumeInput = document.getElementById("resumeInput");
+const fileName = document.getElementById("fileName");
+
+resumeInput.addEventListener("change", function(){
+
+    if(this.files.length > 0){
+
+        const file = this.files[0];
+
+        const allowed = [
+            "application/pdf",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        ];
+
+        if(!allowed.includes(file.type)){
+
+            alert("Please upload only PDF, DOC or DOCX files.");
+
+            this.value = "";
+
+            fileName.innerHTML = "No file selected";
+
+            return;
+
+        }
+
+        if(file.size > 10 * 1024 * 1024){
+
+            alert("File size must be less than 10 MB.");
+
+            this.value = "";
+
+            fileName.innerHTML = "No file selected";
+
+            return;
+
+        }
+
+        fileName.innerHTML = "📄 " + file.name;
+
+    }
+
+});
+
+uploadForm.addEventListener("submit", function(){
+
+    document.getElementById("loadingOverlay").style.display = "flex";
+
+});
+
+</script>
+
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+
+{% endblock %}

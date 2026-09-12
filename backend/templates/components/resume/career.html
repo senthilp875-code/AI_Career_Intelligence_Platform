@@ -1,0 +1,88 @@
+<section class="career-section">
+
+    <!-- ================= AI PREDICTION ================= -->
+
+    <div class="career-card">
+
+        <div class="career-header">
+
+            <h2>
+
+                <i class="fas fa-bullseye"></i>
+
+                AI Career Prediction
+
+            </h2>
+
+            <span class="confidence">
+
+                98% Confidence
+
+            </span>
+
+        </div>
+
+        <div class="career-main">
+
+            <h1>
+
+                {{ analysis.predicted_job }}
+
+            </h1>
+
+            <p>
+
+                Based on your resume, skills and experience,
+                TalentIQ AI predicts this is your strongest career path.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- ================= TOP MATCHES ================= -->
+
+    <div class="matches-card">
+
+        <h2>
+
+            <i class="fas fa-chart-line"></i>
+
+            Top Career Matches
+
+        </h2>
+
+        {% for career in analysis.top_careers %}
+
+        <div class="career-row">
+
+            <div class="career-name">
+
+                {{ career[0] }}
+
+            </div>
+
+            <div class="career-progress">
+
+                <div class="career-fill"
+
+                     style="width: {{ career[1] }}%;">
+
+                </div>
+
+            </div>
+
+            <div class="career-percent">
+
+                {{ career[1] }}%
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>

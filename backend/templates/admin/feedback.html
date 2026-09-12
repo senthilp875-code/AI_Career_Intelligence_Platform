@@ -1,0 +1,149 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+Feedback | Admin | TalentIQ AI
+{% endblock %}
+
+{% block page_heading %}
+User Feedback
+{% endblock %}
+
+{% block content %}
+
+<div class="admin-page">
+
+    <!-- Header -->
+    <div class="admin-page-header">
+
+        <div>
+            <h1>
+                <i class="fas fa-star"></i>
+                User Feedback
+            </h1>
+
+            <p>
+                Review feedback and ratings submitted by TalentIQ AI users.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- Feedback Card -->
+    <div class="admin-card">
+
+        <div class="admin-card-header">
+
+            <div>
+                <h2>
+                    <i class="fas fa-comments"></i>
+                    All Feedback
+                </h2>
+
+                <p>
+                    User reviews and ratings
+                </p>
+            </div>
+
+            <span class="admin-badge">
+                {{ feedback|length }} Feedback
+            </span>
+
+        </div>
+
+
+        {% if feedback %}
+
+        <div class="admin-table-wrapper">
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+                        <th>#</th>
+                        <th>User</th>
+                        <th>Rating</th>
+                        <th>Feedback</th>
+                        <th>Date</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for row in feedback %}
+
+                    <tr>
+
+                        <td>
+                            {{ loop.index }}
+                        </td>
+
+                        <td>
+
+                            <strong>
+                                {{ row[1] }}
+                            </strong>
+
+                        </td>
+
+                        <td>
+
+                            <span class="feedback-rating">
+
+                                {% for i in range(row[2]|int) %}
+                                    <i class="fas fa-star"></i>
+                                {% endfor %}
+
+                            </span>
+
+                            <span class="rating-number">
+                                {{ row[2] }}/5
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <div class="feedback-message">
+                                {{ row[3] }}
+                            </div>
+
+                        </td>
+
+                        <td>
+                            {{ row[4] }}
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="admin-empty-state">
+
+            <i class="fas fa-comment-slash"></i>
+
+            <h3>No Feedback Yet</h3>
+
+            <p>
+                Users have not submitted any feedback yet.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,3318 @@
+/* =====================================================
+   TalentIQ AI Resume Dashboard v1.0
+===================================================== */
+
+.resume-dashboard{
+
+    max-width:1400px;
+
+    margin:auto;
+
+    padding:40px 20px;
+
+}
+
+/* =====================================================
+   SCORE SECTION
+===================================================== */
+
+.score-section{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:25px;
+
+    margin-bottom:40px;
+
+}
+
+.score-card{
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    padding:28px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    border:1px solid #e2e8f0;
+
+}
+
+.score-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 25px 50px rgba(37,99,235,.15);
+
+}
+
+.score-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+    color:white;
+
+    font-size:28px;
+
+    flex-shrink:0;
+
+}
+
+.score-content{
+
+    flex:1;
+
+}
+
+.score-content h4{
+
+    color:#64748b;
+
+    font-size:15px;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+}
+
+.score-content h2{
+
+    color:#0f172a;
+
+    font-size:34px;
+
+    margin-bottom:8px;
+
+    font-weight:700;
+
+}
+
+.score-content p{
+
+    color:#94a3b8;
+
+    font-size:14px;
+
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1100px){
+
+.score-section{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:700px){
+
+.score-section{
+
+grid-template-columns:1fr;
+
+}
+
+.score-card{
+
+padding:22px;
+
+}
+
+.score-content h2{
+
+font-size:28px;
+
+}
+
+}
+/* =====================================================
+   PROFILE SECTION
+===================================================== */
+
+.profile-section{
+
+    margin-bottom:35px;
+
+}
+
+.profile-card{
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    padding:30px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    border:1px solid #e2e8f0;
+
+}
+
+.profile-card h2{
+
+    font-size:26px;
+
+    margin-bottom:25px;
+
+    color:#0f172a;
+
+}
+
+.profile-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+
+}
+
+.profile-item{
+
+    background:#f8fafc;
+
+    border-radius:15px;
+
+    padding:18px;
+
+}
+
+.profile-item span{
+
+    display:block;
+
+    color:#64748b;
+
+    font-size:14px;
+
+    margin-bottom:8px;
+
+}
+
+.profile-item strong{
+
+    color:#0f172a;
+
+    word-break:break-word;
+
+}
+
+@media(max-width:768px){
+
+.profile-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+/* =====================================================
+   SKILLS SECTION
+===================================================== */
+
+.skills-section{
+
+    margin-bottom:35px;
+
+}
+
+.skills-card{
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    padding:30px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    border:1px solid #e2e8f0;
+
+}
+
+.skills-card h2{
+
+    font-size:26px;
+
+    color:#0f172a;
+
+    margin-bottom:25px;
+
+}
+
+.skills-container{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+}
+
+.skill-chip{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:12px 20px;
+
+    border-radius:50px;
+
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+    color:white;
+
+    font-weight:600;
+
+    transition:.35s;
+
+}
+
+.skill-chip:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 25px rgba(37,99,235,.25);
+
+}
+
+.skill-chip i{
+
+    font-size:14px;
+
+}
+
+.empty-text{
+
+    color:#64748b;
+
+}
+/* =====================================================
+   CAREER SECTION
+===================================================== */
+
+.career-section{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:30px;
+
+    margin-bottom:35px;
+
+}
+
+.career-card,
+.matches-card{
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    padding:30px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    border:1px solid #e2e8f0;
+
+}
+
+.career-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.career-header h2{
+
+    color:#0f172a;
+
+    font-size:26px;
+
+}
+
+.confidence{
+
+    background:#dcfce7;
+
+    color:#16a34a;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.career-main{
+
+    text-align:center;
+
+    padding:30px 0;
+
+}
+
+.career-main h1{
+
+    font-size:42px;
+
+    color:#2563eb;
+
+    margin-bottom:15px;
+
+}
+
+.career-main p{
+
+    color:#64748b;
+
+    line-height:1.8;
+
+}
+
+.matches-card h2{
+
+    margin-bottom:30px;
+
+    color:#0f172a;
+
+}
+
+.career-row{
+
+    display:grid;
+
+    grid-template-columns:180px 1fr 70px;
+
+    gap:15px;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.career-name{
+
+    font-weight:600;
+
+    color:#334155;
+
+}
+
+.career-progress{
+
+    height:12px;
+
+    background:#e2e8f0;
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+}
+
+.career-fill{
+
+    height:100%;
+
+    border-radius:30px;
+
+    background:linear-gradient(90deg,#2563eb,#7c3aed);
+
+}
+
+.career-percent{
+
+    font-weight:700;
+
+    color:#2563eb;
+
+}
+
+@media(max-width:900px){
+
+.career-section{
+
+grid-template-columns:1fr;
+
+}
+
+.career-row{
+
+grid-template-columns:1fr;
+
+gap:8px;
+
+}
+
+}
+/* =====================================================
+   ROADMAP SECTION
+===================================================== */
+
+.roadmap-section{
+
+    margin-bottom:35px;
+
+}
+
+.roadmap-card{
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    padding:35px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    border:1px solid #e2e8f0;
+
+}
+
+.roadmap-card h2{
+
+    font-size:28px;
+
+    color:#0f172a;
+
+    margin-bottom:12px;
+
+}
+
+.roadmap-desc{
+
+    color:#64748b;
+
+    margin-bottom:30px;
+
+}
+
+.roadmap-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+}
+
+.roadmap-item{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+}
+
+.step-number{
+
+    width:50px;
+
+    height:50px;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:20px;
+
+    font-weight:700;
+
+    flex-shrink:0;
+
+}
+
+.step-content{
+
+    flex:1;
+
+    padding-bottom:20px;
+
+    border-bottom:1px solid #e2e8f0;
+
+}
+
+.step-content h3{
+
+    color:#0f172a;
+
+    margin-bottom:8px;
+
+}
+
+.step-content p{
+
+    color:#64748b;
+
+    line-height:1.7;
+
+}
+/* =====================================================
+   AI RECOMMENDATIONS
+===================================================== */
+
+.recommendation-section{
+
+    margin-bottom:40px;
+
+}
+
+.recommendation-card{
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    padding:35px;
+
+    border:1px solid #e2e8f0;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+}
+
+.recommendation-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.recommendation-header h2{
+
+    color:#0f172a;
+
+}
+
+.ai-badge{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:8px 16px;
+
+    border-radius:30px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.recommendation-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.recommendation-item{
+
+    display:flex;
+
+    gap:20px;
+
+    padding:22px;
+
+    border-radius:18px;
+
+    transition:.35s;
+
+    border-left:6px solid;
+
+}
+
+.recommendation-item:hover{
+
+    transform:translateX(8px);
+
+}
+
+.high{
+
+    background:#fef2f2;
+
+    border-color:#ef4444;
+
+}
+
+.medium{
+
+    background:#fff7ed;
+
+    border-color:#f59e0b;
+
+}
+
+.low{
+
+    background:#f0fdf4;
+
+    border-color:#22c55e;
+
+}
+
+.priority{
+
+    min-width:90px;
+
+    height:36px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:13px;
+
+    font-weight:700;
+
+}
+
+.high .priority{
+
+    background:#ef4444;
+
+}
+
+.medium .priority{
+
+    background:#f59e0b;
+
+}
+
+.low .priority{
+
+    background:#22c55e;
+
+}
+
+.recommendation-content h3{
+
+    color:#0f172a;
+
+    margin-bottom:8px;
+
+}
+
+.recommendation-content p{
+
+    color:#64748b;
+
+    line-height:1.7;
+
+}
+
+@media(max-width:768px){
+
+.recommendation-item{
+
+flex-direction:column;
+
+}
+
+}
+/* =====================================================
+   PREMIUM AI ANALYTICS DASHBOARD
+===================================================== */
+
+.chart-section{
+
+    margin:40px 0;
+
+}
+
+.chart-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:30px;
+
+}
+
+.chart-card{
+
+    background:linear-gradient(145deg,#ffffff,#f8fbff);
+
+    border-radius:24px;
+
+    padding:30px;
+
+    border:1px solid #e2e8f0;
+
+    box-shadow:0 15px 35px rgba(15,23,42,.08);
+
+    transition:.35s;
+
+}
+
+.chart-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 25px 50px rgba(37,99,235,.15);
+
+}
+
+.chart-card.wide{
+
+    grid-column:span 2;
+
+}
+
+.chart-card h3{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#0f172a;
+
+    margin-bottom:25px;
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+.chart-card h3 i{
+
+    color:#2563eb;
+
+}
+
+.chart-container{
+
+    position:relative;
+
+    width:100%;
+
+    height:320px;
+
+}
+
+.chart-card.wide .chart-container{
+
+    height:380px;
+
+}
+
+canvas{
+
+    width:100% !important;
+
+    height:100% !important;
+
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:992px){
+
+.chart-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.chart-card.wide{
+
+    grid-column:auto;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.chart-card{
+
+    padding:20px;
+
+}
+
+.chart-container{
+
+    height:280px;
+
+}
+
+.chart-card.wide .chart-container{
+
+    height:320px;
+
+}
+
+.chart-card h3{
+
+    font-size:20px;
+
+}
+
+}
+/* ==========================================
+   RESUME ACTIONS
+========================================== */
+
+.resume-actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin:40px 0;
+
+}
+
+.resume-actions .btn-primary{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:16px 34px;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+    box-shadow:0 12px 30px rgba(37,99,235,.25);
+
+}
+
+.resume-actions .btn-primary:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 20px 40px rgba(37,99,235,.35);
+
+}
+/* ==========================================
+   AI INSIGHTS
+========================================== */
+
+.ai-insights{
+
+    margin-top:40px;
+
+}
+
+.section-title{
+
+    margin-bottom:25px;
+
+}
+
+.section-title h2{
+
+    font-size:28px;
+
+    color:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.section-title p{
+
+    color:#b8c5d6;
+
+    margin-top:8px;
+
+}
+
+.insight-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:25px;
+
+}
+
+.insight-card{
+
+    background:rgba(255,255,255,.06);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:22px;
+
+    padding:24px;
+
+    backdrop-filter:blur(18px);
+
+    transition:.35s;
+
+}
+
+.insight-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 40px rgba(37,99,235,.18);
+
+}
+
+.insight-card h4{
+
+    color:#fff;
+
+    margin-bottom:16px;
+
+}
+
+.progress{
+
+    width:100%;
+
+    height:12px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    margin-bottom:14px;
+
+}
+
+.progress-fill{
+
+    height:100%;
+
+    background:linear-gradient(90deg,#2563eb,#60a5fa);
+
+    border-radius:30px;
+
+}
+
+.progress-fill.purple{
+
+    background:linear-gradient(90deg,#7c3aed,#a855f7);
+
+}
+
+.progress-fill.green{
+
+    background:linear-gradient(90deg,#22c55e,#4ade80);
+
+}
+
+.progress-fill.orange{
+
+    background:linear-gradient(90deg,#f59e0b,#fbbf24);
+
+}
+
+.insight-card span{
+
+    color:#fff;
+
+    font-size:20px;
+
+    font-weight:700;
+
+}
+/* ==========================================
+   PREMIUM AI INSIGHTS V2
+========================================== */
+
+.insight-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+.insight-header h4{
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:600;
+
+}
+
+.insight-header span{
+
+    padding:6px 14px;
+
+    border-radius:30px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+}
+
+/* -------- STATUS COLORS -------- */
+
+.good{
+
+    background:#22c55e22;
+
+    color:#4ade80;
+
+    border:1px solid #22c55e55;
+
+}
+
+.average{
+
+    background:#f59e0b22;
+
+    color:#fbbf24;
+
+    border:1px solid #f59e0b55;
+
+}
+
+.poor{
+
+    background:#ef444422;
+
+    color:#f87171;
+
+    border:1px solid #ef444455;
+
+}
+
+/* -------- SCORE -------- */
+
+.insight-card strong{
+
+    display:block;
+
+    margin-top:14px;
+
+    color:#fff;
+
+    font-size:26px;
+
+    font-weight:700;
+
+}
+
+/* -------- ANIMATION -------- */
+
+.insight-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.insight-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:60%;
+
+    height:100%;
+
+    background:linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(255,255,255,.15),
+
+        transparent
+
+    );
+
+    transition:1s;
+
+}
+
+.insight-card:hover::before{
+
+    left:140%;
+
+}
+
+.progress-fill{
+
+    transition:width 1.5s ease;
+
+}
+/* ==========================================
+   AI EXECUTIVE SUMMARY
+========================================== */
+
+.ai-summary{
+
+    margin-top:45px;
+
+}
+
+.summary-header{
+
+    margin-bottom:30px;
+
+}
+
+.summary-header h2{
+
+    color:#ffffff;
+
+    font-size:32px;
+
+    font-weight:700;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.summary-header p{
+
+    color:#94a3b8;
+
+    margin-top:10px;
+
+    font-size:16px;
+
+}
+
+.summary-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:25px;
+
+}
+
+.summary-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:30px;
+
+    border-radius:24px;
+
+    color:#fff;
+
+    transition:.35s;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.30);
+
+}
+
+.summary-card:hover{
+
+    transform:translateY(-8px) scale(1.02);
+
+}
+
+.summary-card i{
+
+    font-size:42px;
+
+    margin-bottom:18px;
+
+    opacity:.95;
+
+}
+
+.summary-card h3{
+
+    font-size:34px;
+
+    margin-bottom:8px;
+
+    font-weight:700;
+
+}
+
+.summary-card p{
+
+    font-size:16px;
+
+    color:rgba(255,255,255,.85);
+
+}
+
+/* Card Colors */
+
+.summary-card.success{
+
+    background:linear-gradient(135deg,#16a34a,#22c55e);
+
+}
+
+.summary-card.primary{
+
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+
+}
+
+.summary-card.purple{
+
+    background:linear-gradient(135deg,#7c3aed,#8b5cf6);
+
+}
+
+.summary-card.warning{
+
+    background:linear-gradient(135deg,#ea580c,#f59e0b);
+
+}
+
+/* Shine Effect */
+
+.summary-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-120%;
+
+    left:-40%;
+
+    width:70%;
+
+    height:300%;
+
+    background:rgba(255,255,255,.12);
+
+    transform:rotate(25deg);
+
+    transition:1s;
+
+}
+
+.summary-card:hover::before{
+
+    left:130%;
+
+}
+/* ==========================================
+   AI Resume Strength Analyzer
+========================================== */
+
+.strength-section{
+    margin-top:30px;
+}
+
+.strength-card{
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    border:1px solid rgba(0,0,0,.05);
+
+}
+
+.strength-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.strength-header h2{
+
+    font-size:28px;
+
+    font-weight:700;
+
+    color:#222;
+
+}
+
+.strength-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:25px;
+
+}
+
+.strength-box{
+
+    background:#f8f9ff;
+
+    border-radius:16px;
+
+    padding:22px;
+
+    transition:.3s;
+
+    border-left:6px solid #4f46e5;
+
+}
+
+.strength-box:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.12);
+
+}
+
+.strength-box h3{
+
+    margin-bottom:18px;
+
+    color:#111827;
+
+    font-size:20px;
+
+}
+
+.strength-box ul{
+
+    padding-left:20px;
+
+}
+
+.strength-box li{
+
+    margin-bottom:12px;
+
+    color:#444;
+
+    line-height:1.6;
+
+}
+
+.strength-box:nth-child(1){
+
+    border-left-color:#22c55e;
+
+}
+
+.strength-box:nth-child(2){
+
+    border-left-color:#f59e0b;
+
+}
+
+.strength-box:nth-child(3){
+
+    border-left-color:#ef4444;
+
+}
+/* ==========================================
+   AI Skill Match Analysis
+========================================== */
+
+.skill-match-section{
+
+    margin-top:30px;
+
+}
+
+.skill-match-card{
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    border:1px solid rgba(0,0,0,.05);
+
+}
+
+.skill-match-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.skill-match-header h2{
+
+    font-size:28px;
+
+    font-weight:700;
+
+    color:#222;
+
+}
+
+.skill-match-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:25px;
+
+}
+
+.skill-column{
+
+    background:#f8f9ff;
+
+    padding:20px;
+
+    border-radius:16px;
+
+}
+
+.skill-column h3{
+
+    margin-bottom:20px;
+
+    color:#222;
+
+}
+
+.skill-chip{
+
+    display:inline-block;
+
+    margin:8px;
+
+    padding:10px 16px;
+
+    border-radius:50px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.skill-chip.success{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+.skill-chip.danger{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+}
+
+@media(max-width:768px){
+
+.skill-match-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+/* ==========================================
+   AI Interview Preparation
+========================================== */
+
+.interview-section{
+
+    margin-top:30px;
+
+}
+
+.interview-card{
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    border:1px solid rgba(0,0,0,.05);
+
+}
+
+.interview-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.interview-header h2{
+
+    font-size:28px;
+
+    color:#222;
+
+}
+
+.interview-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+    gap:25px;
+
+}
+
+.question-box{
+
+    background:#f8f9ff;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    border-top:5px solid #4f46e5;
+
+    transition:.3s;
+
+}
+
+.question-box:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.12);
+
+}
+
+.question-box:nth-child(1){
+
+    border-top-color:#3b82f6;
+
+}
+
+.question-box:nth-child(2){
+
+    border-top-color:#22c55e;
+
+}
+
+.question-box:nth-child(3){
+
+    border-top-color:#f59e0b;
+
+}
+
+.question-box h3{
+
+    margin-bottom:18px;
+
+    color:#111827;
+
+}
+
+.question-box ul{
+
+    padding-left:20px;
+
+}
+
+.question-box li{
+
+    margin-bottom:12px;
+
+    color:#444;
+
+    line-height:1.6;
+
+}
+/* ==========================================
+   AI Recommended Jobs
+========================================== */
+
+.jobs-section{
+
+    margin-top:30px;
+
+}
+
+.jobs-card{
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    border:1px solid rgba(0,0,0,.05);
+
+}
+
+.jobs-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.jobs-header h2{
+
+    font-size:28px;
+
+    color:#222;
+
+    font-weight:700;
+
+}
+
+.jobs-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:20px;
+
+}
+
+.job-item{
+
+    background:#f8f9ff;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    transition:.35s;
+
+    border-left:6px solid #2563eb;
+
+}
+
+.job-item:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 15px 30px rgba(0,0,0,.12);
+
+}
+
+.job-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+.job-top h3{
+
+    font-size:20px;
+
+    color:#111827;
+
+}
+
+.match{
+
+    background:#22c55e;
+
+    color:#fff;
+
+    padding:6px 12px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+}
+
+.job-body p{
+
+    margin:12px 0;
+
+    color:#555;
+
+    font-size:15px;
+
+}
+
+.job-body i{
+
+    color:#2563eb;
+
+    margin-right:8px;
+
+}
+
+@media(max-width:768px){
+
+.jobs-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+/* ==========================================
+   AI Loading Overlay
+========================================== */
+
+.loading-overlay{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:linear-gradient(135deg,#4f46e5,#2563eb,#06b6d4);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:99999;
+
+}
+
+.loading-card{
+
+    width:500px;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(20px);
+
+    border-radius:25px;
+
+    padding:40px;
+
+    text-align:center;
+
+    color:white;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+
+}
+
+.loading-logo{
+
+    font-size:70px;
+
+    margin-bottom:15px;
+
+    animation:floatLogo 2s ease-in-out infinite;
+
+}
+
+@keyframes floatLogo{
+
+0%{transform:translateY(0);}
+
+50%{transform:translateY(-10px);}
+
+100%{transform:translateY(0);}
+
+}
+
+.loading-card h2{
+
+    font-size:34px;
+
+    margin-bottom:10px;
+
+}
+
+.loading-card p{
+
+    opacity:.95;
+
+}
+
+.loading-spinner{
+
+    width:60px;
+
+    height:60px;
+
+    margin:25px auto;
+
+    border:5px solid rgba(255,255,255,.25);
+
+    border-top:5px solid white;
+
+    border-radius:50%;
+
+    animation:spinLoader 1s linear infinite;
+
+}
+
+@keyframes spinLoader{
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+.loading-progress{
+
+    width:100%;
+
+    height:14px;
+
+    background:rgba(255,255,255,.2);
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    margin:25px 0;
+
+}
+
+.loading-bar{
+
+    height:100%;
+
+    width:0;
+
+    background:white;
+
+    animation:loadingBar 5s linear forwards;
+
+}
+
+@keyframes loadingBar{
+
+from{
+
+width:0;
+
+}
+
+to{
+
+width:100%;
+
+}
+
+}
+
+.loading-steps{
+
+    text-align:left;
+
+    margin-top:25px;
+
+}
+
+.loading-steps p{
+
+    margin:12px 0;
+
+    font-size:15px;
+
+}
+
+@media(max-width:600px){
+
+.loading-card{
+
+width:92%;
+
+padding:25px;
+
+}
+
+.loading-card h2{
+
+font-size:28px;
+
+}
+
+.loading-logo{
+
+font-size:55px;
+
+}
+
+}
+/* =====================================
+   Premium Skill Pills
+===================================== */
+
+.skills-container{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:14px;
+
+    margin-top:20px;
+
+}
+
+.skill-pill{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:12px 20px;
+
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+
+    color:white;
+
+    font-weight:600;
+
+    border-radius:999px;
+
+    font-size:15px;
+
+    box-shadow:0 10px 25px rgba(37,99,235,.18);
+
+    transition:.30s;
+
+    cursor:default;
+
+}
+
+.skill-pill:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 18px 35px rgba(37,99,235,.35);
+
+}
+
+.skill-pill i{
+
+    font-size:14px;
+
+    color:#fff;
+
+}
+.mt-40{
+    margin-top:40px;
+}
+
+.empty-text{
+    color:#64748b;
+    font-size:15px;
+}
+
+.recommendation-box{
+
+    margin-top:20px;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    background:#eff6ff;
+
+    border-left:5px solid #2563eb;
+
+    color:#1e293b;
+
+    line-height:1.8;
+
+    font-weight:500;
+
+}
+/* ==========================================
+   TalentIQ AI Copilot Premium v2.0
+========================================== */
+
+.copilot-card{
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    padding:28px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+    border:1px solid #e5e7eb;
+
+}
+
+.copilot-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-bottom:30px;
+
+}
+
+.copilot-avatar{
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#fff;
+
+    font-size:28px;
+
+}
+
+.copilot-title h2{
+
+    margin:0;
+
+    color:#0f172a;
+
+}
+
+.status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:8px;
+
+    color:#22c55e;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.status i{
+
+    font-size:10px;
+
+}
+
+.copilot-chat{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.ai-message{
+
+    display:flex;
+
+    gap:14px;
+
+    align-items:flex-start;
+
+}
+
+.message-icon{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    background:#eff6ff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:20px;
+
+}
+
+.message-box{
+
+    flex:1;
+
+    background:#f8fafc;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    line-height:1.8;
+
+}
+
+.message-box ul{
+
+    margin:10px 0 0;
+
+    padding-left:20px;
+
+}
+
+.ai-message.success .message-box{
+
+    background:#dcfce7;
+
+}
+/* ==========================================
+   Premium Score Cards v2.0
+========================================== */
+
+.score-section{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:25px;
+
+    margin-bottom:35px;
+
+}
+
+.score-card{
+
+    background:#fff;
+
+    border-radius:24px;
+
+    padding:28px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:22px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    border:1px solid #eef2f7;
+
+}
+
+.score-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 25px 50px rgba(37,99,235,.18);
+
+}
+
+.score-circle{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#fff;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    flex-shrink:0;
+
+}
+
+.resume .score-circle{
+
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+
+}
+
+.ats .score-circle{
+
+    background:linear-gradient(135deg,#10b981,#059669);
+
+}
+
+.career .score-circle{
+
+    background:linear-gradient(135deg,#f59e0b,#ea580c);
+
+}
+
+.ai .score-circle{
+
+    background:linear-gradient(135deg,#7c3aed,#9333ea);
+
+}
+
+.score-content h3{
+
+    margin:0;
+
+    color:#0f172a;
+
+    font-size:20px;
+
+}
+
+.score-content p{
+
+    margin:8px 0 15px;
+
+    color:#64748b;
+
+}
+
+.score-status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.excellent{
+
+    background:#dbeafe;
+
+    color:#2563eb;
+
+}
+
+.ats-status{
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+}
+
+.career-status{
+
+    background:#ffedd5;
+
+    color:#ea580c;
+
+}
+
+.ai-status{
+
+    background:#ede9fe;
+
+    color:#7c3aed;
+
+}
+/* ==========================================
+   Premium Roadmap Timeline
+========================================== */
+
+.roadmap-header{
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+}
+
+.roadmap-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 20px;
+
+    border-radius:999px;
+
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+    color:#fff;
+
+    font-weight:600;
+
+}
+
+.roadmap-header h2{
+
+    margin:22px 0 12px;
+
+    color:#0f172a;
+
+}
+
+.roadmap-header p{
+
+    color:#64748b;
+
+    max-width:650px;
+
+    margin:auto;
+
+    line-height:1.8;
+
+}
+
+.timeline{
+
+    position:relative;
+
+    margin-top:40px;
+
+}
+
+.timeline::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:30px;
+
+    top:0;
+
+    bottom:0;
+
+    width:4px;
+
+    background:#dbeafe;
+
+}
+
+.timeline-item{
+
+    display:flex;
+
+    gap:24px;
+
+    margin-bottom:35px;
+
+    position:relative;
+
+}
+
+.timeline-circle{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:24px;
+
+    z-index:2;
+
+    flex-shrink:0;
+
+}
+
+.timeline-content{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:22px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    width:100%;
+
+    transition:.3s;
+
+}
+
+.timeline-content:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.step{
+
+    font-size:12px;
+
+    font-weight:700;
+
+    color:#2563eb;
+
+    letter-spacing:1px;
+
+}
+
+.timeline-content h3{
+
+    margin:8px 0;
+
+}
+
+.timeline-content p{
+
+    color:#64748b;
+
+    line-height:1.8;
+
+}
+/* ==========================================
+   Premium AI Executive Summary
+========================================== */
+
+.summary-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 20px;
+
+    border-radius:999px;
+
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+    color:#fff;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+
+}
+
+.summary-header{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+.summary-header h2{
+
+    margin:15px 0;
+
+    color:#0f172a;
+
+}
+
+.summary-header p{
+
+    color:#64748b;
+
+    max-width:700px;
+
+    margin:auto;
+
+    line-height:1.8;
+
+}
+
+.summary-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:22px;
+
+    margin-top:35px;
+
+}
+
+.summary-card{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:28px;
+
+    text-align:center;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+}
+
+.summary-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.summary-icon{
+
+    width:70px;
+
+    height:70px;
+
+    margin:auto;
+
+    margin-bottom:20px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#fff;
+
+    font-size:28px;
+
+}
+
+.resume-card .summary-icon{
+
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+
+}
+
+.ats-card .summary-icon{
+
+    background:linear-gradient(135deg,#10b981,#059669);
+
+}
+
+.career-card .summary-icon{
+
+    background:linear-gradient(135deg,#f59e0b,#ea580c);
+
+}
+
+.ai-card .summary-icon{
+
+    background:linear-gradient(135deg,#7c3aed,#9333ea);
+
+}
+
+.summary-card h3{
+
+    margin-bottom:10px;
+
+    color:#0f172a;
+
+    font-size:28px;
+
+}
+
+.summary-card span{
+
+    color:#64748b;
+
+}
+
+.summary-recommendation{
+
+    margin-top:40px;
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    padding:30px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    border-left:6px solid #2563eb;
+
+}
+
+.recommendation-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:15px;
+
+}
+
+.recommendation-header i{
+
+    color:#2563eb;
+
+    font-size:24px;
+
+}
+
+.summary-recommendation p{
+
+    color:#475569;
+
+    line-height:1.9;
+
+}
+/* ==========================================
+   Premium Analytics Dashboard
+========================================== */
+
+.analytics-header{
+
+text-align:center;
+
+margin-bottom:40px;
+
+}
+
+.analytics-badge{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:10px;
+
+padding:10px 20px;
+
+border-radius:999px;
+
+background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+color:#fff;
+
+font-weight:600;
+
+}
+
+.analytics-header h2{
+
+margin:20px 0 12px;
+
+color:#0f172a;
+
+}
+
+.analytics-header p{
+
+max-width:700px;
+
+margin:auto;
+
+color:#64748b;
+
+line-height:1.8;
+
+}
+
+.chart-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+gap:25px;
+
+margin-top:35px;
+
+}
+
+.chart-card{
+
+background:#fff;
+
+border-radius:24px;
+
+padding:28px;
+
+box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+transition:.35s;
+
+}
+
+.chart-card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.chart-card.wide{
+
+grid-column:span 2;
+
+}
+
+.card-top{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:25px;
+
+}
+
+.card-top h3{
+
+margin:0;
+
+font-size:20px;
+
+color:#0f172a;
+
+}
+
+.card-top span{
+
+padding:8px 16px;
+
+border-radius:999px;
+
+background:#dbeafe;
+
+color:#2563eb;
+
+font-weight:700;
+
+}
+
+.chart-card canvas{
+
+max-height:320px;
+
+}
+
+@media(max-width:900px){
+
+.chart-card.wide{
+
+grid-column:span 1;
+
+}
+
+}
+/* ================= LIVE JOBS ================= */
+
+.live-jobs-card{
+
+    margin-top:35px;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    background:#ffffff;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.08);
+
+}
+
+.section-title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.section-title h2{
+
+    margin:0;
+
+    font-size:26px;
+
+}
+
+.live-badge{
+
+    background:#10b981;
+
+    color:white;
+
+    padding:6px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.jobs-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+
+    gap:20px;
+
+}
+
+.job-card{
+
+    background:#f8fafc;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:18px;
+
+    padding:20px;
+
+    transition:.3s;
+
+}
+
+.job-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 15px 30px rgba(37,99,235,.15);
+
+}
+
+.job-header{
+
+    display:flex;
+
+    gap:15px;
+
+    align-items:center;
+
+    margin-bottom:15px;
+
+}
+
+.company-logo{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:14px;
+
+}
+
+.job-header h3{
+
+    margin:0;
+
+    font-size:18px;
+
+}
+
+.job-header h4{
+
+    margin-top:5px;
+
+    color:#64748b;
+
+    font-size:14px;
+
+    font-weight:500;
+
+}
+
+.job-details p{
+
+    margin:10px 0;
+
+    color:#475569;
+
+}
+
+.job-details i{
+
+    width:22px;
+
+    color:#2563eb;
+
+}
+
+.job-footer{
+
+    margin-top:18px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.match-score{
+
+    background:#dbeafe;
+
+    color:#2563eb;
+
+    padding:7px 12px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.apply-btn{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:10px 18px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+.apply-btn:hover{
+
+    background:#1d4ed8;
+
+}
+
+.empty-job{
+
+    text-align:center;
+
+    padding:50px;
+
+    color:#64748b;
+
+}
+
+.empty-job i{
+
+    font-size:60px;
+
+    margin-bottom:15px;
+
+    color:#94a3b8;
+
+}
+/* ===========================
+   LIVE JOBS
+=========================== */
+
+.live-jobs-card{
+    margin-top:25px;
+}
+
+.jobs-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:20px;
+}
+
+.job-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    box-shadow:0 8px 22px rgba(0,0,0,.08);
+
+    border:1px solid #ececec;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    transition:.25s;
+}
+
+.job-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+}
+
+.job-title{
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:#222;
+
+    margin-bottom:18px;
+
+}
+
+.job-detail{
+
+    font-size:16px;
+
+    margin:8px 0;
+
+    color:#555;
+
+}
+
+.job-detail strong{
+
+    color:#111;
+
+}
+
+.job-actions{
+
+    margin-top:25px;
+
+}
+
+.apply-btn{
+
+    display:inline-block;
+
+    padding:12px 30px;
+
+    border-radius:12px;
+
+    background:linear-gradient(135deg,#4f7cff,#7b2cff);
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.apply-btn:hover{
+
+    transform:scale(1.05);
+
+}
+
+@media(max-width:768px){
+
+    .jobs-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .job-card{
+
+        padding:18px;
+
+    }
+
+}

@@ -1,0 +1,65 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}
+Resume Builder | TalentIQ AI
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/resume_builder.css') }}">
+{% endblock %}
+
+{% block content %}
+<div id="resume-builder-root" class="rb-page">
+
+    <div class="rb-hero">
+        <div>
+            <h1>Resume Builder</h1>
+            <p>Choose a template, edit your details, preview on A4, run an ATS check, then save or download.</p>
+            <div id="rb-status" class="rb-status"></div>
+        </div>
+        <div class="rb-actions">
+            <select id="saved-resume-select" class="rb-btn rb-btn-ghost rb-saved" aria-label="Saved resumes">
+                <option value="">New resume</option>
+                {% for item in saved_resumes %}
+                <option value="{{ item.id }}" {% if resume.id == item.id %}selected{% endif %}>
+                    {{ item.title }}
+                </option>
+                {% endfor %}
+            </select>
+            <button type="button" id="btn-save" class="rb-btn rb-btn-primary">Save Resume</button>
+            <button type="button" id="btn-preview" class="rb-btn rb-btn-ghost">Preview</button>
+            <button type="button" id="btn-ats" class="rb-btn rb-btn-ghost">ATS Check</button>
+            <button type="button" id="btn-pdf" class="rb-btn rb-btn-dark">Download PDF</button>
+            <button type="button" id="btn-docx" class="rb-btn rb-btn-ghost">Download DOCX</button>
+            <button type="button" id="btn-duplicate" class="rb-btn rb-btn-ghost">Duplicate</button>
+            <button type="button" id="btn-delete" class="rb-btn rb-btn-ghost rb-btn-danger">Delete</button>
+        </div>
+    </div>
+
+    <div class="rb-templates">
+        <h2>Templates</h2>
+        <div id="rb-template-row" class="rb-template-row"></div>
+    </div>
+
+    <div class="rb-workspace">
+        <div class="rb-form">
+            <div id="rb-warnings" class="rb-warnings" style="display:none;"></div>
+            <div id="rb-quality" class="rb-quality"></div>
+            <div id="rb-form-fields"></div>
+        </div>
+        <div class="rb-preview-wrap" id="rb-preview-panel">
+            <div class="rb-preview-scroll">
+                <div id="a4-paper" class="a4-paper" data-template="{{ resume.template }}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="resume-seed" type="application/json">{{ resume | tojson }}</script>
+<script id="template-seed" type="application/json">{{ templates | tojson }}</script>
+<script id="quality-seed" type="application/json">{{ quality | tojson }}</script>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/resume_builder.js') }}"></script>
+{% endblock %}

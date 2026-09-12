@@ -1,0 +1,36 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}
+Career Prediction | TalentIQ AI
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-container">
+
+    <div class="dashboard-header">
+
+        <h1>
+            <i class="fas fa-user-graduate"></i>
+            Career Prediction
+        </h1>
+
+        <p>
+            AI predicts the best career based on your resume.
+        </p>
+
+    </div>
+
+    <div class="dashboard-card">
+
+        <h2>{{ predicted_job if predicted_job else "Business Intelligence Analyst" }}</h2>
+
+        <p>
+            Your strongest career path based on AI analysis.
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

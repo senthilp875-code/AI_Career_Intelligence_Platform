@@ -1,0 +1,986 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}
+Analytics Dashboard | TalentIQ AI
+{% endblock %}
+
+{% block css %}
+
+<style>
+
+/* =========================================================
+   TALENTIQ AI — PREMIUM ANALYTICS
+   ========================================================= */
+
+.analytics-page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 10px 0 50px;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.analytics-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.analytics-header h1 {
+    margin: 0;
+    color: #172033;
+    font-size: 30px;
+    font-weight: 750;
+    letter-spacing: -0.6px;
+}
+
+.analytics-header h1 i {
+    color: #2563eb;
+    margin-right: 9px;
+}
+
+.analytics-header p {
+    margin: 7px 0 0;
+    color: #718096;
+    font-size: 14px;
+}
+
+.analytics-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 12px;
+    border-radius: 9px;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.analytics-badge i {
+    font-size: 10px;
+}
+
+/* =========================================================
+   STATISTICS
+   ========================================================= */
+
+.analytics-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.analytics-stat-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 145px;
+    padding: 21px;
+    background: #ffffff;
+    border: 1px solid #e7ebf2;
+    border-radius: 17px;
+    box-shadow: 0 7px 25px rgba(15, 23, 42, .045);
+    transition: .2s ease;
+}
+
+.analytics-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, .07);
+    border-color: #dbe5f5;
+}
+
+.analytics-stat-card::after {
+    content: "";
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    right: -45px;
+    bottom: -55px;
+    border-radius: 50%;
+    background: #eff6ff;
+}
+
+.analytics-stat-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.analytics-stat-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 17px;
+}
+
+.analytics-stat-label {
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.analytics-stat-value {
+    position: relative;
+    z-index: 1;
+    display: block;
+    color: #172033;
+    font-size: 30px;
+    font-weight: 750;
+    letter-spacing: -.6px;
+}
+
+.analytics-stat-description {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin-top: 4px;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+/* =========================================================
+   CHART GRID
+   ========================================================= */
+
+.analytics-chart-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.analytics-card {
+    background: #ffffff;
+    border: 1px solid #e7ebf2;
+    border-radius: 18px;
+    padding: 23px;
+    box-shadow: 0 6px 25px rgba(15, 23, 42, .035);
+}
+
+.analytics-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.analytics-card-title {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.analytics-card-icon {
+    width: 37px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.analytics-card-title h3 {
+    margin: 0;
+    color: #172033;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.analytics-card-title p {
+    margin: 3px 0 0;
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+.analytics-chart-wrap {
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+
+.analytics-chart-wrap canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* =========================================================
+   PERFORMANCE SUMMARY
+   ========================================================= */
+
+.performance-card {
+    background: #ffffff;
+    border: 1px solid #e7ebf2;
+    border-radius: 18px;
+    padding: 23px;
+    box-shadow: 0 6px 25px rgba(15, 23, 42, .035);
+}
+
+.performance-header {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding-bottom: 17px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.performance-icon {
+    width: 37px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.performance-header h3 {
+    margin: 0;
+    color: #172033;
+    font-size: 16px;
+}
+
+.performance-header p {
+    margin: 3px 0 0;
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+.performance-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.performance-item {
+    padding: 17px;
+    border-radius: 12px;
+    background: #fafbfc;
+    border: 1px solid #edf0f4;
+}
+
+.performance-item-label {
+    display: block;
+    margin-bottom: 7px;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: .45px;
+}
+
+.performance-item strong {
+    color: #172033;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.performance-item span {
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.analytics-empty {
+    text-align: center;
+    padding: 55px 20px;
+}
+
+.analytics-empty-icon {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 25px;
+}
+
+.analytics-empty h3 {
+    margin: 0 0 7px;
+    color: #172033;
+    font-size: 18px;
+}
+
+.analytics-empty p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .analytics-chart-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .analytics-page {
+        padding: 5px 0 30px;
+    }
+
+    .analytics-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .analytics-header h1 {
+        font-size: 25px;
+    }
+
+    .analytics-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .performance-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .analytics-card,
+    .performance-card {
+        padding: 18px;
+    }
+
+    .analytics-chart-wrap {
+        height: 260px;
+    }
+
+}
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="analytics-page">
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <div class="analytics-header">
+
+        <div>
+
+            <h1>
+                <i class="fas fa-chart-line"></i>
+                Analytics Dashboard
+            </h1>
+
+            <p>
+                Track your resume performance and ATS progress over time.
+            </p>
+
+        </div>
+
+        <div class="analytics-badge">
+
+            <i class="fas fa-circle"></i>
+
+            AI Performance Insights
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         STATISTICS
+         ===================================================== -->
+
+    <div class="analytics-stats">
+
+        <!-- TOTAL RESUMES -->
+
+        <div class="analytics-stat-card">
+
+            <div class="analytics-stat-top">
+
+                <div class="analytics-stat-icon">
+
+                    <i class="fas fa-file-lines"></i>
+
+                </div>
+
+                <span class="analytics-stat-label">
+                    Resume Activity
+                </span>
+
+            </div>
+
+            <strong class="analytics-stat-value">
+                {{ total_resumes }}
+            </strong>
+
+            <span class="analytics-stat-description">
+                Total resumes analyzed
+            </span>
+
+        </div>
+
+
+        <!-- AVERAGE ATS -->
+
+        <div class="analytics-stat-card">
+
+            <div class="analytics-stat-top">
+
+                <div class="analytics-stat-icon">
+
+                    <i class="fas fa-user-check"></i>
+
+                </div>
+
+                <span class="analytics-stat-label">
+                    ATS Performance
+                </span>
+
+            </div>
+
+            <strong class="analytics-stat-value">
+                {{ average_ats }}%
+            </strong>
+
+            <span class="analytics-stat-description">
+                Average ATS score
+            </span>
+
+        </div>
+
+
+        <!-- BEST SCORE -->
+
+        <div class="analytics-stat-card">
+
+            <div class="analytics-stat-top">
+
+                <div class="analytics-stat-icon">
+
+                    <i class="fas fa-trophy"></i>
+
+                </div>
+
+                <span class="analytics-stat-label">
+                    Best Performance
+                </span>
+
+            </div>
+
+            <strong class="analytics-stat-value">
+                {{ best_resume }}%
+            </strong>
+
+            <span class="analytics-stat-description">
+                Highest resume score
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CHARTS
+         ===================================================== -->
+
+    {% if labels %}
+
+    <div class="analytics-chart-grid">
+
+        <!-- RESUME SCORE -->
+
+        <div class="analytics-card">
+
+            <div class="analytics-card-header">
+
+                <div class="analytics-card-title">
+
+                    <div class="analytics-card-icon">
+
+                        <i class="fas fa-chart-line"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>Resume Score Trend</h3>
+
+                        <p>Your resume quality across analyses</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="analytics-chart-wrap">
+
+                <canvas id="resumeChart"></canvas>
+
+            </div>
+
+        </div>
+
+
+        <!-- ATS SCORE -->
+
+        <div class="analytics-card">
+
+            <div class="analytics-card-header">
+
+                <div class="analytics-card-title">
+
+                    <div class="analytics-card-icon">
+
+                        <i class="fas fa-bullseye"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>ATS Score Trend</h3>
+
+                        <p>Applicant tracking compatibility</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="analytics-chart-wrap">
+
+                <canvas id="atsChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PERFORMANCE SUMMARY
+         ===================================================== -->
+
+    <div class="performance-card">
+
+        <div class="performance-header">
+
+            <div class="performance-icon">
+
+                <i class="fas fa-chart-simple"></i>
+
+            </div>
+
+            <div>
+
+                <h3>Performance Summary</h3>
+
+                <p>A quick overview of your resume analytics</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="performance-grid">
+
+            <div class="performance-item">
+
+                <span class="performance-item-label">
+                    Resumes Analyzed
+                </span>
+
+                <strong>
+                    {{ total_resumes }}
+                </strong>
+
+                <span>
+                    analyses completed
+                </span>
+
+            </div>
+
+
+            <div class="performance-item">
+
+                <span class="performance-item-label">
+                    Average ATS
+                </span>
+
+                <strong>
+                    {{ average_ats }}%
+                </strong>
+
+                <span>
+                    overall compatibility
+                </span>
+
+            </div>
+
+
+            <div class="performance-item">
+
+                <span class="performance-item-label">
+                    Best Score
+                </span>
+
+                <strong>
+                    {{ best_resume }}%
+                </strong>
+
+                <span>
+                    highest resume score
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {% else %}
+
+    <!-- =====================================================
+         EMPTY STATE
+         ===================================================== -->
+
+    <div class="analytics-card">
+
+        <div class="analytics-empty">
+
+            <div class="analytics-empty-icon">
+
+                <i class="fas fa-chart-line"></i>
+
+            </div>
+
+            <h3>
+                No Analytics Available Yet
+            </h3>
+
+            <p>
+                Analyze your first resume to start seeing performance insights here.
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+
+<!-- =========================================================
+     CHART.JS
+     ========================================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+
+const labels = {{ labels|tojson }};
+
+const resumeScores = {{ resume_scores|tojson }};
+
+const atsScores = {{ ats_scores|tojson }};
+
+
+/* =========================================================
+   COMMON CHART SETTINGS
+   ========================================================= */
+
+const chartFont = {
+    family: "Arial, sans-serif"
+};
+
+
+/* =========================================================
+   RESUME SCORE CHART
+   ========================================================= */
+
+const resumeCanvas = document.getElementById("resumeChart");
+
+if (resumeCanvas) {
+
+    new Chart(resumeCanvas, {
+
+        type: "line",
+
+        data: {
+
+            labels: labels,
+
+            datasets: [{
+
+                label: "Resume Score",
+
+                data: resumeScores,
+
+                borderWidth: 3,
+
+                tension: 0.4,
+
+                fill: true,
+
+                pointRadius: 4,
+
+                pointHoverRadius: 7,
+
+                borderColor: "#2563eb",
+
+                backgroundColor: "rgba(37, 99, 235, 0.08)",
+
+                pointBackgroundColor: "#2563eb",
+
+                pointBorderColor: "#ffffff",
+
+                pointBorderWidth: 2
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            interaction: {
+
+                intersect: false,
+
+                mode: "index"
+
+            },
+
+            plugins: {
+
+                legend: {
+
+                    display: false
+
+                },
+
+                tooltip: {
+
+                    backgroundColor: "#172033",
+
+                    padding: 12,
+
+                    displayColors: false,
+
+                    callbacks: {
+
+                        label: function(context) {
+
+                            return " Resume Score: " + context.parsed.y + "%";
+
+                        }
+
+                    }
+
+                }
+
+            },
+
+            scales: {
+
+                y: {
+
+                    beginAtZero: true,
+
+                    max: 100,
+
+                    ticks: {
+
+                        callback: function(value) {
+
+                            return value + "%";
+
+                        }
+
+                    },
+
+                    grid: {
+
+                        color: "#edf0f5"
+
+                    }
+
+                },
+
+                x: {
+
+                    grid: {
+
+                        display: false
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   ATS SCORE CHART
+   ========================================================= */
+
+const atsCanvas = document.getElementById("atsChart");
+
+if (atsCanvas) {
+
+    new Chart(atsCanvas, {
+
+        type: "bar",
+
+        data: {
+
+            labels: labels,
+
+            datasets: [{
+
+                label: "ATS Score",
+
+                data: atsScores,
+
+                borderWidth: 0,
+
+                borderRadius: 7,
+
+                backgroundColor: "#60a5fa",
+
+                hoverBackgroundColor: "#2563eb"
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            plugins: {
+
+                legend: {
+
+                    display: false
+
+                },
+
+                tooltip: {
+
+                    backgroundColor: "#172033",
+
+                    padding: 12,
+
+                    displayColors: false,
+
+                    callbacks: {
+
+                        label: function(context) {
+
+                            return " ATS Score: " + context.parsed.y + "%";
+
+                        }
+
+                    }
+
+                }
+
+            },
+
+            scales: {
+
+                y: {
+
+                    beginAtZero: true,
+
+                    max: 100,
+
+                    ticks: {
+
+                        callback: function(value) {
+
+                            return value + "%";
+
+                        }
+
+                    },
+
+                    grid: {
+
+                        color: "#edf0f5"
+
+                    }
+
+                },
+
+                x: {
+
+                    grid: {
+
+                        display: false
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
+
+</script>
+
+{% endblock %}

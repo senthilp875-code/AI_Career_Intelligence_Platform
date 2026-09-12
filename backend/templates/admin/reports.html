@@ -1,0 +1,32 @@
+{% extends "admin/base.html" %}
+{% block title %}Reports | Admin{% endblock %}
+{% block page_heading %}Reports{% endblock %}
+{% block content %}
+<div class="admin-report-grid mt-4">
+    <article class="admin-report-card">
+        <i class="fas fa-users-gear"></i>
+        <h3>Users Export</h3>
+        <p>Comprehensive list of all registered users, emails, and account states.</p>
+        <a href="{{ url_for('admin.download_report', report_type='users') }}" class="admin-btn w-100">
+            <i class="fas fa-file-csv"></i> Download CSV
+        </a>
+    </article>
+    <article class="admin-report-card">
+        <i class="fas fa-file-shield"></i>
+        <h3>Resumes Meta</h3>
+        <p>Complete logs of all uploaded files, scores, and analysis results.</p>
+        <a href="{{ url_for('admin.download_report', report_type='resumes') }}" class="admin-btn w-100">
+            <i class="fas fa-file-csv"></i> Download CSV
+        </a>
+    </article>
+    <article class="admin-report-card">
+        <i class="fas fa-chart-column"></i>
+        <h3>AI Performance</h3>
+        <p>Detailed breakdown of AI prediction trends and scoring metrics.</p>
+        <a href="{{ url_for('admin.download_report', report_type='analysis') }}" class="admin-btn w-100">
+            <i class="fas fa-file-csv"></i> Download CSV
+        </a>
+    </article>
+</div>
+
+{% endblock %}

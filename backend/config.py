@@ -1,6 +1,9 @@
+import os
+
+
 DB_CONFIG = {
-    "host": "localhost",
-    "user": "root",
-    "password": "senthil777",
-    "database": "AI_Recruitment"
+    "host": os.getenv("DB_HOST", "localhost"),
+    "user": os.getenv("DB_USER", "root"),
+    "password": os.getenv("DB_PASSWORD", ""),
+    "database": os.getenv("DB_NAME", "AI_Recruitment")
 }

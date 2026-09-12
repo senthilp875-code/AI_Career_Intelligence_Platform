@@ -1,43 +1,111 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>AI Career Intelligence Platform</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
+{% extends "guest_base.html" %}
 
-<body>
+{% block title %}
+TalentIQ AI | Login
+{% endblock %}
 
-<div class="login-box">
+{% block content %}
 
-<h1>AI Career Intelligence Platform</h1>
+<div class="login-container">
 
-<h3>Candidate | Recruiter | Admin Login</h3>
+    <div class="login-card">
 
-<form action="/login" method="POST">
+        <div class="logo">
+            🤖
+        </div>
 
-<input
-type="text"
-name="username"
-placeholder="Username"
-required>
+        <h1>TalentIQ AI</h1>
 
-<input
-type="password"
-name="password"
-placeholder="Password"
-required>
+        <p class="subtitle">
+            Smart Resume Analysis • AI Career Prediction • ATS Optimization
+        </p>
 
-<button type="submit">
-Login
-</button>
+        <form action="/login" method="POST">
 
-</form>
+            <div class="input-group">
 
-<br>
+                <label>👤 Username</label>
 
-<a href="/register">Create New Account</a>
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required>
+
+            </div>
+
+            <div class="input-group">
+
+                <label>🔒 Password</label>
+
+                <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required>
+
+            </div>
+
+            <div class="options">
+
+                <label class="remember">
+
+                    <input type="checkbox">
+
+                    Remember Me
+
+                </label>
+
+                <!-- Forgot Password -->
+                <a href="/forgot-password" class="forgot">
+
+                    Forgot Password?
+
+                </a>
+
+            </div>
+
+            <button class="login-btn" type="submit">
+
+                🚀 Login to Dashboard
+
+            </button>
+
+            <a href="/admin/login" class="admin-login-btn">
+
+                🛡️ Admin Login
+
+            </a>
+
+        </form>
+
+        <div class="footer">
+
+            <p>
+
+                New to TalentIQ AI?
+
+                <a href="/register">
+
+                    Create Account
+
+                </a>
+
+            </p>
+
+        </div>
+
+    </div>
 
 </div>
 
-</body>
-</html>
+{% endblock %}
+
+{% block js %}
+
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+
+{% endblock %}

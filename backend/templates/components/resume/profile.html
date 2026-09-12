@@ -1,0 +1,36 @@
+<section class="profile-section">
+
+    <div class="profile-card">
+
+        <h2>
+            <i class="fas fa-user-circle"></i>
+            Candidate Profile
+        </h2>
+
+        <div class="profile-grid">
+
+            <div class="profile-item">
+                <span>Email</span>
+                <strong>{{ analysis.entities.email or "Not Found" }}</strong>
+            </div>
+
+            <div class="profile-item">
+                <span>Phone</span>
+                <strong>{{ analysis.entities.phone or "Not Found" }}</strong>
+            </div>
+
+            <div class="profile-item">
+                <span>LinkedIn</span>
+                <strong>{{ analysis.entities.linkedin or "Not Found" }}</strong>
+            </div>
+
+            <div class="profile-item">
+                <span>GitHub</span>
+                <strong>{{ analysis.entities.github or "Not Found" }}</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,485 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}
+Career Roadmap | TalentIQ AI
+{% endblock %}
+
+
+{% block css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/career_roadmap.css') }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="career-roadmap-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="career-roadmap-header">
+
+        <div class="roadmap-header-content">
+
+            <div class="roadmap-title-icon">
+
+                <i class="fas fa-route"></i>
+
+            </div>
+
+
+            <div>
+
+                <h1>
+                    Your Career Roadmap
+                </h1>
+
+                <p>
+                    Follow your personalized journey and move step by step
+                    towards your dream career.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="roadmap-progress-badge">
+
+            <i class="fas fa-compass"></i>
+
+            <span>
+                Your Career Journey
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         ROADMAP MAIN AREA
+    ====================================================== -->
+
+    <div class="roadmap-map-container">
+
+
+        <!-- BACKGROUND DECORATIONS -->
+
+        <div class="roadmap-bg-circle circle-one"></div>
+
+        <div class="roadmap-bg-circle circle-two"></div>
+
+        <div class="roadmap-bg-circle circle-three"></div>
+
+
+        <div class="roadmap-bg-grid"></div>
+
+
+
+        <!-- TOP DECORATION -->
+
+        <div class="roadmap-decoration decoration-laptop">
+
+            <i class="fas fa-laptop-code"></i>
+
+        </div>
+
+
+        <div class="roadmap-decoration decoration-rocket">
+
+            <i class="fas fa-rocket"></i>
+
+        </div>
+
+
+        <div class="roadmap-decoration decoration-chart">
+
+            <i class="fas fa-chart-line"></i>
+
+        </div>
+
+
+        <div class="roadmap-decoration decoration-graduation">
+
+            <i class="fas fa-graduation-cap"></i>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             START POINT
+        ====================================================== -->
+
+        <div class="roadmap-start-point">
+
+            <div class="start-icon">
+
+                <i class="fas fa-user"></i>
+
+            </div>
+
+            <span>
+                YOU ARE HERE
+            </span>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             CURVED ROAD / SVG PATH
+        ====================================================== -->
+
+        <svg
+            class="roadmap-route"
+            viewBox="0 0 1200 700"
+            preserveAspectRatio="none"
+        >
+
+            <!-- ROUTE SHADOW -->
+
+            <path
+                class="road-shadow"
+                d="
+                    M 80 120
+                    C 250 40, 360 180, 500 130
+                    S 720 70, 820 190
+                    S 1080 300, 930 390
+                    S 650 450, 730 560
+                    S 420 690, 250 560
+                    S 100 440, 220 360
+                "
+            />
+
+
+            <!-- MAIN ROUTE -->
+
+            <path
+                class="road-path"
+                d="
+                    M 80 120
+                    C 250 40, 360 180, 500 130
+                    S 720 70, 820 190
+                    S 1080 300, 930 390
+                    S 650 450, 730 560
+                    S 420 690, 250 560
+                    S 100 440, 220 360
+                "
+            />
+
+        </svg>
+
+
+
+        <!-- =====================================================
+             ROADMAP STEP 1
+        ====================================================== -->
+
+        <div class="roadmap-stop stop-one">
+
+            <div class="roadmap-node">
+
+                <div class="node-icon">
+
+                    <i class="fas fa-file-alt"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="roadmap-stop-card">
+
+                <div class="stop-number">
+                    01
+                </div>
+
+                <h3>
+                    Improve Resume
+                </h3>
+
+                <p>
+                    Build a stronger and more professional resume.
+                </p>
+
+                <span class="stop-status current">
+                    Current Step
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             ROADMAP STEP 2
+        ====================================================== -->
+
+        <div class="roadmap-stop stop-two">
+
+            <div class="roadmap-node">
+
+                <div class="node-icon">
+
+                    <i class="fas fa-book-open"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="roadmap-stop-card">
+
+                <div class="stop-number">
+                    02
+                </div>
+
+                <h3>
+                    Learn Missing Skills
+                </h3>
+
+                <p>
+                    Close your skill gaps and improve your profile.
+                </p>
+
+                <span class="stop-status">
+                    Skill Growth
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             ROADMAP STEP 3
+        ====================================================== -->
+
+        <div class="roadmap-stop stop-three">
+
+            <div class="roadmap-node">
+
+                <div class="node-icon">
+
+                    <i class="fas fa-laptop-code"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="roadmap-stop-card">
+
+                <div class="stop-number">
+                    03
+                </div>
+
+                <h3>
+                    Build Projects
+                </h3>
+
+                <p>
+                    Complete industry-level projects and gain experience.
+                </p>
+
+                <span class="stop-status">
+                    Build Experience
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             ROADMAP STEP 4
+        ====================================================== -->
+
+        <div class="roadmap-stop stop-four">
+
+            <div class="roadmap-node">
+
+                <div class="node-icon">
+
+                    <i class="fas fa-microphone"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="roadmap-stop-card">
+
+                <div class="stop-number">
+                    04
+                </div>
+
+                <h3>
+                    Practice Interviews
+                </h3>
+
+                <p>
+                    Prepare for technical and HR interview questions.
+                </p>
+
+                <span class="stop-status">
+                    Interview Ready
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             ROADMAP STEP 5
+        ====================================================== -->
+
+        <div class="roadmap-stop stop-five">
+
+            <div class="roadmap-node">
+
+                <div class="node-icon">
+
+                    <i class="fas fa-briefcase"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="roadmap-stop-card">
+
+                <div class="stop-number">
+                    05
+                </div>
+
+                <h3>
+                    Apply For Jobs
+                </h3>
+
+                <p>
+                    Discover opportunities that match your skills.
+                </p>
+
+                <span class="stop-status">
+                    Job Search
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             FINAL DESTINATION
+        ====================================================== -->
+
+        <div class="roadmap-destination">
+
+            <div class="destination-glow"></div>
+
+
+            <div class="destination-icon">
+
+                <i class="fas fa-rocket"></i>
+
+            </div>
+
+
+            <div class="destination-content">
+
+                <span>
+                    FINAL DESTINATION
+                </span>
+
+                <h2>
+                    Your Dream Career
+                </h2>
+
+                <p>
+                    You are ready to launch your professional journey.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             MAP LABELS
+        ====================================================== -->
+
+        <div class="map-label label-one">
+
+            <i class="fas fa-star"></i>
+
+            Career Growth
+
+        </div>
+
+
+        <div class="map-label label-two">
+
+            <i class="fas fa-arrow-trend-up"></i>
+
+            Keep Moving Forward
+
+        </div>
+
+
+        <div class="map-label label-three">
+
+            <i class="fas fa-bullseye"></i>
+
+            Career Goal
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         ROADMAP FOOTER
+    ====================================================== -->
+
+    <div class="roadmap-footer">
+
+        <div class="roadmap-footer-icon">
+
+            <i class="fas fa-lightbulb"></i>
+
+        </div>
+
+
+        <p>
+
+            Every step you complete brings you closer to your
+            <strong>dream career.</strong>
+
+        </p>
+
+    </div>
+
+
+</div>
+
+{% endblock %}

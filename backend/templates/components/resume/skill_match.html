@@ -1,0 +1,66 @@
+<section class="skill-match-section">
+
+    <div class="skill-match-card">
+
+        <div class="skill-match-header">
+
+            <h2>
+                <i class="fas fa-chart-pie"></i>
+                AI Skill Match Analysis
+            </h2>
+
+            <span class="ai-badge">
+                Live Analysis
+            </span>
+
+        </div>
+
+        <div class="skill-match-grid">
+
+            <!-- Existing Skills -->
+
+            <div class="skill-column">
+
+                <h3>
+                    <i class="fas fa-circle-check"></i>
+                    Your Skills
+                </h3>
+
+                {% for skill in analysis.skills %}
+
+                <span class="skill-chip success">
+
+                    {{ skill }}
+
+                </span>
+
+                {% endfor %}
+
+            </div>
+
+            <!-- Missing Skills -->
+
+            <div class="skill-column">
+
+                <h3>
+                    <i class="fas fa-circle-xmark"></i>
+                    Missing Skills
+                </h3>
+
+                {% for skill in analysis.skill_gap.missing_skills %}
+
+                <span class="skill-chip danger">
+
+                    {{ skill }}
+
+                </span>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

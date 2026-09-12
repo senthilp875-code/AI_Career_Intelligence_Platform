@@ -1,0 +1,77 @@
+<header class="top-navbar">
+
+    <!-- Left -->
+
+    <div class="nav-left">
+
+        <a href="javascript:void(0)"
+           id="menu-toggle"
+           class="brand">
+
+            <i class="fas fa-robot"></i>
+
+            <span>TalentIQ AI</span>
+
+        </a>
+
+    </div>
+
+    <!-- Right -->
+
+    <div class="nav-right">
+
+        <button class="theme-btn">
+
+            <i class="fas fa-moon"></i>
+
+        </button>
+
+        <!-- Profile Dropdown -->
+
+        <div class="profile-dropdown">
+
+            <button class="profile-btn">
+
+                <i class="fas fa-user-circle"></i>
+
+                <span>{{ session.username }}</span>
+
+                <i class="fas fa-chevron-down small-arrow"></i>
+
+            </button>
+
+            <div class="profile-menu">
+
+                <a href="/profile">
+
+                    <i class="fas fa-user"></i>
+
+                    My Profile
+
+                </a>
+
+                <a href="/settings">
+
+                    <i class="fas fa-gear"></i>
+
+                    Settings
+
+                </a>
+
+                <hr>
+
+                <a href="/logout" class="logout-item">
+
+                    <i class="fas fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>

@@ -1,0 +1,112 @@
+{% extends "admin/base.html" %}
+{% block title %}User Detail | TalentIQ AI{% endblock %}
+{% block page_heading %}Candidate Profile Information{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <a href="{{ url_for('admin.users') }}" class="admin-btn btn-muted btn-sm">
+        <i class="fas fa-arrow-left"></i> Back to User Management
+    </a>
+</div>
+
+<section class="admin-panel">
+    <div class="admin-panel-header">
+        <h2><i class="fas fa-id-card text-primary"></i> Account Overview</h2>
+    </div>
+    <div style="padding: 2.5rem; display: flex; gap: 3rem; align-items: center;">
+        <div style="width: 100px; height: 100px; background: #eff6ff; color: var(--primary); border-radius: 20px; display: grid; place-items: center; font-size: 3rem; border: 2px solid #dbeafe;">
+            <i class="fas fa-user-tie"></i>
+        </div>
+        <div style="flex: 1;">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+                <h2 style="margin: 0; font-size: 1.75rem; font-weight: 800;">{{ user[1] }}</h2>
+                {% if user[4] %}
+                <span class="admin-badge success">Active Candidate</span>
+                {% else %}
+                <span class="admin-badge danger">Suspended</span>
+                {% endif %}
+            </div>
+            <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.25rem;">
+                <i class="fas fa-at me-1"></i> {{ user[2] }} · <i class="fas fa-envelope me-1 ms-3"></i> {{ user[3] }}
+            </p>
+            <div style="display: flex; gap: 2rem; font-size: 0.9rem; color: var(--text-muted);">
+                <span><i class="fas fa-calendar-check me-2"></i> Member Since: <strong>{{ user[5] or '—' }}</strong></span>
+                <span><i class="fas fa-hashtag me-2"></i> Internal ID: <strong>#{{ user[0] }}</strong></span>
+            </div>
+        </div>
+        <div class="admin-actions">
+            <form method="POST" action="{{ url_for('admin.user_toggle', user_id=user[0]) }}">
+                <input type="hidden" name="active" value="{{ 0 if user[4] else 1 }}">
+                <button type="submit" class="admin-btn {{ 'btn-danger' if user[4] else '' }}">
+                    <i class="fas {{ 'fa-user-slash' if user[4] else 'fa-user-check' }}"></i>
+                    {{ 'Deactivate Account' if user[4] else 'Reactivate Account' }}
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<div style="display: grid; grid-template-columns: 2fr 1.2fr; gap: 2rem;">
+    <section class="admin-panel">
+        <div class="admin-panel-header">
+            <h2><i class="fas fa-file-invoice text-primary"></i> Resume Analysis History</h2>
+        </div>
+        <div class="admin-table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Score</th>
+                        <th>ATS</th>
+                        <th>Predicted Role</th>
+                        <th>Analyzed At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for a in analyses %}
+                    <tr>
+                        <td style="font-weight: 600;"><i class="fas fa-file-pdf text-danger me-2"></i> {{ a[0] }}</td>
+                        <td><span class="admin-badge success">{{ a[1] }}%</span></td>
+                        <td><span class="admin-badge success">{{ a[2] }}%</span></td>
+                        <td style="font-weight: 600; color: var(--primary);">{{ a[3] }}</td>
+                        <td style="font-size: 0.8rem; color: var(--text-muted);">{{ a[4] }}</td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="5" class="admin-empty">No resume analysis data found for this candidate.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="admin-panel">
+        <div class="admin-panel-header">
+            <h2><i class="fas fa-clock-rotate-left text-primary"></i> Activity Log</h2>
+        </div>
+        <div class="admin-table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for act in activity %}
+                    <tr>
+                        <td>
+                            <div style="font-weight: 700; font-size: 0.85rem;">{{ act[0] | upper }}</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">{{ act[1] or 'No details' }}</div>
+                        </td>
+                        <td style="font-size: 0.75rem; color: var(--text-muted); white-space: nowrap;">{{ act[2] }}</td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="2" class="admin-empty">No activity records found.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+{% endblock %}
+

@@ -1,0 +1,933 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}
+Settings | TalentIQ AI
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+/* =========================================================
+   TALENTIQ AI — PREMIUM SETTINGS
+   ========================================================= */
+
+.settings-page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 10px 0 50px;
+}
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.settings-header h1 {
+    margin: 0;
+    color: #172033;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -.5px;
+}
+
+.settings-header h1 i {
+    color: #2563eb;
+    margin-right: 8px;
+}
+
+.settings-header p {
+    margin: 7px 0 0;
+    color: #718096;
+    font-size: 14px;
+}
+
+/* =========================================================
+   SETTINGS CARD
+   ========================================================= */
+
+.settings-card {
+    background: #ffffff;
+    border: 1px solid #e7ebf2;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(15, 23, 42, .05);
+}
+
+/* =========================================================
+   SETTING ROW
+   ========================================================= */
+
+.setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    padding: 24px 28px;
+    transition: background .2s ease;
+}
+
+.setting-row:hover {
+    background: #fafbff;
+}
+
+.setting-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+.setting-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eff6ff;
+    color: #2563eb;
+
+    font-size: 17px;
+}
+
+.setting-info h3 {
+    margin: 0 0 5px;
+    color: #172033;
+    font-size: 15px;
+    font-weight: 650;
+}
+
+.setting-info p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.setting-value {
+    color: #334155 !important;
+    font-size: 14px !important;
+    font-weight: 500;
+}
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.settings-divider {
+    height: 1px;
+    background: #edf0f5;
+    margin: 0 28px;
+}
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+.settings-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    border: none;
+    border-radius: 10px;
+
+    padding: 10px 16px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 6px 18px rgba(37, 99, 235, .18);
+
+    transition: all .2s ease;
+}
+
+.settings-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 9px 24px rgba(37, 99, 235, .25);
+}
+
+/* =========================================================
+   THEME SWITCH
+   ========================================================= */
+
+.theme-switch {
+    position: relative;
+    width: 58px;
+    height: 30px;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.theme-slider {
+    position: absolute;
+    inset: 0;
+
+    background: #cbd5e1;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.theme-slider::before {
+    content: "";
+
+    position: absolute;
+
+    width: 24px;
+    height: 24px;
+
+    left: 3px;
+    top: 3px;
+
+    background: #ffffff;
+
+    border-radius: 50%;
+
+    box-shadow: 0 2px 5px rgba(0,0,0,.15);
+
+    transition: .25s;
+}
+
+.theme-switch input:checked + .theme-slider {
+    background: #2563eb;
+}
+
+.theme-switch input:checked + .theme-slider::before {
+    transform: translateX(28px);
+}
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+.logout-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 16px;
+
+    border-radius: 10px;
+
+    background: #fff1f2;
+    border: 1px solid #fecdd3;
+
+    color: #dc2626;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: all .2s ease;
+}
+
+.logout-btn:hover {
+    background: #fee2e2;
+    color: #b91c1c;
+    transform: translateY(-1px);
+}
+
+/* =========================================================
+   PASSWORD MODAL
+   ========================================================= */
+
+.password-modal {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    background: rgba(15, 23, 42, .55);
+
+    backdrop-filter: blur(6px);
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.password-modal.active {
+    display: flex;
+}
+
+.password-box {
+    width: 100%;
+    max-width: 440px;
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    padding: 28px;
+
+    box-shadow: 0 25px 70px rgba(15,23,42,.25);
+
+    animation: modalIn .2s ease;
+}
+
+@keyframes modalIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+.password-box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 22px;
+}
+
+.password-box-header h2 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 20px;
+}
+
+.close-modal {
+    width: 34px;
+    height: 34px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #f1f5f9;
+
+    color: #64748b;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+.close-modal:hover {
+    background: #e2e8f0;
+}
+
+.password-field {
+    margin-bottom: 17px;
+}
+
+.password-field label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #475569;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+.password-field input {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 12px 13px;
+
+    border: 1px solid #dbe2ea;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    transition: .2s;
+}
+
+.password-field input:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37,99,235,.10);
+}
+
+.password-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+.cancel-btn {
+    border: 1px solid #e2e8f0;
+
+    background: #ffffff;
+
+    color: #64748b;
+
+    padding: 10px 16px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.cancel-btn:hover {
+    background: #f8fafc;
+}
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+body.dark-mode {
+    background: #0f172a !important;
+}
+
+body.dark-mode .settings-header h1,
+body.dark-mode .setting-info h3 {
+    color: #f8fafc;
+}
+
+body.dark-mode .settings-header p,
+body.dark-mode .setting-info p {
+    color: #94a3b8;
+}
+
+body.dark-mode .settings-card {
+    background: #111827;
+    border-color: #1f2937;
+    box-shadow: none;
+}
+
+body.dark-mode .setting-row:hover {
+    background: #172033;
+}
+
+body.dark-mode .settings-divider {
+    background: #1f2937;
+}
+
+body.dark-mode .setting-value {
+    color: #e2e8f0 !important;
+}
+
+body.dark-mode .setting-icon {
+    background: #172554;
+    color: #60a5fa;
+}
+
+body.dark-mode .password-box {
+    background: #111827;
+}
+
+body.dark-mode .password-box-header h2 {
+    color: #f8fafc;
+}
+
+body.dark-mode .password-field label {
+    color: #cbd5e1;
+}
+
+body.dark-mode .password-field input {
+    background: #0f172a;
+    border-color: #334155;
+    color: #ffffff;
+}
+
+body.dark-mode .cancel-btn {
+    background: #1e293b;
+    border-color: #334155;
+    color: #cbd5e1;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .settings-page {
+        padding: 5px 0 30px;
+    }
+
+    .settings-header h1 {
+        font-size: 25px;
+    }
+
+    .setting-row {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .settings-btn,
+    .logout-btn {
+        width: 100%;
+    }
+
+    .theme-switch {
+        margin-left: 60px;
+    }
+
+}
+
+</style>
+
+
+<div class="settings-page">
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <div class="settings-header">
+
+        <div>
+
+            <h1>
+                <i class="fas fa-gear"></i>
+                Settings
+            </h1>
+
+            <p>
+                Manage your TalentIQ AI account and preferences
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SETTINGS CARD
+         ===================================================== -->
+
+    <div class="settings-card">
+
+
+        <!-- ================= ACCOUNT ================= -->
+
+        <div class="setting-row">
+
+            <div class="setting-left">
+
+                <div class="setting-icon">
+
+                    <i class="fas fa-user"></i>
+
+                </div>
+
+                <div class="setting-info">
+
+                    <h3>Username</h3>
+
+                    <p>Your TalentIQ AI account username</p>
+
+                </div>
+
+            </div>
+
+            <div class="setting-info">
+
+                <p class="setting-value">
+                    {{ session.username }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="settings-divider"></div>
+
+
+        <!-- ================= PASSWORD ================= -->
+
+        <div class="setting-row">
+
+            <div class="setting-left">
+
+                <div class="setting-icon">
+
+                    <i class="fas fa-lock"></i>
+
+                </div>
+
+                <div class="setting-info">
+
+                    <h3>Password</h3>
+
+                    <p>
+                        Keep your account secure with a strong password
+                    </p>
+
+                </div>
+
+            </div>
+
+            <button
+                type="button"
+                class="settings-btn"
+                id="openPasswordModal">
+
+                <i class="fas fa-key"></i>
+
+                Change Password
+
+            </button>
+
+        </div>
+
+
+        <div class="settings-divider"></div>
+
+
+        <!-- ================= THEME ================= -->
+
+        <div class="setting-row">
+
+            <div class="setting-left">
+
+                <div class="setting-icon">
+
+                    <i class="fas fa-palette"></i>
+
+                </div>
+
+                <div class="setting-info">
+
+                    <h3>Appearance</h3>
+
+                    <p id="themeDescription">
+                        Use light mode
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <label class="theme-switch">
+
+                <input
+                    type="checkbox"
+                    id="themeToggle">
+
+                <span class="theme-slider"></span>
+
+            </label>
+
+        </div>
+
+
+        <div class="settings-divider"></div>
+
+
+        <!-- ================= LOGOUT ================= -->
+
+        <div class="setting-row">
+
+            <div class="setting-left">
+
+                <div class="setting-icon">
+
+                    <i class="fas fa-right-from-bracket"></i>
+
+                </div>
+
+                <div class="setting-info">
+
+                    <h3>Logout</h3>
+
+                    <p>
+                        Sign out from your TalentIQ AI account
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="/logout"
+                class="logout-btn">
+
+                <i class="fas fa-arrow-right-from-bracket"></i>
+
+                Logout
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     PASSWORD MODAL
+     ========================================================= -->
+
+<div
+    class="password-modal"
+    id="passwordModal">
+
+    <div class="password-box">
+
+        <div class="password-box-header">
+
+            <h2>
+                <i class="fas fa-shield-halved"
+                   style="color:#2563eb; margin-right:7px;"></i>
+
+                Change Password
+            </h2>
+
+            <button
+                type="button"
+                class="close-modal"
+                id="closePasswordModal">
+
+                <i class="fas fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <form
+            method="POST"
+            action="/change-password">
+
+
+            <div class="password-field">
+
+                <label>
+                    Current Password
+                </label>
+
+                <input
+                    type="password"
+                    name="current_password"
+                    required
+                    autocomplete="current-password">
+
+            </div>
+
+
+            <div class="password-field">
+
+                <label>
+                    New Password
+                </label>
+
+                <input
+                    type="password"
+                    name="new_password"
+                    required
+                    minlength="6"
+                    autocomplete="new-password">
+
+            </div>
+
+
+            <div class="password-field">
+
+                <label>
+                    Confirm New Password
+                </label>
+
+                <input
+                    type="password"
+                    name="confirm_password"
+                    required
+                    minlength="6"
+                    autocomplete="new-password">
+
+            </div>
+
+
+            <div class="password-actions">
+
+                <button
+                    type="button"
+                    class="cancel-btn"
+                    id="cancelPassword">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="settings-btn">
+
+                    <i class="fas fa-check"></i>
+
+                    Update Password
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     THEME + MODAL JAVASCRIPT
+     ========================================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =====================================================
+       PASSWORD MODAL
+       ===================================================== */
+
+    const modal = document.getElementById("passwordModal");
+
+    const openBtn =
+        document.getElementById("openPasswordModal");
+
+    const closeBtn =
+        document.getElementById("closePasswordModal");
+
+    const cancelBtn =
+        document.getElementById("cancelPassword");
+
+
+    function openModal() {
+        modal.classList.add("active");
+    }
+
+
+    function closeModal() {
+        modal.classList.remove("active");
+    }
+
+
+    openBtn.addEventListener("click", openModal);
+
+    closeBtn.addEventListener("click", closeModal);
+
+    cancelBtn.addEventListener("click", closeModal);
+
+
+    modal.addEventListener("click", function (event) {
+
+        if (event.target === modal) {
+            closeModal();
+        }
+
+    });
+
+
+    /* =====================================================
+       THEME
+       ===================================================== */
+
+    const themeToggle =
+        document.getElementById("themeToggle");
+
+    const themeDescription =
+        document.getElementById("themeDescription");
+
+
+    function applyTheme(theme) {
+
+        if (theme === "dark") {
+
+            document.body.classList.add("dark-mode");
+
+            themeToggle.checked = true;
+
+            themeDescription.textContent =
+                "Use dark mode";
+
+        } else {
+
+            document.body.classList.remove("dark-mode");
+
+            themeToggle.checked = false;
+
+            themeDescription.textContent =
+                "Use light mode";
+
+        }
+
+    }
+
+
+    const savedTheme =
+        localStorage.getItem("talentiq-theme") || "light";
+
+
+    applyTheme(savedTheme);
+
+
+    themeToggle.addEventListener("change", function () {
+
+        const selectedTheme =
+            this.checked ? "dark" : "light";
+
+        localStorage.setItem(
+            "talentiq-theme",
+            selectedTheme
+        );
+
+        applyTheme(selectedTheme);
+
+    });
+
+});
+
+</script>
+
+{% endblock %}

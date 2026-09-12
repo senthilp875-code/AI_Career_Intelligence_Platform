@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+
+        {% block title %}TalentIQ AI{% endblock %}
+
+    </title>
+
+    <!-- ================= GOOGLE FONT ================= -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- ================= FONT AWESOME ================= -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- ================= BASE CSS ================= -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/base.css') }}">
+
+    {% if session.get("username") %}
+
+        <!-- Dashboard CSS -->
+
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='css/layout.css') }}">
+
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='css/navbar.css') }}">
+
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='css/cards.css') }}">
+
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='css/upload.css') }}">
+
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='css/resume.css') }}">
+
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='css/theme.css') }}">
+
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='css/animations.css') }}">
+
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='css/responsive.css') }}">
+
+    {% else %}
+
+        <!-- Login/Register CSS -->
+
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='css/login.css') }}">
+
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='css/register.css') }}">
+
+    {% endif %}
+
+    {% block css %}{% endblock %}
+
+</head>
+
+<body>
+
+{% if session.get("username") %}
+
+<div class="app-layout">
+
+    <!-- Sidebar -->
+
+    {% include "components/sidebar.html" %}
+
+    <div class="main-wrapper">
+
+        <!-- Navbar -->
+
+        {% include "components/navbar.html" %}
+
+        <!-- Flash Messages -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+        <div class="flash-container">
+
+            {% for category, message in messages %}
+
+            <div class="alert {{ category }}">
+
+                <i class="fas fa-circle-info"></i>
+
+                <span>{{ message }}</span>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+        {% endwith %}
+
+        <!-- Page -->
+
+        <main class="page-content">
+
+            {% block content %}{% endblock %}
+
+        </main>
+
+        <!-- Footer -->
+
+        <footer class="main-footer">
+
+            © 2026 <strong>TalentIQ AI</strong> | AI Career Intelligence Platform
+
+        </footer>
+
+    </div>
+
+</div>
+
+{% else %}
+
+<!-- Guest Layout -->
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+{% if messages %}
+
+<div class="flash-container">
+
+    {% for category, message in messages %}
+
+    <div class="alert {{ category }}">
+
+        <i class="fas fa-circle-info"></i>
+
+        <span>{{ message }}</span>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endif %}
+
+{% endwith %}
+
+<div class="guest-layout">
+
+    {% block content %}{% endblock %}
+
+</div>
+
+{% endif %}
+
+<!-- Chart.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+{% if session.get("username") %}
+
+<script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/animations.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+
+{% endif %}
+
+{% block js %}{% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,314 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}
+Resume Improvement | TalentIQ AI
+{% endblock %}
+
+
+{% block css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/resume_improvement.css') }}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="resume-improvement-page">
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="improvement-hero">
+
+        <div class="hero-content">
+
+            <div class="hero-icon">
+                <i class="fas fa-wand-magic-sparkles"></i>
+            </div>
+
+            <div>
+
+                <span class="hero-label">
+                    AI-POWERED RESUME OPTIMIZATION
+                </span>
+
+                <h1>
+                    Improve Your Resume
+                </h1>
+
+                <p>
+                    TalentIQ AI analyzes your resume and provides
+                    personalized suggestions to make your profile
+                    stronger and more job-ready.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-ai-badge">
+
+            <i class="fas fa-robot"></i>
+
+            <span>
+                AI Analysis
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= STRENGTHS + IMPROVEMENTS ================= -->
+
+    <section class="improvement-grid">
+
+
+        <!-- RESUME STRENGTHS -->
+
+        <div class="improvement-card strengths-card">
+
+            <div class="improvement-card-header">
+
+                <div class="section-icon strength-icon">
+                    <i class="fas fa-shield-heart"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Resume Strengths
+                    </h2>
+
+                    <p>
+                        What your resume is already doing well
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="improvement-list">
+
+                {% if analysis.resume_strengths %}
+
+                    {% for item in analysis.resume_strengths %}
+
+                    <div class="improvement-item strength-item">
+
+                        <div class="item-status">
+                            <i class="fas fa-check"></i>
+                        </div>
+
+                        <span>
+                            {{ item }}
+                        </span>
+
+                    </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="empty-analysis">
+
+                        <i class="fas fa-circle-check"></i>
+
+                        <p>
+                            Your resume analysis is looking good.
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+
+        <!-- AREAS TO IMPROVE -->
+
+        <div class="improvement-card improve-card">
+
+            <div class="improvement-card-header">
+
+                <div class="section-icon improve-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Areas to Improve
+                    </h2>
+
+                    <p>
+                        Suggestions to strengthen your resume
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="improvement-list">
+
+                {% if analysis.resume_improvements %}
+
+                    {% for item in analysis.resume_improvements %}
+
+                    <div class="improvement-item warning-item">
+
+                        <div class="item-status">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+
+                        <span>
+                            {{ item }}
+                        </span>
+
+                    </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="empty-analysis">
+
+                        <i class="fas fa-trophy"></i>
+
+                        <p>
+                            No major improvements detected.
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= ACTION VERBS ================= -->
+
+    <section class="action-verbs-card">
+
+        <div class="verbs-header">
+
+            <div>
+
+                <span class="section-small-label">
+                    STRONGER WRITING
+                </span>
+
+                <h2>
+                    <i class="fas fa-bolt"></i>
+
+                    Recommended Action Verbs
+                </h2>
+
+                <p>
+                    Use these powerful action verbs to make your
+                    achievements and experience more impactful.
+                </p>
+
+            </div>
+
+
+            <div class="verbs-icon">
+
+                <i class="fas fa-pen-nib"></i>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="modern-action-tags">
+
+            {% if analysis.action_verbs %}
+
+                {% for verb in analysis.action_verbs %}
+
+                <span class="action-verb-tag">
+
+                    <i class="fas fa-plus"></i>
+
+                    {{ verb }}
+
+                </span>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p class="no-data">
+                    No action verb suggestions available.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= NEXT STEP ================= -->
+
+    <section class="improvement-next-step">
+
+        <div class="next-step-icon">
+
+            <i class="fas fa-rocket"></i>
+
+        </div>
+
+
+        <div class="next-step-content">
+
+            <span>
+                NEXT STEP
+            </span>
+
+            <h2>
+                Make Your Resume Stronger
+            </h2>
+
+            <p>
+                Apply the suggestions above and analyze your resume
+                again to track your improvement.
+            </p>
+
+        </div>
+
+
+        <a href="/new-resume"
+           class="improve-action-btn">
+
+            Analyze Updated Resume
+
+            <i class="fas fa-arrow-right"></i>
+
+        </a>
+
+    </section>
+
+
+</div>
+
+{% endblock %}

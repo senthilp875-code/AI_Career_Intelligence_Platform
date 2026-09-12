@@ -1,0 +1,928 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}
+Edit Profile | TalentIQ AI
+{% endblock %}
+
+{% block css %}
+
+<style>
+
+/* =========================================================
+   TALENTIQ AI - EDIT PROFILE
+   ========================================================= */
+
+.profile-edit-page {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+/* ---------- HEADER ---------- */
+
+.profile-edit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.profile-edit-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.profile-edit-title .title-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.20);
+}
+
+.profile-edit-title h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.profile-edit-title p {
+    margin: 5px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* ---------- MAIN GRID ---------- */
+
+.profile-edit-grid {
+    display: grid;
+    grid-template-columns: 330px 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+/* ---------- LEFT PROFILE CARD ---------- */
+
+.profile-preview-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 22px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 35px rgba(15, 23, 42, 0.06);
+    position: sticky;
+    top: 90px;
+}
+
+.profile-avatar-wrapper {
+    position: relative;
+    width: 110px;
+    margin: 0 auto 18px;
+}
+
+.profile-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    font-weight: 700;
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.25);
+}
+
+.avatar-edit-icon {
+    position: absolute;
+    right: 0;
+    bottom: 2px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3px solid #f8fafc;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+}
+
+.profile-preview-card h2 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 22px;
+}
+
+.profile-preview-card .profile-headline {
+    margin: 7px 0 20px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.profile-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 12px;
+    border-radius: 20px;
+    background: #ecfdf5;
+    color: #059669;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.profile-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #10b981;
+}
+
+/* ---------- PROFILE COMPLETION ---------- */
+
+.profile-completion {
+    margin-top: 28px;
+    text-align: left;
+    padding: 18px;
+    background: #f8fafc;
+    border-radius: 16px;
+}
+
+.completion-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.completion-header span:first-child {
+    color: #334155;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.completion-header span:last-child {
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.completion-bar {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.completion-fill {
+    width: 75%;
+    height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #2563eb, #7c3aed);
+}
+
+/* ---------- PROFILE QUICK INFO ---------- */
+
+.profile-quick-info {
+    margin-top: 22px;
+    text-align: left;
+}
+
+.quick-info-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 13px;
+    color: #64748b;
+    word-break: break-word;
+}
+
+.quick-info-item:last-child {
+    border-bottom: none;
+}
+
+.quick-info-item i {
+    width: 25px;
+    color: #2563eb;
+    text-align: center;
+}
+
+/* ---------- RIGHT SIDE ---------- */
+
+.profile-form-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 22px;
+    box-shadow: 0 10px 35px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+}
+
+.form-section {
+    padding: 28px 30px;
+    border-bottom: 1px solid #eef2f7;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+}
+
+.form-section-header {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 22px;
+}
+
+.section-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: #eff6ff;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-section-header h3 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 17px;
+}
+
+.form-section-header p {
+    margin: 4px 0 0;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+/* ---------- FORM GRID ---------- */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form-group label i {
+    color: #2563eb;
+    margin-right: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #dbe3ee;
+    background: #f8fafc;
+    border-radius: 11px;
+    padding: 12px 14px;
+    font-family: inherit;
+    font-size: 13px;
+    color: #0f172a;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.form-group input {
+    height: 45px;
+}
+
+.form-group textarea {
+    min-height: 105px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #2563eb;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+.form-help {
+    margin-top: 6px;
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+/* ---------- SKILLS ---------- */
+
+.skills-box {
+    background: #f8fafc;
+    border: 1px solid #dbe3ee;
+    border-radius: 12px;
+    padding: 4px;
+}
+
+.skills-box textarea {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+.skills-box textarea:focus {
+    box-shadow: none;
+}
+
+/* ---------- SOCIAL LINKS ---------- */
+
+.social-input {
+    position: relative;
+}
+
+.social-input i {
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    color: #64748b;
+}
+
+.social-input input {
+    padding-left: 40px;
+}
+
+/* ---------- ACTION BAR ---------- */
+
+.form-actions {
+    padding: 22px 30px;
+    background: #f8fafc;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.btn-cancel,
+.btn-save {
+    height: 45px;
+    padding: 0 22px;
+    border-radius: 11px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-cancel {
+    color: #475569;
+    background: white;
+    border: 1px solid #dbe3ee;
+}
+
+.btn-cancel:hover {
+    background: #f1f5f9;
+}
+
+.btn-save {
+    border: none;
+    color: white;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.22);
+}
+
+.btn-save:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 25px rgba(37, 99, 235, 0.28);
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 900px) {
+
+    .profile-edit-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-preview-card {
+        position: static;
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .profile-edit-header {
+        align-items: flex-start;
+    }
+
+    .profile-edit-title h1 {
+        font-size: 24px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full-width {
+        grid-column: auto;
+    }
+
+    .form-section {
+        padding: 22px;
+    }
+
+    .form-actions {
+        padding: 18px 22px;
+    }
+
+    .btn-cancel,
+    .btn-save {
+        flex: 1;
+    }
+
+}
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="profile-edit-page">
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <div class="profile-edit-header">
+
+        <div class="profile-edit-title">
+
+            <div class="title-icon">
+                <i class="fas fa-user-edit"></i>
+            </div>
+
+            <div>
+                <h1>Edit Profile</h1>
+
+                <p>
+                    Build your professional TalentIQ AI career profile
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN GRID
+         ===================================================== -->
+
+    <div class="profile-edit-grid">
+
+
+        <!-- =================================================
+             LEFT PROFILE PREVIEW
+             ================================================= -->
+
+        <div class="profile-preview-card">
+
+            <div class="profile-avatar-wrapper">
+
+                <div class="profile-avatar">
+                    {{ session.username[0]|upper }}
+                </div>
+
+                <div class="avatar-edit-icon">
+                    <i class="fas fa-camera"></i>
+                </div>
+
+            </div>
+
+
+            <h2>
+                {{ user.full_name or session.username }}
+            </h2>
+
+            <p class="profile-headline">
+
+                {{ user.headline or "Add your professional headline" }}
+
+            </p>
+
+
+            <span class="profile-status">
+
+                <span class="profile-status-dot"></span>
+
+                Profile Active
+
+            </span>
+
+
+            <!-- PROFILE COMPLETION -->
+
+            <div class="profile-completion">
+
+                <div class="completion-header">
+
+                    <span>Profile Completion</span>
+
+                    <span>75%</span>
+
+                </div>
+
+                <div class="completion-bar">
+
+                    <div class="completion-fill"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK INFORMATION -->
+
+            <div class="profile-quick-info">
+
+                <div class="quick-info-item">
+
+                    <i class="fas fa-envelope"></i>
+
+                    <span>
+                        {{ user.email or "Email not added" }}
+                    </span>
+
+                </div>
+
+
+                <div class="quick-info-item">
+
+                    <i class="fas fa-phone"></i>
+
+                    <span>
+                        {{ user.phone or "Phone not added" }}
+                    </span>
+
+                </div>
+
+
+                <div class="quick-info-item">
+
+                    <i class="fas fa-location-dot"></i>
+
+                    <span>
+                        {{ user.location or "Location not added" }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             RIGHT EDIT FORM
+             ================================================= -->
+
+        <form
+            method="POST"
+            action="{{ url_for('edit_profile') }}"
+            class="profile-form-card"
+        >
+
+
+            <!-- =============================================
+                 PERSONAL INFORMATION
+                 ============================================= -->
+
+            <div class="form-section">
+
+                <div class="form-section-header">
+
+                    <div class="section-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>Personal Information</h3>
+
+                        <p>
+                            Basic information about you
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            <i class="fas fa-id-card"></i>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="full_name"
+                            value="{{ user.full_name or '' }}"
+                            placeholder="Enter your full name"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            <i class="fas fa-envelope"></i>
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            value="{{ user.email or '' }}"
+                            placeholder="Enter your email"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            <i class="fas fa-phone"></i>
+                            Phone
+                        </label>
+
+                        <input
+                            type="text"
+                            name="phone"
+                            value="{{ user.phone or '' }}"
+                            placeholder="Enter phone number"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            <i class="fas fa-location-dot"></i>
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            name="location"
+                            value="{{ user.location or '' }}"
+                            placeholder="City, State"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 CAREER INFORMATION
+                 ============================================= -->
+
+            <div class="form-section">
+
+                <div class="form-section-header">
+
+                    <div class="section-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>Career Information</h3>
+
+                        <p>
+                            Show recruiters what you do
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group full-width">
+
+                        <label>
+                            <i class="fas fa-heading"></i>
+                            Career Headline
+                        </label>
+
+                        <input
+                            type="text"
+                            name="headline"
+                            value="{{ user.headline or '' }}"
+                            placeholder="Example: BSc Computer Science | Data Analyst | Python Developer"
+                        >
+
+                        <span class="form-help">
+                            A short professional description that represents your career.
+                        </span>
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label>
+                            <i class="fas fa-code"></i>
+                            Skills
+                        </label>
+
+                        <div class="skills-box">
+
+                            <textarea
+                                name="skills"
+                                placeholder="Python, SQL, Excel, Power BI, Tableau, Machine Learning"
+                            >{{ user.skills or '' }}</textarea>
+
+                        </div>
+
+                        <span class="form-help">
+                            Separate your skills using commas.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 PROFESSIONAL LINKS
+                 ============================================= -->
+
+            <div class="form-section">
+
+                <div class="form-section-header">
+
+                    <div class="section-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>Professional Links</h3>
+
+                        <p>
+                            Connect your professional presence
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            <i class="fab fa-linkedin"></i>
+                            LinkedIn
+                        </label>
+
+                        <div class="social-input">
+
+                            <i class="fab fa-linkedin"></i>
+
+                            <input
+                                type="url"
+                                name="linkedin"
+                                value="{{ user.linkedin or '' }}"
+                                placeholder="https://linkedin.com/in/username"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </label>
+
+                        <div class="social-input">
+
+                            <i class="fab fa-github"></i>
+
+                            <input
+                                type="url"
+                                name="github"
+                                value="{{ user.github or '' }}"
+                                placeholder="https://github.com/username"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label>
+                            <i class="fas fa-globe"></i>
+                            Portfolio Website
+                        </label>
+
+                        <div class="social-input">
+
+                            <i class="fas fa-globe"></i>
+
+                            <input
+                                type="url"
+                                name="portfolio"
+                                value="{{ user.portfolio or '' }}"
+                                placeholder="https://yourportfolio.com"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 ACTIONS
+                 ============================================= -->
+
+            <div class="form-actions">
+
+                <a
+                    href="{{ url_for('profile') }}"
+                    class="btn-cancel"
+                >
+                    <i class="fas fa-arrow-left"></i>
+                    Cancel
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="btn-save"
+                >
+                    <i class="fas fa-check"></i>
+                    Save Profile
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

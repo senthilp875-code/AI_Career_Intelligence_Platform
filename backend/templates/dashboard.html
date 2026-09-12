@@ -1,18 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard</title>
-</head>
 
-<body>
+{% extends "dashboard_base.html" %}
 
-<h1>🎉 Login Successful!</h1>
+{% block title %}
+Dashboard | TalentIQ AI
+{% endblock %}
 
-<h2>Welcome, {{ username }}</h2>
+{% block css %}
 
-<p>You have successfully logged into the AI Career Intelligence Platform.</p>
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/dashboard.css') }}">
 
-<a href="/">Logout</a>
+{% endblock %}
 
-</body>
-</html>
+{% block content %}
+
+<div class="dashboard-container">
+
+    {% include "components/workspace.html" %}
+
+</div>
+
+{% endblock %}
+

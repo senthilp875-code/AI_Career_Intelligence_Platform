@@ -1,0 +1,115 @@
+<section class="activity-section">
+
+    <div class="activity-header">
+
+        <h2>
+
+            <i class="fas fa-clock-rotate-left"></i>
+
+            Recent Activity
+
+        </h2>
+
+        <span class="activity-badge">
+
+            Live Updates
+
+        </span>
+
+    </div>
+
+    <div class="timeline">
+
+        {% if session.analysis %}
+
+        <div class="timeline-item">
+
+            <div class="circle success"></div>
+
+            <div>
+
+                <h4>Resume Uploaded</h4>
+
+                <p>Your resume has been uploaded successfully.</p>
+
+            </div>
+
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="circle success"></div>
+
+            <div>
+
+                <h4>Resume Analysis Completed</h4>
+
+                <p>Resume Score : {{ session.analysis.resume_score }}%</p>
+
+            </div>
+
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="circle success"></div>
+
+            <div>
+
+                <h4>ATS Score Generated</h4>
+
+                <p>ATS Score : {{ session.analysis.ats_score }}%</p>
+
+            </div>
+
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="circle success"></div>
+
+            <div>
+
+                <h4>Career Predicted</h4>
+
+                <p>{{ session.analysis.predicted_job }}</p>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="timeline-item">
+
+            <div class="circle"></div>
+
+            <div>
+
+                <h4>Welcome to TalentIQ AI</h4>
+
+                <p>Upload your first resume to begin your AI career journey.</p>
+
+            </div>
+
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="circle"></div>
+
+            <div>
+
+                <h4>AI Engine Ready</h4>
+
+                <p>The AI engine is online and waiting for your resume.</p>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>

@@ -1,0 +1,110 @@
+<aside class="admin-sidebar" id="adminSidebar">
+
+    <div class="admin-brand">
+
+        <span class="admin-brand-icon">
+            <i class="fas fa-shield-halved"></i>
+        </span>
+
+        <div class="admin-brand-text">
+            <h2>TalentIQ AI</h2>
+            <small>Administration</small>
+        </div>
+
+    </div>
+
+
+    <nav class="admin-nav">
+
+        <!-- Dashboard -->
+
+        <a href="{{ url_for('admin.dashboard') }}"
+           class="{% if request.endpoint == 'admin.dashboard' %}active{% endif %}">
+
+            <i class="fas fa-chart-line"></i>
+            Dashboard
+
+        </a>
+
+
+        <!-- User Management -->
+
+        <a href="{{ url_for('admin.users') }}"
+           class="{% if request.endpoint in ['admin.users', 'admin.user_detail'] %}active{% endif %}">
+
+            <i class="fas fa-user-group"></i>
+            User Management
+
+        </a>
+
+
+        <!-- Resume Library -->
+
+        <a href="{{ url_for('admin.resumes') }}"
+           class="{% if request.endpoint == 'admin.resumes' %}active{% endif %}">
+
+            <i class="fas fa-file-invoice"></i>
+            Resume Library
+
+        </a>
+
+
+        <!-- Feedback -->
+
+        <a href="{{ url_for('admin.feedback') }}"
+           class="{% if request.endpoint == 'admin.feedback' %}active{% endif %}">
+
+            <i class="fas fa-star"></i>
+            Feedback
+
+        </a>
+
+
+        <!-- AI Insights -->
+
+        <a href="{{ url_for('admin.analytics') }}"
+           class="{% if request.endpoint == 'admin.analytics' %}active{% endif %}">
+
+            <i class="fas fa-wand-magic-sparkles"></i>
+            AI Insights
+
+        </a>
+
+
+        <!-- Data Reports -->
+
+        <a href="{{ url_for('admin.reports') }}"
+           class="{% if request.endpoint == 'admin.reports' %}active{% endif %}">
+
+            <i class="fas fa-cloud-arrow-down"></i>
+            Data Reports
+
+        </a>
+
+
+        <!-- App Settings -->
+
+        <a href="{{ url_for('admin.settings') }}"
+           class="{% if request.endpoint == 'admin.settings' %}active{% endif %}">
+
+            <i class="fas fa-sliders"></i>
+            App Settings
+
+        </a>
+
+    </nav>
+
+
+    <div class="admin-sidebar-footer">
+
+        <a href="{{ url_for('admin.logout') }}"
+           class="admin-logout">
+
+            <i class="fas fa-power-off"></i>
+            Sign Out
+
+        </a>
+
+    </div>
+
+</aside>

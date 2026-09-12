@@ -1,0 +1,82 @@
+<aside class="sidebar">
+
+    <!-- ================= LOGO ================= -->
+
+    <div class="sidebar-logo">
+
+        <div class="logo-icon">
+            <i class="fas fa-robot"></i>
+        </div>
+
+        <div class="logo-text">
+            <h2>TalentIQ AI</h2>
+            <span>Career Intelligence</span>
+        </div>
+
+    </div>
+
+    <!-- ================= MENU ================= -->
+
+    <nav class="sidebar-menu">
+
+        <a href="/dashboard" class="menu-item">
+            <i class="fas fa-house"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="/upload" class="menu-item">
+            <i class="fas fa-file-arrow-up"></i>
+            <span>Resume Analysis</span>
+        </a>
+
+        <!-- NEW FEATURE -->
+
+        <a href="/resume-builder" class="menu-item">
+            <i class="fas fa-file-lines"></i>
+            <span>Resume Builder</span>
+        </a>
+
+        <a href="/ai-chat" class="menu-item">
+            <i class="fas fa-sparkles"></i>
+            <span>AI Assistant</span>
+        </a>
+
+        <a href="/resume-history" class="menu-item">
+            <i class="fas fa-clock-rotate-left"></i>
+            <span>Resume History</span>
+        </a>
+
+        <a href="/analytics" class="menu-item">
+            <i class="fas fa-chart-line"></i>
+            <span>ATS Analytics</span>
+        </a>
+
+       
+
+
+        <a href="/feedback" class="menu-item">
+            <i class="fas fa-comments"></i>
+            <span>Feedback</span>
+        </a>
+
+        
+
+    </nav>
+
+    <!-- ================= USER ================= -->
+
+    <div class="sidebar-user">
+
+        <div class="avatar">
+            {{ session.username[0]|upper }}
+        </div>
+
+        <div class="user-info">
+            <strong>{{ session.username }}</strong>
+            <small>Premium Member</small>
+        </div>
+
+    </div>
+
+    
+</aside>

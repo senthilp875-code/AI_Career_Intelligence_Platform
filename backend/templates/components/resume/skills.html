@@ -1,0 +1,104 @@
+<section class="resume-card">
+
+    <!-- ================= SKILLS ================= -->
+
+    <div class="card-header">
+
+        <h2>
+            <i class="fas fa-code"></i>
+            Skills You Have
+        </h2>
+
+    </div>
+
+    <div class="skills-container">
+
+        {% if analysis.skills %}
+
+            {% for skill in analysis.skills %}
+
+                <span class="skill-pill">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    {{ skill }}
+
+                </span>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p class="empty-text">
+
+                No skills detected.
+
+            </p>
+
+        {% endif %}
+
+    </div>
+
+    <!-- ================= MISSING SKILLS ================= -->
+
+    <div class="card-header mt-40">
+
+        <h2>
+
+            <i class="fas fa-triangle-exclamation"></i>
+
+            Missing Skills
+
+        </h2>
+
+    </div>
+
+    <div class="missing-skills-container">
+
+        {% if analysis.skill_gap.missing_skills %}
+
+            {% for skill in analysis.skill_gap.missing_skills %}
+
+                <span class="missing-pill">
+
+                    <i class="fas fa-times-circle"></i>
+
+                    {{ skill }}
+
+                </span>
+
+            {% endfor %}
+
+        {% else %}
+
+            <span class="perfect-skill">
+
+                🎉 Great! No major skills are missing.
+
+            </span>
+
+        {% endif %}
+
+    </div>
+
+    <!-- ================= AI RECOMMENDATION ================= -->
+
+    <div class="card-header mt-40">
+
+        <h2>
+
+            <i class="fas fa-lightbulb"></i>
+
+            AI Recommendation
+
+        </h2>
+
+    </div>
+
+    <div class="recommendation-box">
+
+        Learn the missing skills above to improve your ATS score, hiring chances, and career opportunities.
+
+    </div>
+
+</section>

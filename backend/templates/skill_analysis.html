@@ -1,0 +1,288 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}
+Skill Analysis | TalentIQ AI
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+.skill-page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}
+
+.skill-header {
+    margin-bottom: 25px;
+}
+
+.skill-header h1 {
+    margin: 0;
+    color: #172033;
+    font-size: 30px;
+    font-weight: 750;
+}
+
+.skill-header h1 i {
+    color: #2563eb;
+    margin-right: 8px;
+}
+
+.skill-header p {
+    margin: 7px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* ================= EMPTY STATE ================= */
+
+.skill-empty {
+    background: #ffffff;
+    border: 1px solid #e5eaf2;
+    border-radius: 18px;
+    padding: 55px 25px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, .05);
+}
+
+.skill-empty-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 18px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 28px;
+}
+
+.skill-empty h2 {
+    margin: 0 0 8px;
+    color: #172033;
+    font-size: 21px;
+}
+
+.skill-empty p {
+    margin: 0 auto 22px;
+    max-width: 500px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.skill-upload-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.skill-upload-btn:hover {
+    background: #1d4ed8;
+    color: white;
+}
+
+
+/* ================= SKILL CARD ================= */
+
+.skill-card {
+    background: #ffffff;
+    border: 1px solid #e5eaf2;
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 7px 25px rgba(15, 23, 42, .04);
+}
+
+.skill-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.skill-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.skill-card-header h2 {
+    margin: 0;
+    color: #172033;
+    font-size: 17px;
+}
+
+.skill-card-header p {
+    margin: 3px 0 0;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+
+/* ================= SKILL TAGS ================= */
+
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 13px;
+    border-radius: 9px;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    color: #1d4ed8;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.skill-tag i {
+    font-size: 10px;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 650px) {
+
+    .skill-page {
+        padding: 0 5px 30px;
+    }
+
+    .skill-header h1 {
+        font-size: 25px;
+    }
+
+    .skill-card {
+        padding: 20px;
+    }
+
+}
+
+</style>
+
+
+<div class="skill-page">
+
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="skill-header">
+
+        <h1>
+            <i class="fas fa-brain"></i>
+            Skill Analysis
+        </h1>
+
+        <p>
+            Analyze the technical and professional skills detected from your resume.
+        </p>
+
+    </div>
+
+
+    {% if skills %}
+
+    <!-- ================= DETECTED SKILLS ================= -->
+
+    <div class="skill-card">
+
+        <div class="skill-card-header">
+
+            <div class="skill-card-icon">
+                <i class="fas fa-bolt"></i>
+            </div>
+
+            <div>
+
+                <h2>
+                    Detected Skills
+                </h2>
+
+                <p>
+                    Skills identified from your latest resume analysis
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-list">
+
+            {% for skill in skills %}
+
+                <span class="skill-tag">
+
+                    <i class="fas fa-check"></i>
+
+                    {{ skill }}
+
+                </span>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    {% else %}
+
+    <!-- ================= NO ANALYSIS ================= -->
+
+    <div class="skill-empty">
+
+        <div class="skill-empty-icon">
+
+            <i class="fas fa-file-circle-question"></i>
+
+        </div>
+
+        <h2>
+            No Resume Analysis Available
+        </h2>
+
+        <p>
+            Upload and analyze your resume first. TalentIQ AI will
+            automatically detect your technical and professional skills.
+        </p>
+
+        <a href="/upload" class="skill-upload-btn">
+
+            <i class="fas fa-cloud-arrow-up"></i>
+
+            Analyze Resume
+
+        </a>
+
+    </div>
+
+    {% endif %}
+
+
+</div>
+
+{% endblock %}

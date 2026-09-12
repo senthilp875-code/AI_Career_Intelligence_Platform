@@ -1,0 +1,172 @@
+<div class="job-card">
+
+    <div class="job-top">
+
+        <div class="company">
+
+            <img src="{{ job.logo }}" alt="Company Logo" class="company-logo">
+
+            <div>
+
+                <h3>{{ job.title }}</h3>
+
+                <p>{{ job.company }}</p>
+
+            </div>
+
+        </div>
+
+        <span class="match-score">{{ job.match }}% Match</span>
+
+    </div>
+
+    <div class="job-info">
+
+        <span>
+            <i class="fas fa-location-dot"></i>
+            {{ job.location }}
+        </span>
+
+        <span>
+            <i class="fas fa-briefcase"></i>
+            {{ job.type }}
+        </span>
+
+        <span>
+            <i class="fas fa-indian-rupee-sign"></i>
+            {{ job.salary }}
+        </span>
+
+    </div>
+
+    <p class="job-description">
+        {{ job.description }}
+    </p>
+
+    <div class="skills">
+
+        {% for skill in job.skills %}
+
+        <span class="skill-tag">
+            {{ skill }}
+        </span>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="job-buttons">
+
+        <a href="{{ job.url }}"
+           target="_blank"
+           class="apply-btn">
+
+            <i class="fas fa-paper-plane"></i>
+
+            Apply Now
+
+        </a>
+
+        <button class="details-btn">
+
+            <i class="fas fa-eye"></i>
+
+            View Details
+
+        </button>
+
+    </div>
+
+</div>
+<div class="job-card">
+
+    <div class="job-top">
+
+        <div class="company">
+
+            <img
+                src="https://placehold.co/60x60?text={{ job.company[0] }}"
+                class="company-logo">
+
+            <div>
+
+                <h3>{{ job.title }}</h3>
+
+                <p>{{ job.company }}</p>
+
+            </div>
+
+        </div>
+
+        <span class="match-score">
+
+            {{ job.match }}% Match
+
+        </span>
+
+    </div>
+
+    <div class="job-info">
+
+        <span>
+
+            <i class="fas fa-location-dot"></i>
+
+            {{ job.location }}
+
+        </span>
+
+        <span>
+
+            <i class="fas fa-briefcase"></i>
+
+            {{ job.type }}
+
+        </span>
+
+        <span>
+
+            <i class="fas fa-indian-rupee-sign"></i>
+
+            {{ job.salary }}
+
+        </span>
+
+    </div>
+
+    <p class="job-description">
+
+        {{ job.description }}
+
+    </p>
+
+    <div class="skills">
+
+        {% for skill in job.skills %}
+
+        <span class="skill-tag">
+
+            {{ skill }}
+
+        </span>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="job-buttons">
+
+        <a
+            href="{{ job.url }}"
+            target="_blank"
+            class="apply-btn">
+
+            <i class="fas fa-paper-plane"></i>
+
+            Apply Now
+
+        </a>
+
+    </div>
+
+</div>

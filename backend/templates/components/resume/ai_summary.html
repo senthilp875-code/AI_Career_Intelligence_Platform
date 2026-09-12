@@ -1,0 +1,102 @@
+<section class="ai-summary">
+
+    <div class="summary-header">
+
+        <span class="summary-badge">
+
+            <i class="fas fa-brain"></i>
+
+            AI Executive Summary
+
+        </span>
+
+        <h2>Your Resume at a Glance</h2>
+
+        <p>
+
+            TalentIQ AI has completed a deep analysis of your resume and
+            generated personalized insights to improve your career success.
+
+        </p>
+
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card resume-card">
+
+            <div class="summary-icon">
+
+                <i class="fas fa-file-alt"></i>
+
+            </div>
+
+            <h3>{{ analysis.resume_score }}/100</h3>
+
+            <span>Resume Quality</span>
+
+        </div>
+
+        <div class="summary-card ats-card">
+
+            <div class="summary-icon">
+
+                <i class="fas fa-file-shield"></i>
+
+            </div>
+
+            <h3>{{ analysis.ats_score }}/100</h3>
+
+            <span>ATS Readiness</span>
+
+        </div>
+
+        <div class="summary-card career-card">
+
+            <div class="summary-icon">
+
+                <i class="fas fa-briefcase"></i>
+
+            </div>
+
+            <h3>{{ analysis.job_match }}%</h3>
+
+            <span>Career Match</span>
+
+        </div>
+
+        <div class="summary-card ai-card">
+
+            <div class="summary-icon">
+
+                <i class="fas fa-robot"></i>
+
+            </div>
+
+            <h3>98%</h3>
+
+            <span>AI Confidence</span>
+
+        </div>
+
+    </div>
+
+    <div class="summary-recommendation">
+
+        <div class="recommendation-header">
+
+            <i class="fas fa-lightbulb"></i>
+
+            <h3>AI Recommendation</h3>
+
+        </div>
+
+        <p>
+
+            {{ analysis.ai_summary }}
+
+        </p>
+
+    </div>
+
+</section>

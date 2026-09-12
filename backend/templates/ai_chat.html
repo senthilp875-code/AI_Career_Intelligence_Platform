@@ -1,0 +1,275 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}
+TalentIQ AI Assistant
+{% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/ai_chat.css') }}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="chat-page">
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="chat-header">
+
+        <div class="chat-logo">
+            🤖
+        </div>
+
+        <h1>TalentIQ AI Assistant</h1>
+
+        <p>
+            Your Personal Career Mentor powered by Artificial Intelligence
+        </p>
+
+    </div>
+
+    <!-- ================= ANALYSIS CONTEXT ================= -->
+
+    <div class="chat-context-bar">
+
+        <div class="context-item">
+            <span class="context-label">Resume Score</span>
+            <strong class="context-value score-resume">
+                {{ analysis.resume_score }}/100
+            </strong>
+        </div>
+
+        <div class="context-item">
+            <span class="context-label">ATS Score</span>
+            <strong class="context-value score-ats">
+                {{ analysis.ats_score }}/100
+            </strong>
+        </div>
+
+        <div class="context-item">
+            <span class="context-label">Predicted Role</span>
+            <strong class="context-value">
+                {{ analysis.predicted_job }}
+            </strong>
+        </div>
+
+        <div class="context-item">
+            <span class="context-label">Job Match</span>
+            <strong class="context-value score-match">
+                {{ analysis.job_match }}%
+            </strong>
+        </div>
+
+    </div>
+
+    <!-- ================= CHAT BOX ================= -->
+
+    <div id="chatBox" class="chat-box">
+
+        <!-- ================= AI WELCOME ================= -->
+
+        <div class="bot-message welcome-card">
+
+            <div class="welcome-left">
+
+                <div class="avatar">
+                    🤖
+                </div>
+
+                <div class="welcome-text">
+
+                    <h2>
+                        Welcome, {{ session.username }} 👋
+                    </h2>
+
+                    <p>
+
+                        Welcome to <strong>TalentIQ AI</strong>.
+
+                        Your intelligent AI Career Mentor is ready to help you
+                        analyze resumes, improve ATS scores, discover career
+                        opportunities, prepare for interviews and build a
+                        successful career.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="welcome-features">
+
+                <button type="button"
+                        class="feature-chip"
+                        data-prompt="Review my resume">
+                    📄 Resume Review
+                </button>
+
+                <button type="button"
+                        class="feature-chip"
+                        data-prompt="Improve my ATS score">
+                    📊 ATS Optimization
+                </button>
+
+                <button type="button"
+                        class="feature-chip"
+                        data-prompt="What is my career prediction?">
+                    💼 Career Prediction
+                </button>
+
+                <button type="button"
+                        class="feature-chip"
+                        data-prompt="Generate interview questions">
+                    🎤 Interview Preparation
+                </button>
+
+                <button type="button"
+                        class="feature-chip"
+                        data-prompt="Analyze my skills">
+                    🧠 Skill Analysis
+                </button>
+
+                <button type="button"
+                        class="feature-chip"
+                        data-prompt="Show my career roadmap">
+                    🚀 Career Roadmap
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- ================= QUICK PROMPTS ================= -->
+
+        <div class="quick-prompts">
+
+            <div class="prompt-card"
+                 data-prompt="Review my resume">
+
+                <div class="prompt-icon">
+                    📄
+                </div>
+
+                <h3>Review Resume</h3>
+
+                <p>
+                    Analyze your uploaded resume and receive AI suggestions.
+                </p>
+
+            </div>
+
+            <div class="prompt-card"
+                 data-prompt="Improve my ATS score">
+
+                <div class="prompt-icon">
+                    📊
+                </div>
+
+                <h3>Improve ATS Score</h3>
+
+                <p>
+                    Increase your ATS compatibility with smart recommendations.
+                </p>
+
+            </div>
+
+            <div class="prompt-card"
+                 data-prompt="Suggest best jobs for me">
+
+                <div class="prompt-icon">
+                    💼
+                </div>
+
+                <h3>Find Best Jobs</h3>
+
+                <p>
+                    Discover careers that best match your skills.
+                </p>
+
+            </div>
+
+            <div class="prompt-card"
+                 data-prompt="Generate interview questions">
+
+                <div class="prompt-icon">
+                    🎤
+                </div>
+
+                <h3>Interview Preparation</h3>
+
+                <p>
+                    Practice HR and technical interview questions.
+                </p>
+
+            </div>
+
+            <div class="prompt-card"
+                 data-prompt="Analyze my skills">
+
+                <div class="prompt-icon">
+                    🧠
+                </div>
+
+                <h3>Skill Analysis</h3>
+
+                <p>
+                    Find your strengths and identify missing skills.
+                </p>
+
+            </div>
+
+            <div class="prompt-card"
+                 data-prompt="Show my career roadmap">
+
+                <div class="prompt-icon">
+                    🚀
+                </div>
+
+                <h3>Career Roadmap</h3>
+
+                <p>
+                    Generate your personalized AI learning roadmap.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= CHAT INPUT ================= -->
+
+    <form id="chatForm">
+
+        <div class="chat-input">
+
+            <input
+                id="message"
+                type="text"
+                placeholder="Ask TalentIQ AI anything..."
+                autocomplete="off"
+                maxlength="1000"
+                required>
+
+            <button type="submit" id="sendBtn">
+
+                <i class="fas fa-paper-plane"></i>
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script src="{{ url_for('static', filename='js/ai_chat.js') }}"></script>
+
+{% endblock %}

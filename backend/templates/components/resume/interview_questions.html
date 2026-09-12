@@ -1,0 +1,101 @@
+<section class="interview-section">
+
+    <div class="interview-card">
+
+        <div class="interview-header">
+
+            <h2>
+
+                <i class="fas fa-user-tie"></i>
+
+                AI Interview Preparation
+
+            </h2>
+
+            <span class="ai-badge">
+
+                AI Generated
+
+            </span>
+
+        </div>
+
+        <div class="interview-grid">
+
+            <!-- Technical Questions -->
+
+            <div class="question-box">
+
+                <h3>
+
+                    <i class="fas fa-laptop-code"></i>
+
+                    Technical Questions
+
+                </h3>
+
+                <ul>
+
+                    {% for question in analysis.interview_questions.technical %}
+
+                    <li>{{ question }}</li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+            <!-- HR Questions -->
+
+            <div class="question-box">
+
+                <h3>
+
+                    <i class="fas fa-users"></i>
+
+                    HR Questions
+
+                </h3>
+
+                <ul>
+
+                    {% for question in analysis.interview_questions.hr %}
+
+                    <li>{{ question }}</li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+            <!-- Coding Questions -->
+
+            <div class="question-box">
+
+                <h3>
+
+                    <i class="fas fa-code"></i>
+
+                    Coding Questions
+
+                </h3>
+
+                <ul>
+
+                    {% for question in analysis.interview_questions.coding %}
+
+                    <li>{{ question }}</li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

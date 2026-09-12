@@ -1,0 +1,62 @@
+{% extends "admin/base.html" %}
+{% from "admin/partials/pagination.html" import render_pagination %}
+{% block title %}Resumes | Admin{% endblock %}
+{% block page_heading %}Resume Management{% endblock %}
+{% block content %}
+<form class="admin-search-wrap" method="GET" action="{{ url_for('admin.resumes') }}">
+    <div class="admin-search">
+        <input type="search" name="q" value="{{ q }}" placeholder="Search by filename or username...">
+        <button type="submit" class="admin-btn"><i class="fas fa-magnifying-glass"></i> Search</button>
+    </div>
+</form>
+<section class="admin-panel mt-4">
+    <div class="admin-table-wrap">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Candidate</th>
+                    <th>Document</th>
+                    <th>AI Score</th>
+                    <th>ATS Match</th>
+                    <th>Target Role</th>
+                    <th>Upload Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in resumes %}
+                <tr>
+                    <td>#{{ r[0] }}</td>
+                    <td><div style="font-weight: 700;">@{{ r[1] }}</div></td>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-file-pdf text-danger"></i>
+                            <span style="font-weight: 500; font-size: 0.85rem;">{{ r[2] }}</span>
+                        </div>
+                    </td>
+                    <td><span class="admin-badge success">{{ r[3] }}%</span></td>
+                    <td><span class="admin-badge success">{{ r[4] }}%</span></td>
+                    <td><span style="font-weight: 600; color: var(--primary);">{{ r[5] or 'Not Analyzed' }}</span></td>
+                    <td><span style="font-size: 0.8rem; color: var(--text-muted);">{{ r[6] }}</span></td>
+                    <td class="admin-actions">
+                        <a href="{{ url_for('admin.resume_download', resume_id=r[0]) }}" class="admin-btn btn-muted btn-sm">
+                            <i class="fas fa-download"></i> Get File
+                        </a>
+                        <form method="POST" action="{{ url_for('admin.resume_delete', resume_id=r[0]) }}" onsubmit="return confirm('Delete this resume record and file?');">
+                            <button type="submit" class="admin-btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+
+                {% else %}
+                <tr><td colspan="8" class="admin-empty">No resumes found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {{ render_pagination(pager, q) }}
+</section>
+{% endblock %}

@@ -1,0 +1,1116 @@
+<section class="workspace premium-dashboard">
+
+    <!-- =====================================================
+       HERO
+    ====================================================== -->
+
+    <section class="premium-hero">
+
+        <div class="hero-decoration hero-circle-one"></div>
+        <div class="hero-decoration hero-circle-two"></div>
+
+        <div class="hero-spark spark-one">✦</div>
+        <div class="hero-spark spark-two">✦</div>
+        <div class="hero-spark spark-three">✦</div>
+
+        <!-- Left Robot -->
+
+        <div class="hero-visual hero-robot-area">
+
+            <div class="robot-glow"></div>
+
+            <div class="robot-character">
+                🤖
+            </div>
+
+            <div class="robot-shadow"></div>
+
+        </div>
+
+
+        <!-- Center Content -->
+
+        <div class="hero-content">
+
+            <div class="hero-top-badge">
+                ✨ Let's build your dream career with AI ✨
+            </div>
+
+            <h1>
+                Welcome back,
+                <span>{{ session.username }}</span> 👋
+            </h1>
+
+            <p>
+                You are closer to achieving your dream career.
+                Explore your progress, improve your skills, and
+                take the next smart step toward your future.
+            </p>
+
+            <div class="hero-actions">
+
+                <a
+                    href="/upload"
+                    class="hero-main-btn"
+                >
+                    Analyze My Resume
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+                <a
+                    href="/ai-chat"
+                    class="hero-link-btn"
+                >
+                    <i class="fas fa-robot"></i>
+                    Ask TalentIQ AI
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Right Visual -->
+
+        <div class="hero-visual hero-right-visual">
+
+            <div class="floating-card analytics-card">
+                <i class="fas fa-chart-bar"></i>
+
+                <div class="mini-bars">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="floating-target">
+                <i class="fas fa-bullseye"></i>
+            </div>
+
+            <div class="floating-resume">
+                <i class="fas fa-file-alt"></i>
+                <span>★</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+       STATS
+    ====================================================== -->
+
+    <section class="premium-stats-grid">
+
+
+        <!-- Resume Count -->
+
+        <div class="premium-stat-card">
+
+            <div class="stat-icon purple-icon">
+                <i class="fas fa-file-alt"></i>
+            </div>
+
+            <div class="stat-content">
+
+                <span class="stat-label">
+                    Resumes Analyzed
+                </span>
+
+                <h2 id="resumeCount">
+                    {% if session.analysis %}
+                        1
+                    {% else %}
+                        0
+                    {% endif %}
+                </h2>
+
+                <small class="positive-text">
+                    <i class="fas fa-arrow-up"></i>
+                    Your career progress
+                </small>
+
+            </div>
+
+            <div class="stat-chart purple-chart"></div>
+
+        </div>
+
+
+        <!-- Jobs -->
+
+        <div class="premium-stat-card">
+
+            <div class="stat-icon green-icon">
+                <i class="fas fa-bullseye"></i>
+            </div>
+
+            <div class="stat-content">
+
+                <span class="stat-label">
+                    Jobs Recommended
+                </span>
+
+                <h2>
+                    {% if session.analysis and session.analysis.top_careers %}
+                        {{ session.analysis.top_careers|length }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </h2>
+
+                <small class="positive-text">
+                    <i class="fas fa-arrow-up"></i>
+                    AI career matches
+                </small>
+
+            </div>
+
+            <div class="stat-chart green-chart"></div>
+
+        </div>
+
+
+        <!-- ATS -->
+
+        <div class="premium-stat-card">
+
+            <div class="stat-icon orange-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+
+            <div class="stat-content">
+
+                <span class="stat-label">
+                    Avg ATS Score
+                </span>
+
+                <h2>
+                    {% if session.analysis %}
+                        {{ session.analysis.ats_score }}%
+                    {% else %}
+                        --%
+                    {% endif %}
+                </h2>
+
+                <small class="positive-text">
+                    <i class="fas fa-arrow-up"></i>
+                    Keep improving
+                </small>
+
+            </div>
+
+            <div class="stat-chart orange-chart"></div>
+
+        </div>
+
+
+        <!-- Skills -->
+
+        <div class="premium-stat-card">
+
+            <div class="stat-icon blue-icon">
+                <i class="fas fa-briefcase"></i>
+            </div>
+
+            <div class="stat-content">
+
+                <span class="stat-label">
+                    Skills Identified
+                </span>
+
+                <h2>
+                    {% if session.analysis and session.analysis.skills %}
+                        {{ session.analysis.skills|length }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </h2>
+
+                <small class="positive-text">
+                    <i class="fas fa-arrow-up"></i>
+                    Skills detected
+                </small>
+
+            </div>
+
+            <div class="stat-chart blue-chart"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+       MIDDLE GRID
+    ====================================================== -->
+
+    <section class="dashboard-middle-grid">
+
+
+       <!-- =====================================================
+     FUTURE CAREER
+====================================================== -->
+
+<div class="premium-panel future-career-panel">
+
+    <div class="panel-heading">
+
+        <h3>
+            Where Can You Be in 6 Months?
+        </h3>
+
+        <i class="fas fa-info-circle"></i>
+
+    </div>
+
+
+    {% if session.analysis %}
+
+        {% set predicted_job = session.analysis.predicted_job %}
+        {% set skills = session.analysis.skills %}
+        {% set job_match = session.analysis.job_match %}
+
+
+        <div class="future-career-flow">
+
+
+            <!-- ================= TODAY ================= -->
+
+            <div class="future-step today-step">
+
+                <div class="future-badge">
+                    Today
+                </div>
+
+                <div class="future-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+
+                <h4>
+
+                    {% if skills and skills|length >= 5 %}
+                        {{ predicted_job }} Aspirant
+                    {% elif skills and skills|length > 0 %}
+                        {{ skills[0] }} Learner
+                    {% else %}
+                        Career Explorer
+                    {% endif %}
+
+                </h4>
+
+                <span>
+                    Building Your Career Foundation
+                </span>
+
+            </div>
+
+
+            <div class="future-arrow">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+
+
+            <!-- ================= 3 MONTHS ================= -->
+
+            <div class="future-step intern-step">
+
+                <div class="future-badge">
+                    3 Months
+                </div>
+
+                <div class="future-avatar">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+
+                <h4>
+
+                    {% if job_match >= 70 %}
+                        Junior {{ predicted_job }}
+                    {% else %}
+                        {{ predicted_job }} Trainee
+                    {% endif %}
+
+                </h4>
+
+                <span>
+                    Strengthening Skills & Building Projects
+                </span>
+
+            </div>
+
+
+            <div class="future-arrow">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+
+
+            <!-- ================= 6 MONTHS ================= -->
+
+            <div class="future-step career-step">
+
+                <div class="future-badge green-badge">
+                    6 Months
+                </div>
+
+                <div class="future-avatar">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+
+                <h4>
+                    {{ predicted_job }}
+                </h4>
+
+                <span>
+                    Ready for Career Opportunities
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        <a
+            href="/career-roadmap"
+            class="outline-action-btn"
+        >
+
+            See My Career Roadmap
+
+            <i class="fas fa-arrow-right"></i>
+
+        </a>
+
+
+    {% else %}
+
+
+        <!-- ================= NO RESUME ================= -->
+
+        <div class="future-career-flow">
+
+
+            <div class="future-step today-step">
+
+                <div class="future-badge">
+                    Today
+                </div>
+
+                <div class="future-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+
+                <h4>
+                    Career Explorer
+                </h4>
+
+                <span>
+                    Start by analyzing your resume
+                </span>
+
+            </div>
+
+
+            <div class="future-arrow">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+
+
+            <div class="future-step intern-step">
+
+                <div class="future-badge">
+                    3 Months
+                </div>
+
+                <div class="future-avatar">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+
+                <h4>
+                    Skill Builder
+                </h4>
+
+                <span>
+                    Develop valuable professional skills
+                </span>
+
+            </div>
+
+
+            <div class="future-arrow">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+
+
+            <div class="future-step career-step">
+
+                <div class="future-badge green-badge">
+                    6 Months
+                </div>
+
+                <div class="future-avatar">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+
+                <h4>
+                    Career Ready
+                </h4>
+
+                <span>
+                    Discover your best career path
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        <a
+            href="/upload"
+            class="outline-action-btn"
+        >
+
+            Analyze My Resume
+
+            <i class="fas fa-arrow-right"></i>
+
+        </a>
+
+
+    {% endif %}
+
+</div>
+
+       <!-- =====================================================
+       CAREER XP
+====================================================== -->
+
+<div class="premium-panel xp-panel">
+
+    <div class="panel-heading">
+
+        <h3>
+            Career XP & Level
+        </h3>
+
+        <i class="fas fa-info-circle"></i>
+
+    </div>
+
+
+    <!-- LEVEL -->
+
+    <div class="xp-main">
+
+        <div class="xp-level-icon">
+
+            <i class="fas fa-star"></i>
+
+        </div>
+
+
+        <div>
+
+            <h2>
+                Level {{ career_level }}
+            </h2>
+
+            <p>
+                {{ career_title }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+   <!-- XP PROGRESS -->
+
+<div class="xp-progress">
+
+    <div class="xp-progress-bar">
+
+        <div
+            class="xp-progress-fill"
+            style="width: {{ xp_progress|default(0) }}%;"
+        ></div>
+
+    </div>
+
+    <span>
+
+        {{ current_level_xp|default(0) }}
+        /
+        {{ xp_per_level|default(1000) }}
+        XP
+
+    </span>
+
+</div>
+
+
+    <!-- XP INFORMATION -->
+
+    <div class="xp-bottom-actions">
+
+
+        <div class="xp-small-card">
+
+            <div>
+
+                <i class="fas fa-shield-alt"></i>
+
+            </div>
+
+
+            <span>
+
+                Complete tasks
+
+                <small>
+                    to earn more XP
+                </small>
+
+            </span>
+
+        </div>
+
+
+        <div class="xp-small-card">
+
+            <div>
+
+                <i class="fas fa-gift"></i>
+
+            </div>
+
+
+            <span>
+
+                Keep going!
+
+                <small>
+
+                    {% if analysis %}
+
+                        Resume analyzed successfully
+
+                    {% else %}
+
+                        Analyze your resume to earn XP
+
+                    {% endif %}
+
+                </small>
+
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+        <!-- =====================================================
+           CAREER JOURNEY
+        ====================================================== -->
+
+        <div class="premium-panel journey-panel">
+
+            <div class="panel-heading">
+
+                <h3>
+                    Career Journey
+                </h3>
+
+                <i class="fas fa-info-circle"></i>
+
+            </div>
+
+
+            <div class="journey-steps">
+
+
+                <div class="journey-step completed">
+
+                    <div class="journey-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+
+                    <span>
+                        Student
+                    </span>
+
+                    <small>
+                        <i class="fas fa-check-circle"></i>
+                    </small>
+
+                </div>
+
+
+                <div class="journey-line active-line"></div>
+
+
+                <div class="journey-step completed">
+
+                    <div class="journey-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+
+                    <span>
+                        Skill Build
+                    </span>
+
+                    <small>
+                        <i class="fas fa-check-circle"></i>
+                    </small>
+
+                </div>
+
+
+                <div class="journey-line active-line"></div>
+
+
+                <div class="journey-step active">
+
+                    <div class="journey-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+
+                    <span>
+                        Resume
+                    </span>
+
+                    <b>
+                        Ready
+                    </b>
+
+                </div>
+
+
+                <div class="journey-line"></div>
+
+
+                <div class="journey-step">
+
+                    <div class="journey-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+
+                    <span>
+                        Interview
+                    </span>
+
+                    <b>
+                        Ready
+                    </b>
+
+                </div>
+
+
+                <div class="journey-line"></div>
+
+
+                <div class="journey-step">
+
+                    <div class="journey-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+
+                    <span>
+                        Job
+                    </span>
+
+                    <b>
+                        Ready
+                    </b>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="journey-status">
+
+                <div class="journey-status-icon">
+                    🚀
+                </div>
+
+                <div>
+
+                    <strong>
+                        You are in Resume Ready stage
+                    </strong>
+
+                    <span>
+                        Keep going! You are doing great!
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+   <!-- =====================================================
+   BOTTOM GRID
+===================================================== -->
+
+<section class="dashboard-bottom-grid">
+
+
+    <!-- AI CAREER PERSONALITY -->
+
+    <div class="premium-panel personality-panel">
+
+        <div class="panel-heading">
+
+            <h3>
+                AI Career Personality
+            </h3>
+
+            <i class="fas fa-info-circle"></i>
+
+        </div>
+
+
+        <div class="personality-content">
+
+            <div class="brain-icon">
+                🧠
+            </div>
+
+
+            <div>
+
+                <span>
+                    You are a
+                </span>
+
+
+                <h2>
+                    {{ personality_title }}
+                </h2>
+
+
+                <p>
+                    {{ personality_description }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Dynamic Personality Tags -->
+
+        <div class="personality-tags">
+
+            {% if personality_tags %}
+
+                {% for tag in personality_tags %}
+
+                    <span>
+                        {{ tag }}
+                    </span>
+
+                {% endfor %}
+
+            {% else %}
+
+                <span>Curious</span>
+                <span>Learning</span>
+                <span>Growing</span>
+                <span>Exploring</span>
+
+            {% endif %}
+
+        </div>
+
+
+       
+
+
+        <!-- Dynamic Details -->
+
+        <div
+            class="personality-details"
+            id="personalityDetails"
+            style="display:none;"
+        >
+
+            <div class="personality-detail-box">
+
+                <h4>
+                    Your AI Career Insight
+                </h4>
+
+                <p>
+                    Your career personality is generated from the
+                    skills and information detected in your latest
+                    resume analysis.
+                </p>
+
+                <div class="personality-detail-tags">
+
+                    {% if personality_tags %}
+
+                        {% for tag in personality_tags %}
+
+                            <span>
+                                <i class="fas fa-check-circle"></i>
+                                {{ tag }}
+                            </span>
+
+                        {% endfor %}
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+        
+
+        <!-- Trending Skills -->
+
+        <div class="premium-panel trending-panel">
+
+            <div class="panel-heading">
+
+                <h3>
+                    Trending Skills Right Now
+                </h3>
+
+                <i class="fas fa-info-circle"></i>
+
+            </div>
+
+
+            <div class="trending-content">
+
+
+                <div class="trending-skills-list">
+
+                    {% if session.analysis and session.analysis.skills %}
+
+                        {% for skill in session.analysis.skills[:5] %}
+
+                            <div class="trend-skill">
+
+                                <div class="trend-skill-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+
+                                <span>
+                                    {{ skill }}
+                                </span>
+
+                            </div>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <div class="trend-skill">
+                            <div class="trend-skill-icon">
+                                <i class="fab fa-python"></i>
+                            </div>
+
+                            <span>Python</span>
+                        </div>
+
+                        <div class="trend-skill">
+                            <div class="trend-skill-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+
+                            <span>Power BI</span>
+                        </div>
+
+                        <div class="trend-skill">
+                            <div class="trend-skill-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+
+                            <span>SQL</span>
+                        </div>
+
+                        <div class="trend-skill">
+                            <div class="trend-skill-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+
+                            <span>Data Analytics</span>
+                        </div>
+
+                        <div class="trend-skill">
+                            <div class="trend-skill-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+
+                            <span>Machine Learning</span>
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="trending-visual">
+
+                    <i class="fas fa-chart-bar bar-one"></i>
+                    <i class="fas fa-chart-bar bar-two"></i>
+                    <i class="fas fa-chart-bar bar-three"></i>
+                    <i class="fas fa-star trend-star"></i>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="/upload"
+                class="text-action"
+            >
+
+                Explore All Skills
+
+                <i class="fas fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+
+
+        <!-- Challenge -->
+
+        <div class="premium-panel challenge-panel">
+
+            <div class="panel-heading">
+
+                <h3>
+                    Career Challenge of the Day
+                </h3>
+
+                <i class="fas fa-info-circle"></i>
+
+            </div>
+
+
+            <div class="challenge-content">
+
+                <div class="trophy-icon">
+                    🏆
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Add 3 new skills
+                        <br>
+                        to your profile
+                    </h3>
+
+                    <p>
+                        This will increase your career score
+                        and help you get better job matches.
+                    </p>
+
+                    <strong>
+                        Reward:
+                        ⭐ +5 Career XP
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="/resume-builder"
+                class="challenge-btn"
+            >
+
+                Accept Challenge
+
+            </a>
+
+        </div>
+
+
+
+        <!-- Recommendation -->
+
+        <div class="premium-panel recommendation-panel">
+
+            <div class="panel-heading">
+
+                <h3>
+                    One Thing You Should Do Today
+                </h3>
+
+                <i class="fas fa-info-circle"></i>
+
+            </div>
+
+
+            <div class="recommendation-content">
+
+                <div class="recommendation-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Improve your ATS score
+                        by optimizing your resume.
+                    </h3>
+
+                    <p>
+                        This can increase your job
+                        shortlist chances significantly.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="/resume-builder"
+                class="do-now-btn"
+            >
+
+                Do It Now
+
+                <i class="fas fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+
+    </section>
+
+</section>

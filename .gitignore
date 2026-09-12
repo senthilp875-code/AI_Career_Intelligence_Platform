@@ -1,6 +1,38 @@
+# Virtual environments
 venv/
+.venv/
+env/
+
+# Python cache
 __pycache__/
-*.pyc
+*.py[cod]
+
+# Environment secrets
 .env
+.env.*
+
+# IDE files
 .vscode/
 .idea/
+*.code-workspace
+
+# Windows files
+desktop.ini
+Thumbs.db
+
+# User uploads
+uploads/
+backend/uploads/
+
+# Generated resume files
+backend/AI_Resume.pdf
+backend/AI_Resume.docx
+backend/Professional_Resume.pdf
+backend/TalentIQ_AI_Report.pdf
+
+# Generated reports
+*.log
+
+# Temporary files
+*.tmp
+*.temp

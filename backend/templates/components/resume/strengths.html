@@ -1,0 +1,101 @@
+<section class="strength-section">
+
+    <div class="strength-card">
+
+        <div class="strength-header">
+
+            <h2>
+
+                <i class="fas fa-shield-heart"></i>
+
+                AI Resume Strength Analyzer
+
+            </h2>
+
+            <span class="ai-badge">
+
+                AI Powered
+
+            </span>
+
+        </div>
+
+        <div class="strength-grid">
+
+            <!-- Strengths -->
+
+            <div class="strength-box">
+
+                <h3>
+
+                    <i class="fas fa-circle-check"></i>
+
+                    Strengths
+
+                </h3>
+
+                <ul>
+
+                    {% for item in analysis.feedback.strengths %}
+
+                    <li>{{ item }}</li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+            <!-- Improvements -->
+
+            <div class="strength-box">
+
+                <h3>
+
+                    <i class="fas fa-triangle-exclamation"></i>
+
+                    Improvements
+
+                </h3>
+
+                <ul>
+
+                    {% for item in analysis.feedback.improvements %}
+
+                    <li>{{ item }}</li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+            <!-- Priority Actions -->
+
+            <div class="strength-box">
+
+                <h3>
+
+                    <i class="fas fa-bullseye"></i>
+
+                    Priority Actions
+
+                </h3>
+
+                <ul>
+
+                    {% for item in analysis.feedback.priority_actions %}
+
+                    <li>{{ item }}</li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

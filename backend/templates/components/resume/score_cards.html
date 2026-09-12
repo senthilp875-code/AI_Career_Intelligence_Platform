@@ -1,0 +1,115 @@
+<section class="score-section">
+
+    <!-- Resume Score -->
+
+    <div class="score-card resume">
+
+        <div class="score-circle">
+
+            {{ analysis.resume_score }}%
+
+        </div>
+
+        <div class="score-content">
+
+            <h3>Resume Score</h3>
+
+            <p>Overall Resume Quality</p>
+
+            <span class="score-status excellent">
+
+                <i class="fas fa-star"></i>
+
+                AI Evaluated
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- ATS -->
+
+    <div class="score-card ats">
+
+        <div class="score-circle">
+
+            {{ analysis.ats_score }}%
+
+        </div>
+
+        <div class="score-content">
+
+            <h3>ATS Score</h3>
+
+            <p>Applicant Tracking System</p>
+
+            <span class="score-status ats-status">
+
+                <i class="fas fa-check-circle"></i>
+
+                ATS Ready
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- Career -->
+
+    <div class="score-card career">
+
+        <div class="score-circle">
+
+            {{ analysis.job_match }}%
+
+        </div>
+
+        <div class="score-content">
+
+            <h3>Career Match</h3>
+
+            <p>{{ analysis.predicted_job }}</p>
+
+            <span class="score-status career-status">
+
+                <i class="fas fa-bullseye"></i>
+
+                AI Prediction
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- AI -->
+
+    <div class="score-card ai">
+
+        <div class="score-circle">
+
+            98%
+
+        </div>
+
+        <div class="score-content">
+
+            <h3>AI Confidence</h3>
+
+            <p>Prediction Accuracy</p>
+
+            <span class="score-status ai-status">
+
+                <i class="fas fa-robot"></i>
+
+                AI Online
+
+            </span>
+
+        </div>
+
+    </div>
+
+</section>

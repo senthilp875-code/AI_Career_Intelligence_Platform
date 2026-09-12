@@ -1,0 +1,109 @@
+/* ==========================================
+   TalentIQ AI Layout v8.0
+========================================== */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+body{
+
+    background:#f5f7fb;
+
+    font-family:"Poppins",sans-serif;
+
+    overflow-x:hidden;
+
+}
+
+/* ================= APP ================= */
+
+.app-layout{
+
+    display:flex;
+
+    width:100%;
+
+    min-height:100vh;
+
+}
+
+/* ================= MAIN ================= */
+
+.main-wrapper{
+
+    margin-left:270px;
+
+    width:calc(100% - 270px);
+
+    min-height:100vh;
+
+    transition:all .35s ease;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+/* Sidebar Collapsed */
+
+.sidebar.collapsed ~ .main-wrapper{
+
+    margin-left:85px;
+
+    width:calc(100% - 85px);
+
+}
+
+/* ================= PAGE ================= */
+
+.page-content{
+
+    padding:35px;
+
+    flex:1;
+
+}
+
+/* ================= FOOTER ================= */
+
+.main-footer{
+
+    padding:18px;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    border-top:1px solid #e5e7eb;
+
+    background:white;
+
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:992px){
+
+.main-wrapper{
+
+margin-left:0;
+
+width:100%;
+
+}
+
+.page-content{
+
+padding:20px;
+
+}
+
+}

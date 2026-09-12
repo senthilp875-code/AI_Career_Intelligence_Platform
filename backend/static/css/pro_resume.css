@@ -1,0 +1,169 @@
+/* ================= PROFESSIONAL RESUME ================= */
+
+.pro-resume{
+
+    max-width:900px;
+
+    margin:40px auto;
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    padding:40px;
+
+    box-shadow:0 15px 45px rgba(0,0,0,.08);
+
+}
+
+.resume-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    border-bottom:3px solid #2563eb;
+
+    padding-bottom:25px;
+
+    margin-bottom:30px;
+
+}
+
+.resume-name{
+
+    font-size:38px;
+
+    font-weight:700;
+
+    color:#1e293b;
+
+}
+
+.resume-role{
+
+    font-size:18px;
+
+    color:#2563eb;
+
+    margin-top:8px;
+
+}
+
+.contact-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:10px;
+
+    margin-top:15px;
+
+}
+
+.contact-item{
+
+    font-size:14px;
+
+    color:#555;
+
+}
+
+.resume-section{
+
+    margin-top:35px;
+
+}
+
+.resume-section h2{
+
+    color:#2563eb;
+
+    font-size:22px;
+
+    border-left:6px solid #2563eb;
+
+    padding-left:12px;
+
+    margin-bottom:18px;
+
+}
+
+.skill-grid{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+}
+
+.skill-badge{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+    font-size:14px;
+
+}
+
+.project-card{
+
+    background:#f8fafc;
+
+    border-left:5px solid #2563eb;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    margin-bottom:15px;
+
+}
+
+.download-area{
+
+    display:flex;
+
+    gap:20px;
+
+    justify-content:center;
+
+    margin-top:45px;
+
+}
+
+.download-btn{
+
+    padding:14px 30px;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.download-btn:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+}

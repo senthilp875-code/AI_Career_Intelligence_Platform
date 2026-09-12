@@ -1,0 +1,688 @@
+/* ==========================================
+   TalentIQ AI Chat v1.0
+========================================== */
+
+.chat-page{
+
+max-width:1100px;
+
+margin:auto;
+
+padding:35px;
+
+}
+
+/* ==========================================
+   ANALYSIS CONTEXT BAR
+========================================== */
+
+.chat-context-bar{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:16px;
+
+margin-bottom:25px;
+
+}
+
+.context-item{
+
+background:#fff;
+
+padding:16px 20px;
+
+border-radius:16px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.06);
+
+border:1px solid #e2e8f0;
+
+text-align:center;
+
+}
+
+.context-label{
+
+display:block;
+
+font-size:12px;
+
+font-weight:600;
+
+color:#64748b;
+
+text-transform:uppercase;
+
+letter-spacing:.5px;
+
+margin-bottom:6px;
+
+}
+
+.context-value{
+
+font-size:18px;
+
+color:#0f172a;
+
+}
+
+.score-resume{
+color:#2563eb;
+}
+
+.score-ats{
+color:#7c3aed;
+}
+
+.score-match{
+color:#10b981;
+}
+
+.chat-header{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+text-align:center;
+
+margin-bottom:35px;
+
+}
+
+.chat-logo{
+
+width:90px;
+
+height:90px;
+
+border-radius:50%;
+
+background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:42px;
+
+color:#fff;
+
+box-shadow:0 15px 35px rgba(37,99,235,.35);
+
+}
+
+.chat-header h1{
+
+font-size:40px;
+
+font-weight:700;
+
+margin-top:20px;
+
+color:#0f172a;
+
+}
+
+.chat-header p{
+
+margin-top:12px;
+
+font-size:18px;
+
+color:#64748b;
+
+max-width:700px;
+
+line-height:1.7;
+
+}
+
+.chat-box{
+
+height:520px;
+
+overflow-y:auto;
+
+background:#fff;
+
+border-radius:25px;
+
+padding:30px;
+
+box-shadow:0 20px 45px rgba(0,0,0,.08);
+
+}
+
+.bot-message,
+
+.user-message{
+
+display:flex;
+
+gap:15px;
+
+margin-bottom:25px;
+
+animation:fadeIn .3s ease;
+
+}
+
+.user-message{
+
+flex-direction:row-reverse;
+
+}
+
+.avatar{
+
+width:55px;
+
+height:55px;
+
+border-radius:50%;
+
+background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:24px;
+
+color:#fff;
+
+flex-shrink:0;
+
+}
+
+.user-message .avatar{
+
+background:linear-gradient(135deg,#10b981,#14b8a6);
+
+}
+
+.message{
+
+max-width:75%;
+
+padding:18px 22px;
+
+border-radius:20px;
+
+background:#f8fafc;
+
+line-height:1.8;
+
+box-shadow:0 8px 20px rgba(0,0,0,.05);
+
+}
+
+.user-message .message{
+
+background:#2563eb;
+
+color:#fff;
+
+}
+
+.chat-input{
+
+display:flex;
+
+gap:15px;
+
+margin-top:25px;
+
+}
+
+.chat-input input{
+
+flex:1;
+
+padding:18px 22px;
+
+border:none;
+
+border-radius:999px;
+
+background:#fff;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+font-size:16px;
+
+outline:none;
+
+}
+
+.chat-input button{
+
+width:65px;
+
+height:65px;
+
+border:none;
+
+border-radius:50%;
+
+cursor:pointer;
+
+background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+color:#fff;
+
+font-size:22px;
+
+transition:.3s;
+
+}
+
+.chat-input button:hover{
+
+transform:scale(1.08);
+
+}
+
+.chat-input button:disabled{
+
+opacity:.6;
+
+cursor:not-allowed;
+
+transform:none;
+
+}
+
+.chat-input button.loading i{
+
+animation:pulse .8s infinite;
+
+}
+
+@keyframes pulse{
+
+0%,100%{opacity:1;}
+
+50%{opacity:.4;}
+
+}
+
+.error-message .message{
+
+background:#fef2f2;
+
+border:1px solid #fecaca;
+
+color:#991b1b;
+
+}
+
+.error-message .avatar{
+
+background:linear-gradient(135deg,#ef4444,#f97316);
+
+}
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+transform:translateY(15px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.chat-page{
+
+padding:20px;
+
+}
+
+.chat-context-bar{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.chat-box{
+
+height:430px;
+
+}
+
+.message{
+
+max-width:90%;
+
+}
+
+.chat-header h1{
+
+font-size:26px;
+
+}
+
+}
+/* =====================================
+   QUICK PROMPTS
+===================================== */
+
+.quick-prompts{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:15px;
+
+margin-top:30px;
+
+justify-content:center;
+
+}
+
+.prompt-btn{
+
+padding:14px 24px;
+
+border:none;
+
+border-radius:50px;
+
+background:white;
+
+color:#1e293b;
+
+font-size:15px;
+
+font-weight:600;
+
+cursor:pointer;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+transition:.35s;
+
+}
+
+.prompt-btn:hover{
+
+transform:translateY(-5px);
+
+background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+color:white;
+
+box-shadow:0 20px 40px rgba(37,99,235,.35);
+
+}
+
+.prompt-btn:active{
+
+transform:scale(.96);
+
+}
+/* ==========================================
+   AI THINKING ANIMATION
+========================================== */
+
+.typing-text{
+
+font-weight:600;
+
+color:#2563eb;
+
+font-size:15px;
+
+}
+
+.dots::after{
+
+content:"";
+
+animation:typingDots 1.4s infinite;
+
+}
+
+@keyframes typingDots{
+
+0%{
+
+content:"";
+
+}
+
+25%{
+
+content:".";
+
+}
+
+50%{
+
+content:"..";
+
+}
+
+75%{
+
+content:"...";
+
+}
+
+100%{
+
+content:"";
+
+}
+
+}
+/* ==========================================
+   WELCOME CARD
+========================================== */
+
+.welcome-features{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:12px;
+
+margin-top:20px;
+
+}
+
+.feature-chip{
+
+padding:12px 18px;
+
+border-radius:50px;
+
+background:linear-gradient(135deg,#eff6ff,#f5f3ff);
+
+border:1px solid #dbeafe;
+
+font-weight:600;
+
+font-size:14px;
+
+color:#2563eb;
+
+transition:.3s;
+
+cursor:pointer;
+
+font-family:inherit;
+
+}
+
+.feature-chip:hover{
+
+transform:translateY(-3px);
+
+background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+color:white;
+
+box-shadow:0 12px 30px rgba(37,99,235,.25);
+
+}
+/* ==========================================
+   PREMIUM WELCOME CARD
+========================================== */
+
+.welcome-card{
+
+background:linear-gradient(135deg,#ffffff,#f8fbff);
+
+border:1px solid #e2e8f0;
+
+padding:28px;
+
+border-radius:22px;
+
+box-shadow:0 15px 35px rgba(37,99,235,.08);
+
+}
+
+.welcome-card h2{
+
+margin-bottom:15px;
+
+font-size:28px;
+
+color:#0f172a;
+
+}
+
+.welcome-card p{
+
+color:#64748b;
+
+line-height:1.9;
+
+font-size:16px;
+
+margin-bottom:22px;
+
+}
+/* ==========================================
+PROMPT CARDS
+========================================== */
+
+.quick-prompts{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:20px;
+
+margin-top:35px;
+
+}
+
+.prompt-card{
+
+background:#fff;
+
+padding:25px;
+
+border-radius:20px;
+
+cursor:pointer;
+
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+transition:.35s;
+
+text-align:center;
+
+border:1px solid #edf2f7;
+
+}
+
+.prompt-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 20px 45px rgba(37,99,235,.20);
+
+border-color:#2563eb;
+
+}
+
+.prompt-icon{
+
+font-size:42px;
+
+display:block;
+
+margin-bottom:15px;
+
+}
+
+.prompt-card h3{
+
+margin-bottom:10px;
+
+color:#0f172a;
+
+}
+
+.prompt-card p{
+
+font-size:14px;
+
+color:#64748b;
+
+line-height:1.7;
+
+}
+
+@media(max-width:900px){
+
+.quick-prompts{
+
+grid-template-columns:1fr;
+
+}
+
+}
+/* ==========================================
+   Smooth Hide Animation
+========================================== */
+
+.welcome-card,
+.quick-prompts{
+
+transition:all .4s ease;
+
+}

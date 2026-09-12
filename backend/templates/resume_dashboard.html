@@ -1,0 +1,195 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}
+Resume Analysis | TalentIQ AI
+{% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/resume.css') }}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="resume-dashboard">
+
+    {% include "components/resume/score_cards.html" %}
+
+    {% include "components/resume/profile.html" %}
+
+    
+
+    {% include "components/resume/career.html" %}
+
+    {% include "components/resume/roadmap.html" %}
+
+    {% include "components/resume/recommendations.html" %}
+
+    {% include "components/resume/ai_copilot.html" %}
+
+    {% include "components/resume/strengths.html" %}
+
+    {% include "components/resume/skill_match.html" %}
+
+    {% include "components/resume/interview_questions.html" %}
+
+
+    <!-- ================= RECOMMENDED JOBS ================= -->
+
+    <div class="live-jobs-card">
+
+        <h2>🎯 Recommended Jobs</h2>
+
+        <div class="jobs-grid">
+
+            {% for job in analysis.live_jobs %}
+
+            <div class="job-card">
+
+                <div class="job-top">
+
+                    <div>
+
+                        <h3>{{ job.job_title }}</h3>
+
+                        <p>{{ job.company }}</p>
+
+                    </div>
+
+                    <span class="match-score">
+
+                        {{ job.match_score }}%
+
+                    </span>
+
+                </div>
+
+
+                <div class="job-info">
+
+                    <p>
+
+                        <strong>Location:</strong>
+
+                        {{ job.location }}
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>Salary:</strong>
+
+                        {{ job.salary }}
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>Experience:</strong>
+
+                        {{ job.experience }}
+
+                    </p>
+
+                </div>
+
+
+                <div class="skills">
+
+                    {% for skill in job.skills %}
+
+                    <span class="skill-tag">
+
+                        {{ skill }}
+
+                    </span>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="job-buttons">
+
+                    <a href="{{ job.apply_link }}"
+                       target="_blank"
+                       class="apply-btn">
+
+                        Apply Now
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= AI SUMMARY ================= -->
+
+    {% include "components/resume/ai_summary.html" %}
+
+
+    <!-- ================= RESUME ACTIONS ================= -->
+
+    <div class="resume-actions">
+
+
+        <!-- NEW RESUME -->
+
+        <a href="/new-resume" class="btn-primary">
+
+            <i class="fas fa-plus"></i>
+
+            Analyze New Resume
+
+        </a>
+
+
+       
+
+        <!-- IMPROVE RESUME -->
+
+        <a href="/resume-improvement" class="btn-primary">
+
+            <i class="fas fa-magic"></i>
+
+            Improve My Resume
+
+        </a>
+
+
+        <!-- DOWNLOAD REPORT -->
+
+        <a href="/download-report" class="btn-primary">
+
+            <i class="fas fa-download"></i>
+
+            Download AI Report
+
+        </a>
+
+
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+
+{% block js %}
+
+<script src="{{ url_for('static', filename='js/resume.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,166 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}
+Professional Resume Builder
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/pro_resume.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="pro-resume">
+
+    <!-- HEADER -->
+
+    <div class="resume-header">
+
+        <div>
+
+            <div class="resume-name">
+                {{ session.username }}
+            </div>
+
+            <div class="resume-role">
+                {{ session.analysis.predicted_job }}
+            </div>
+
+            <div class="contact-grid">
+
+                <div class="contact-item">
+                    📧 {{ session.analysis.email or "example@email.com" }}
+                </div>
+
+                <div class="contact-item">
+                    📞 {{ session.analysis.phone or "+91 XXXXX XXXXX" }}
+                </div>
+
+                <div class="contact-item">
+                    📍 India
+                </div>
+
+                <div class="contact-item">
+                    🔗 linkedin.com/in/yourprofile
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SUMMARY -->
+
+    <div class="resume-section">
+
+        <h2>Professional Summary</h2>
+
+        <p>
+
+            {{ resume.sections.summary.content }}
+
+        </p>
+
+    </div>
+
+    <!-- SKILLS -->
+
+    <div class="resume-section">
+
+        <h2>Technical Skills</h2>
+
+        <div class="skill-grid">
+
+            {% for skill in resume.sections.skills.content %}
+
+            <span class="skill-badge">
+
+                {{ skill }}
+
+            </span>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <!-- PROJECTS -->
+
+    <div class="resume-section">
+
+        <h2>Projects</h2>
+
+        {% for project in resume.sections.projects.content %}
+
+        <div class="project-card">
+
+            {{ project }}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <!-- EDUCATION -->
+
+    <div class="resume-section">
+
+        <h2>Education</h2>
+
+        <ul>
+
+            {% for edu in resume.sections.education.content %}
+
+            <li>{{ edu }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <!-- CERTIFICATIONS -->
+
+    <div class="resume-section">
+
+        <h2>Certifications</h2>
+
+        <ul>
+
+            {% for cert in resume.sections.certifications.content %}
+
+            <li>{{ cert }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <!-- DOWNLOAD -->
+
+    <div class="download-area">
+
+        <a href="/professional-resume/pdf"
+           class="download-btn">
+
+            📄 Download PDF
+
+        </a>
+
+        <a href="/professional-resume/docx"
+           class="download-btn">
+
+            📝 Download DOCX
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

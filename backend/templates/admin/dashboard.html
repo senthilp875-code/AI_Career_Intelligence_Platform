@@ -1,0 +1,63 @@
+{% extends "admin/base.html" %}
+{% block title %}Admin Dashboard | TalentIQ AI{% endblock %}
+{% block page_heading %}Dashboard Overview{% endblock %}
+{% block content %}
+<div class="admin-stats-grid">
+    <article class="admin-stat-card">
+        <span class="label">Platform Users</span>
+        <strong>{{ stats.total_users }}</strong>
+        <i class="fas fa-users-viewfinder icon"></i>
+    </article>
+    <article class="admin-stat-card">
+        <span class="label">Total Resumes</span>
+        <strong>{{ stats.total_resumes }}</strong>
+        <i class="fas fa-file-pdf icon"></i>
+    </article>
+    <article class="admin-stat-card">
+        <span class="label">AI Analyses</span>
+        <strong>{{ stats.total_analyses }}</strong>
+        <i class="fas fa-brain icon"></i>
+    </article>
+    <article class="admin-stat-card">
+        <span class="label">Chat Sessions</span>
+        <strong>{{ stats.total_chat_sessions }}</strong>
+        <i class="fas fa-comment-dots icon"></i>
+    </article>
+    <article class="admin-stat-card">
+        <span class="label">Job Recs</span>
+        <strong>{{ stats.total_job_recs }}</strong>
+        <i class="fas fa-briefcase icon"></i>
+    </article>
+</div>
+<section class="admin-panel">
+    <div class="admin-panel-header">
+        <h2><i class="fas fa-bolt-lightning text-warning"></i> Recent System Activity</h2>
+    </div>
+
+    <div class="admin-table-wrap">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Activity</th>
+                    <th>Details</th>
+                    <th>When</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in stats.recent_activity %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                                        <td><span class="admin-badge success">{{ row[1] }}</span></td>
+
+                    <td>{{ row[2] or '—' }}</td>
+                    <td>{{ row[3] }}</td>
+                </tr>
+                {% else %}
+                <tr><td colspan="4" class="admin-empty">No activity recorded yet.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

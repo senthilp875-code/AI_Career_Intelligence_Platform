@@ -1,0 +1,815 @@
+/* =========================================================
+   TALENTIQ AI - CAREER ROADMAP
+   Creative Full Page Route Map
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.career-roadmap-page {
+    width: 100%;
+    min-height: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.career-roadmap-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 24px;
+}
+
+
+.roadmap-header-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+
+.roadmap-title-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: linear-gradient(
+        135deg,
+        #4f46e5,
+        #7c3aed
+    );
+
+    color: white;
+
+    font-size: 22px;
+
+    box-shadow:
+        0 10px 25px rgba(79, 70, 229, 0.25);
+}
+
+
+.career-roadmap-header h1 {
+    margin: 0;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    color: #1e293b;
+}
+
+
+.career-roadmap-header p {
+    margin: 6px 0 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+.roadmap-progress-badge {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 12px 18px;
+
+    border-radius: 30px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    color: #4f46e5;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    box-shadow:
+        0 8px 20px rgba(15, 23, 42, 0.05);
+}
+
+
+/* =========================================================
+   MAIN MAP CONTAINER
+========================================================= */
+
+.roadmap-map-container {
+    position: relative;
+
+    width: 100%;
+    min-height: 650px;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8faff 0%,
+            #f3f6ff 45%,
+            #faf7ff 100%
+        );
+
+    border: 1px solid #e2e8f0;
+
+    box-shadow:
+        0 15px 40px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================================
+   BACKGROUND GRID
+========================================================= */
+
+.roadmap-bg-grid {
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0.35;
+
+    background-image:
+
+        linear-gradient(
+            rgba(99, 102, 241, 0.08) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(99, 102, 241, 0.08) 1px,
+            transparent 1px
+        );
+
+    background-size: 45px 45px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   BACKGROUND CIRCLES
+========================================================= */
+
+.roadmap-bg-circle {
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter: blur(1px);
+
+    pointer-events: none;
+}
+
+
+.circle-one {
+    width: 340px;
+    height: 340px;
+
+    top: -150px;
+    left: -120px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(79, 70, 229, 0.12),
+            transparent 70%
+        );
+}
+
+
+.circle-two {
+    width: 420px;
+    height: 420px;
+
+    right: -180px;
+    top: 100px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(16, 185, 129, 0.10),
+            transparent 70%
+        );
+}
+
+
+.circle-three {
+    width: 380px;
+    height: 380px;
+
+    left: 35%;
+    bottom: -230px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(124, 58, 237, 0.10),
+            transparent 70%
+        );
+}
+
+
+/* =========================================================
+   SVG ROAD
+========================================================= */
+
+.roadmap-route {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 1;
+
+    pointer-events: none;
+}
+
+
+.road-shadow {
+    fill: none;
+
+    stroke: rgba(15, 23, 42, 0.08);
+
+    stroke-width: 26;
+
+    stroke-linecap: round;
+}
+
+
+.road-path {
+    fill: none;
+
+    stroke: #ffffff;
+
+    stroke-width: 15;
+
+    stroke-linecap: round;
+
+    stroke-dasharray: 12 10;
+
+    filter:
+        drop-shadow(
+            0 5px 10px rgba(15, 23, 42, 0.12)
+        );
+}
+
+
+/* =========================================================
+   ROADMAP STOPS
+========================================================= */
+
+.roadmap-stop {
+    position: absolute;
+
+    z-index: 5;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+/* =========================================================
+   NODE
+========================================================= */
+
+.roadmap-node {
+    width: 58px;
+    height: 58px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: white;
+
+    border: 6px solid #eef2ff;
+
+    box-shadow:
+        0 10px 25px rgba(15, 23, 42, 0.15);
+}
+
+
+.node-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #7c3aed
+        );
+
+    color: white;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   STOP CARD
+========================================================= */
+
+.roadmap-stop-card {
+    width: 190px;
+
+    padding: 16px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255, 255, 255, 0.92);
+
+    border:
+        1px solid rgba(226, 232, 240, 0.9);
+
+    box-shadow:
+        0 12px 30px rgba(15, 23, 42, 0.08);
+
+    backdrop-filter:
+        blur(10px);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.roadmap-stop-card:hover {
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 18px 35px rgba(79, 70, 229, 0.15);
+}
+
+
+.stop-number {
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: #6366f1;
+
+    margin-bottom: 6px;
+}
+
+
+.roadmap-stop-card h3 {
+    margin: 0 0 7px;
+
+    font-size: 15px;
+
+    color: #1e293b;
+}
+
+
+.roadmap-stop-card p {
+    margin: 0 0 12px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    color: #64748b;
+}
+
+
+.stop-status {
+    display: inline-flex;
+
+    padding:
+        5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    background: #eef2ff;
+
+    color: #4f46e5;
+}
+
+
+.stop-status.current {
+    background: #dcfce7;
+
+    color: #15803d;
+}
+
+
+/* =========================================================
+   STOP POSITIONS
+========================================================= */
+
+.stop-one {
+    top: 10%;
+    left: 6%;
+}
+
+
+.stop-two {
+    top: 6%;
+    left: 38%;
+}
+
+
+.stop-three {
+    top: 18%;
+    right: 7%;
+}
+
+
+.stop-four {
+    top: 52%;
+    right: 13%;
+}
+
+
+.stop-five {
+    bottom: 7%;
+    left: 42%;
+}
+
+
+/* =========================================================
+   FINAL DESTINATION
+========================================================= */
+
+.roadmap-destination {
+    position: absolute;
+
+    left: 7%;
+    bottom: 13%;
+
+    z-index: 6;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 20px 24px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #312e81,
+            #4f46e5,
+            #7c3aed
+        );
+
+    color: white;
+
+    box-shadow:
+        0 20px 40px rgba(79, 70, 229, 0.30);
+}
+
+
+.destination-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255, 255, 255, 0.15);
+
+    font-size: 25px;
+}
+
+
+.destination-content span {
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    opacity: 0.75;
+}
+
+
+.destination-content h2 {
+    margin:
+        4px 0;
+
+    font-size: 20px;
+}
+
+
+.destination-content p {
+    margin: 0;
+
+    font-size: 12px;
+
+    opacity: 0.85;
+}
+
+
+/* =========================================================
+   DECORATION ICONS
+========================================================= */
+
+.roadmap-decoration {
+    position: absolute;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 55px;
+    height: 55px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255, 255, 255, 0.75);
+
+    color: #6366f1;
+
+    box-shadow:
+        0 10px 25px rgba(15, 23, 42, 0.06);
+
+    font-size: 22px;
+
+    opacity: 0.75;
+}
+
+
+.decoration-laptop {
+    top: 18%;
+    left: 27%;
+
+    transform:
+        rotate(-8deg);
+}
+
+
+.decoration-rocket {
+    top: 8%;
+    right: 8%;
+
+    transform:
+        rotate(10deg);
+
+    color: #f97316;
+}
+
+
+.decoration-chart {
+    bottom: 12%;
+    right: 28%;
+
+    color: #10b981;
+
+    transform:
+        rotate(8deg);
+}
+
+
+.decoration-graduation {
+    bottom: 8%;
+    left: 30%;
+
+    color: #7c3aed;
+
+    transform:
+        rotate(-6deg);
+}
+
+
+/* =========================================================
+   MAP LABELS
+========================================================= */
+
+.map-label {
+    position: absolute;
+
+    z-index: 3;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding:
+        8px 13px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255, 255, 255, 0.8);
+
+    border:
+        1px solid rgba(226, 232, 240, 0.8);
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    color: #64748b;
+
+    backdrop-filter:
+        blur(8px);
+}
+
+
+.map-label i {
+    color: #f59e0b;
+}
+
+
+.label-one {
+    top: 42%;
+    left: 14%;
+}
+
+
+.label-two {
+    top: 42%;
+    right: 18%;
+}
+
+
+.label-three {
+    bottom: 30%;
+    left: 50%;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.roadmap-footer {
+    margin-top: 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+.roadmap-footer-icon {
+    color: #f59e0b;
+}
+
+
+.roadmap-footer p {
+    margin: 0;
+}
+
+
+.roadmap-footer strong {
+    color: #4f46e5;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .roadmap-map-container {
+        min-height: 950px;
+    }
+
+
+    .roadmap-stop {
+        position: relative;
+
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+
+        margin: 25px;
+    }
+
+
+    .roadmap-destination {
+        position: relative;
+
+        left: auto;
+        bottom: auto;
+
+        margin: 25px;
+    }
+
+
+    .roadmap-route {
+        display: none;
+    }
+
+
+    .roadmap-decoration,
+    .map-label {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .career-roadmap-page {
+        padding: 18px;
+    }
+
+
+    .career-roadmap-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 16px;
+    }
+
+
+    .career-roadmap-header h1 {
+        font-size: 24px;
+    }
+
+
+    .roadmap-progress-badge {
+        width: 100%;
+
+        justify-content: center;
+    }
+
+
+    .roadmap-stop {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .roadmap-stop-card {
+        width: 100%;
+    }
+
+
+    .roadmap-destination {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+}
