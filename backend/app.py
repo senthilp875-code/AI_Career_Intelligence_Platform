@@ -1597,6 +1597,9 @@ def resume_history():
         return redirect("/")
 
     connection = get_connection()
+
+    # DictCursor is required because the template uses:
+    # row.job_match, row.resume_score, etc.
     cursor = connection.cursor(pymysql.cursors.DictCursor)
 
     try:
@@ -1605,7 +1608,8 @@ def resume_history():
         # GET RESUME HISTORY
         # =========================================
 
-        cursor.execute("""
+        cursor.execute(
+            """
             SELECT
                 id,
                 resume_name,
@@ -1617,55 +1621,94 @@ def resume_history():
             FROM resume_analysis
             WHERE username = %s
             ORDER BY uploaded_at DESC
-        """, (session["username"],))
+            """,
+            (session["username"],)
+        )
 
         history = cursor.fetchall()
 
+        # Convert numeric database values to float.
+        # This fixes template comparisons such as:
+        # row.job_match >= 80
+        for row in history:
+
+            if row.get("resume_score") is not None:
+                row["resume_score"] = float(row["resume_score"])
+
+            else:
+                row["resume_score"] = 0.0
+
+            if row.get("ats_score") is not None:
+                row["ats_score"] = float(row["ats_score"])
+
+            else:
+                row["ats_score"] = 0.0
+
+            if row.get("job_match") is not None:
+                row["job_match"] = float(row["job_match"])
+
+            else:
+                row["job_match"] = 0.0
 
         # =========================================
         # GET STATISTICS
         # =========================================
 
-        cursor.execute("""
+        cursor.execute(
+            """
             SELECT
                 COUNT(*) AS total_resumes,
                 AVG(ats_score) AS average_ats,
                 MAX(resume_score) AS best_resume
             FROM resume_analysis
             WHERE username = %s
-        """, (session["username"],))
+            """,
+            (session["username"],)
+        )
 
         stats = cursor.fetchone()
-
 
         # =========================================
         # PREPARE STATISTICS
         # =========================================
 
-        total_resumes = stats["total_resumes"] or 0
+        total_resumes = (
+            int(stats["total_resumes"])
+            if stats and stats["total_resumes"] is not None
+            else 0
+        )
 
         average_ats = (
             round(float(stats["average_ats"]), 1)
-            if stats["average_ats"] is not None
+            if stats
+            and stats["average_ats"] is not None
             else 0
         )
 
         best_resume = (
-            stats["best_resume"]
-            if stats["best_resume"] is not None
+            round(float(stats["best_resume"]), 1)
+            if stats
+            and stats["best_resume"] is not None
             else 0
         )
 
+        # =========================================
+        # GET RESUME BUILDER FILES
+        # =========================================
+
+        builder_resumes = []
+
+        try:
+            builder_resumes = list_user_resumes(
+                session["username"]
+            )
+
+        except Exception as exc:
+            print("user_resumes history:", exc)
 
         # =========================================
         # SHOW HISTORY PAGE
         # =========================================
-
-        builder_resumes = []
-        try:
-            builder_resumes = list_user_resumes(session["username"])
-        except Exception as exc:
-            print("user_resumes history:", exc)
 
         return render_template(
             "resume_history.html",
@@ -1675,6 +1718,17 @@ def resume_history():
             average_ats=average_ats,
             best_resume=best_resume
         )
+
+    except Exception as exc:
+
+        print("Resume History Error:", exc)
+
+        flash(
+            "Unable to load resume history. Please try again.",
+            "error"
+        )
+
+        return redirect("/")
 
     finally:
 
@@ -1686,7 +1740,10 @@ def resume_history():
 # DELETE RESUME HISTORY
 # ===============================
 
-@app.route("/delete-resume/<int:resume_id>", methods=["POST"])
+@app.route(
+    "/delete-resume/<int:resume_id>",
+    methods=["POST"]
+)
 def delete_resume(resume_id):
 
     if "username" not in session:
@@ -1699,11 +1756,14 @@ def delete_resume(resume_id):
 
     try:
 
-        cursor.execute("""
+        cursor.execute(
+            """
             DELETE FROM resume_analysis
             WHERE id = %s
             AND username = %s
-        """, (resume_id, username))
+            """,
+            (resume_id, username)
+        )
 
         connection.commit()
 
@@ -1712,11 +1772,14 @@ def delete_resume(resume_id):
             "success"
         )
 
-    except Exception as e:
+    except Exception as exc:
 
         connection.rollback()
 
-        print("Delete Resume History Error:", e)
+        print(
+            "Delete Resume History Error:",
+            exc
+        )
 
         flash(
             "Failed to delete resume analysis.",
@@ -1729,7 +1792,6 @@ def delete_resume(resume_id):
         connection.close()
 
     return redirect("/resume-history")
-
 # ---------------- ANALYTICS ----------------
 
 @app.route("/analytics")

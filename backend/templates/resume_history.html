@@ -1,10 +1,8 @@
-```html
 {% extends "dashboard_base.html" %}
 
 {% block title %}
 Resume History | TalentIQ AI
 {% endblock %}
-
 
 {% block css %}
 
@@ -19,11 +17,6 @@ Resume History | TalentIQ AI
     margin: 0 auto;
     padding: 8px 0 50px;
 }
-
-
-/* =========================================================
-   PAGE HEADER
-   ========================================================= */
 
 .history-header {
     display: flex;
@@ -52,7 +45,6 @@ Resume History | TalentIQ AI
     font-size: 14px;
 }
 
-
 /* =========================================================
    STATISTICS
    ========================================================= */
@@ -67,15 +59,11 @@ Resume History | TalentIQ AI
 .history-stat {
     position: relative;
     overflow: hidden;
-
     background: #ffffff;
     border: 1px solid #e7ebf2;
     border-radius: 17px;
-
     padding: 21px;
-
     box-shadow: 0 7px 25px rgba(15, 23, 42, .045);
-
     transition: .2s ease;
 }
 
@@ -86,17 +74,12 @@ Resume History | TalentIQ AI
 
 .history-stat::after {
     content: "";
-
     position: absolute;
-
     width: 95px;
     height: 95px;
-
     right: -38px;
     bottom: -42px;
-
     border-radius: 50%;
-
     background: #eff6ff;
 }
 
@@ -109,40 +92,30 @@ Resume History | TalentIQ AI
 .history-stat-icon {
     width: 42px;
     height: 42px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     border-radius: 11px;
-
     background: #eff6ff;
     color: #2563eb;
-
     font-size: 17px;
 }
 
 .history-stat-label {
     margin-top: 15px;
-
     color: #94a3b8;
-
     font-size: 11px;
     font-weight: 650;
-
     text-transform: uppercase;
     letter-spacing: .55px;
 }
 
 .history-stat-value {
     margin-top: 4px;
-
     color: #172033;
-
     font-size: 27px;
     font-weight: 750;
 }
-
 
 /* =========================================================
    HISTORY CARD
@@ -150,20 +123,15 @@ Resume History | TalentIQ AI
 
 .history-card {
     background: #ffffff;
-
     border: 1px solid #e7ebf2;
     border-radius: 19px;
-
     box-shadow: 0 8px 30px rgba(15, 23, 42, .045);
-
     overflow: hidden;
 }
 
 .history-card-top {
     padding: 23px 25px;
-
     border-bottom: 1px solid #edf0f5;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -178,34 +146,26 @@ Resume History | TalentIQ AI
 .history-card-title-icon {
     width: 38px;
     height: 38px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     border-radius: 10px;
-
     background: #eff6ff;
     color: #2563eb;
 }
 
 .history-card-title h2 {
     margin: 0;
-
     color: #172033;
-
     font-size: 17px;
     font-weight: 700;
 }
 
 .history-card-title p {
     margin: 3px 0 0;
-
     color: #94a3b8;
-
     font-size: 12px;
 }
-
 
 /* =========================================================
    HISTORY LIST
@@ -215,14 +175,8 @@ Resume History | TalentIQ AI
     padding: 8px 18px 18px;
 }
 
-
-/* =========================================================
-   COLUMN HEADER
-   ========================================================= */
-
 .history-columns {
     display: grid;
-
     grid-template-columns:
         minmax(210px, 1.5fr)
         110px
@@ -231,28 +185,17 @@ Resume History | TalentIQ AI
         100px
         125px
         45px;
-
     gap: 14px;
-
     padding: 12px 26px;
-
     color: #94a3b8;
-
     font-size: 10px;
     font-weight: 700;
-
     text-transform: uppercase;
     letter-spacing: .55px;
 }
 
-
-/* =========================================================
-   HISTORY ITEM
-   ========================================================= */
-
 .history-item {
     display: grid;
-
     grid-template-columns:
         minmax(210px, 1.5fr)
         110px
@@ -261,15 +204,10 @@ Resume History | TalentIQ AI
         100px
         125px
         45px;
-
     align-items: center;
-
     gap: 14px;
-
     padding: 17px 8px;
-
     border-bottom: 1px solid #eef1f5;
-
     transition: .18s ease;
 }
 
@@ -282,7 +220,6 @@ Resume History | TalentIQ AI
     border-radius: 12px;
 }
 
-
 /* =========================================================
    RESUME NAME
    ========================================================= */
@@ -291,22 +228,17 @@ Resume History | TalentIQ AI
     display: flex;
     align-items: center;
     gap: 11px;
-
     min-width: 0;
 }
 
 .resume-icon {
     width: 39px;
     height: 39px;
-
     flex-shrink: 0;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     border-radius: 10px;
-
     background: #f1f5ff;
     color: #2563eb;
 }
@@ -317,12 +249,9 @@ Resume History | TalentIQ AI
 
 .resume-name-text strong {
     display: block;
-
     color: #334155;
-
     font-size: 13px;
     font-weight: 650;
-
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -330,14 +259,10 @@ Resume History | TalentIQ AI
 
 .resume-name-text span {
     display: block;
-
     margin-top: 3px;
-
     color: #94a3b8;
-
     font-size: 11px;
 }
-
 
 /* =========================================================
    SCORE BADGES
@@ -346,13 +271,9 @@ Resume History | TalentIQ AI
 .history-score {
     display: inline-flex;
     align-items: center;
-
     width: fit-content;
-
     padding: 6px 9px;
-
     border-radius: 8px;
-
     font-size: 12px;
     font-weight: 700;
 }
@@ -372,32 +293,23 @@ Resume History | TalentIQ AI
     background: #fff7ed;
 }
 
-
 /* =========================================================
-   JOB
+   JOB / DATE
    ========================================================= */
 
 .history-job {
     color: #475569;
-
     font-size: 12px;
     font-weight: 550;
-
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-
-/* =========================================================
-   DATE
-   ========================================================= */
-
 .history-date {
     color: #64748b;
     font-size: 12px;
 }
-
 
 /* =========================================================
    DELETE BUTTON
@@ -417,19 +329,14 @@ Resume History | TalentIQ AI
 .history-delete-btn {
     width: 34px;
     height: 34px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     border: 1px solid #fee2e2;
     border-radius: 9px;
-
     background: #fff5f5;
     color: #ef4444;
-
     cursor: pointer;
-
     transition: all .2s ease;
 }
 
@@ -437,9 +344,7 @@ Resume History | TalentIQ AI
     background: #fee2e2;
     border-color: #fecaca;
     color: #dc2626;
-
     transform: translateY(-1px);
-
     box-shadow: 0 5px 12px rgba(239, 68, 68, .12);
 }
 
@@ -447,51 +352,39 @@ Resume History | TalentIQ AI
     transform: scale(.95);
 }
 
-
 /* =========================================================
    EMPTY STATE
    ========================================================= */
 
 .history-empty {
     padding: 65px 25px;
-
     text-align: center;
 }
 
 .history-empty-icon {
     width: 62px;
     height: 62px;
-
     margin: 0 auto 16px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     border-radius: 17px;
-
     background: #eff6ff;
     color: #2563eb;
-
     font-size: 24px;
 }
 
 .history-empty h3 {
     margin: 0 0 7px;
-
     color: #334155;
-
     font-size: 17px;
 }
 
 .history-empty p {
     margin: 0;
-
     color: #94a3b8;
-
     font-size: 13px;
 }
-
 
 /* =========================================================
    RESPONSIVE
@@ -511,15 +404,11 @@ Resume History | TalentIQ AI
             45px;
     }
 
-    .history-job {
-        display: none;
-    }
-
+    .history-job,
     .history-date {
         display: none;
     }
 }
-
 
 @media (max-width: 700px) {
 
@@ -549,9 +438,7 @@ Resume History | TalentIQ AI
             80px
             80px
             40px;
-
         gap: 8px;
-
         padding: 15px 5px;
     }
 
@@ -560,7 +447,6 @@ Resume History | TalentIQ AI
         height: 35px;
     }
 }
-
 
 @media (max-width: 480px) {
 
@@ -574,216 +460,121 @@ Resume History | TalentIQ AI
     .history-item > div:nth-child(3) {
         display: none;
     }
-
 }
 
 </style>
 
 {% endblock %}
 
-
 {% block content %}
 
 <div class="history-page">
 
-
-    <!-- =====================================================
-         PAGE HEADER
-         ===================================================== -->
+    <!-- PAGE HEADER -->
 
     <div class="history-header">
 
         <div>
 
             <h1>
-
                 <i class="fas fa-chart-line"></i>
-
                 Resume Performance
-
             </h1>
 
             <p>
-
                 Track how your resumes perform across TalentIQ AI.
-
             </p>
 
         </div>
 
     </div>
 
-
-    <!-- =====================================================
-         STATISTICS
-         ===================================================== -->
+    <!-- STATISTICS -->
 
     <div class="history-stats">
 
-
-        <!-- TOTAL RESUMES -->
-
         <div class="history-stat">
 
             <div class="history-stat-top">
 
                 <div class="history-stat-icon">
-
                     <i class="fas fa-file-lines"></i>
-
                 </div>
 
             </div>
 
             <div class="history-stat-label">
-
                 Total Resumes
-
             </div>
 
             <div class="history-stat-value">
-
                 {{ total_resumes }}
-
             </div>
 
         </div>
-
-
-        <!-- AVERAGE ATS -->
 
         <div class="history-stat">
 
             <div class="history-stat-top">
 
                 <div class="history-stat-icon">
-
                     <i class="fas fa-bullseye"></i>
-
                 </div>
 
             </div>
 
             <div class="history-stat-label">
-
                 Average ATS Score
-
             </div>
 
             <div class="history-stat-value">
-
                 {{ average_ats }}%
-
             </div>
 
         </div>
-
-
-        <!-- BEST SCORE -->
 
         <div class="history-stat">
 
             <div class="history-stat-top">
 
                 <div class="history-stat-icon">
-
                     <i class="fas fa-trophy"></i>
-
                 </div>
 
             </div>
 
             <div class="history-stat-label">
-
                 Best Resume Score
-
             </div>
 
             <div class="history-stat-value">
-
                 {{ best_resume }}%
-
             </div>
 
         </div>
-
 
     </div>
 
+    <!-- RESUME BUILDER DRAFTS -->
 
     {% if builder_resumes %}
+
     <div class="history-card" style="margin-bottom:22px;">
+
         <div class="history-card-top">
+
             <div class="history-card-title">
+
                 <div class="history-card-title-icon">
                     <i class="fas fa-file-pen"></i>
                 </div>
+
                 <div>
+
                     <h2>Saved Resume Builder Drafts</h2>
-                    <p>Reopen a resume to keep editing or download it again.</p>
-                </div>
-            </div>
-        </div>
-        <div class="history-list">
-            {% for item in builder_resumes %}
-            <div class="history-item" style="grid-template-columns: 1.4fr 120px 150px 150px 140px;">
-                <div class="resume-name">
-                    <div class="resume-icon"><i class="fas fa-file-lines"></i></div>
-                    <div class="resume-name-text">
-                        <strong>{{ item.title }}</strong>
-                        <span>{{ item.template }}</span>
-                    </div>
-                </div>
-                <div>
-                    {% if item.ats_score is not none %}
-                    <span class="history-score score-blue">{{ item.ats_score }}%</span>
-                    {% else %}
-                    <span class="history-score">—</span>
-                    {% endif %}
-                </div>
-                <div class="history-date">Created {{ item.created_at or "—" }}</div>
-                <div class="history-date">Updated {{ item.updated_at or "—" }}</div>
-                <div>
-                    <a href="/resume-builder/{{ item.id }}" style="color:#2563eb;font-weight:600;text-decoration:none;">Open in Builder</a>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    {% endif %}
-
-
-    <!-- =====================================================
-         HISTORY CARD
-         ===================================================== -->
-
-    <div class="history-card">
-
-
-        <!-- CARD HEADER -->
-
-        <div class="history-card-top">
-
-            <div class="history-card-title">
-
-                <div class="history-card-title-icon">
-
-                    <i class="fas fa-clock-rotate-left"></i>
-
-                </div>
-
-                <div>
-
-                    <h2>
-
-                        Analysis History
-
-                    </h2>
 
                     <p>
-
-                        Your previous resume performance
-
+                        Reopen a resume to keep editing or download it again.
                     </p>
 
                 </div>
@@ -792,42 +583,127 @@ Resume History | TalentIQ AI
 
         </div>
 
+        <div class="history-list">
+
+            {% for item in builder_resumes %}
+
+            <div class="history-item"
+                 style="grid-template-columns: 1.4fr 120px 150px 150px 140px;">
+
+                <div class="resume-name">
+
+                    <div class="resume-icon">
+                        <i class="fas fa-file-lines"></i>
+                    </div>
+
+                    <div class="resume-name-text">
+
+                        <strong>
+                            {{ item.title }}
+                        </strong>
+
+                        <span>
+                            {{ item.template }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div>
+
+                    {% if item.ats_score is not none %}
+
+                    <span class="history-score score-blue">
+                        {{ item.ats_score }}%
+                    </span>
+
+                    {% else %}
+
+                    <span class="history-score">
+                        —
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+                <div class="history-date">
+                    Created {{ item.created_at or "—" }}
+                </div>
+
+                <div class="history-date">
+                    Updated {{ item.updated_at or "—" }}
+                </div>
+
+                <div>
+
+                    <a href="/resume-builder/{{ item.id }}"
+                       style="color:#2563eb;font-weight:600;text-decoration:none;">
+
+                        Open in Builder
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+    <!-- ANALYSIS HISTORY -->
+
+    <div class="history-card">
+
+        <div class="history-card-top">
+
+            <div class="history-card-title">
+
+                <div class="history-card-title-icon">
+                    <i class="fas fa-clock-rotate-left"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Analysis History
+                    </h2>
+
+                    <p>
+                        Your previous resume performance
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
 
         {% if history %}
-
-
-        <!-- COLUMN HEADERS -->
 
         <div class="history-columns">
 
             <div>Resume</div>
-
             <div>Resume Score</div>
-
             <div>ATS Score</div>
-
             <div>Predicted Role</div>
-
             <div>Job Match</div>
-
             <div>Date</div>
-
             <div></div>
 
         </div>
 
-
-        <!-- =================================================
-             HISTORY LIST
-             ================================================= -->
-
         <div class="history-list">
-
 
             {% for row in history %}
 
             <div class="history-item">
-
 
                 <!-- RESUME -->
 
@@ -856,126 +732,99 @@ Resume History | TalentIQ AI
                         </strong>
 
                         <span>
-
                             AI Resume Analysis
-
                         </span>
 
                     </div>
 
                 </div>
 
-
                 <!-- RESUME SCORE -->
 
                 <div>
 
-                    {% if row.resume_score >= 80 %}
+                    {% if row.resume_score|float >= 80 %}
 
                         <span class="history-score score-green">
-
                             {{ row.resume_score }}%
-
                         </span>
 
-                    {% elif row.resume_score >= 60 %}
+                    {% elif row.resume_score|float >= 60 %}
 
                         <span class="history-score score-blue">
-
                             {{ row.resume_score }}%
-
                         </span>
 
                     {% else %}
 
                         <span class="history-score score-orange">
-
                             {{ row.resume_score }}%
-
                         </span>
 
                     {% endif %}
 
                 </div>
-
 
                 <!-- ATS SCORE -->
 
                 <div>
 
-                    {% if row.ats_score >= 80 %}
+                    {% if row.ats_score|float >= 80 %}
 
                         <span class="history-score score-green">
-
                             {{ row.ats_score }}%
-
                         </span>
 
-                    {% elif row.ats_score >= 60 %}
+                    {% elif row.ats_score|float >= 60 %}
 
                         <span class="history-score score-blue">
-
                             {{ row.ats_score }}%
-
                         </span>
 
                     {% else %}
 
                         <span class="history-score score-orange">
-
                             {{ row.ats_score }}%
-
                         </span>
 
                     {% endif %}
 
                 </div>
 
-
                 <!-- PREDICTED JOB -->
 
-                <div
-                    class="history-job"
-                    title="{{ row.predicted_job or 'Not available' }}"
-                >
+                <div class="history-job"
+                     title="{{ row.predicted_job or 'Not available' }}">
 
                     {{ row.predicted_job or "Not available" }}
 
                 </div>
 
-
                 <!-- JOB MATCH -->
 
                 <div>
 
-                    {% if row.job_match >= 80 %}
+                    {% if row.job_match|float >= 80 %}
 
                         <span class="history-score score-green">
-
                             {{ row.job_match }}%
-
                         </span>
 
-                    {% elif row.job_match >= 60 %}
+                    {% elif row.job_match|float >= 60 %}
 
                         <span class="history-score score-blue">
-
                             {{ row.job_match }}%
-
                         </span>
 
                     {% else %}
 
                         <span class="history-score score-orange">
-
                             {{ row.job_match }}%
-
                         </span>
 
                     {% endif %}
 
                 </div>
-
 
                 <!-- DATE -->
 
@@ -985,24 +834,19 @@ Resume History | TalentIQ AI
 
                 </div>
 
-
                 <!-- DELETE -->
 
                 <div class="history-action">
 
-                    <form
-                        method="POST"
-                        action="/delete-resume/{{ row.id }}"
-                        class="history-delete-form"
-                        onsubmit="return confirm('Are you sure you want to delete this resume analysis?');"
-                    >
+                    <form method="POST"
+                          action="/delete-resume/{{ row.id }}"
+                          class="history-delete-form"
+                          onsubmit="return confirm('Are you sure you want to delete this resume analysis?');">
 
-                        <button
-                            type="submit"
-                            class="history-delete-btn"
-                            title="Delete analysis"
-                            aria-label="Delete {{ row.resume_name }}"
-                        >
+                        <button type="submit"
+                                class="history-delete-btn"
+                                title="Delete analysis"
+                                aria-label="Delete {{ row.resume_name }}">
 
                             <i class="fas fa-trash"></i>
 
@@ -1012,52 +856,36 @@ Resume History | TalentIQ AI
 
                 </div>
 
-
             </div>
 
             {% endfor %}
 
-
         </div>
-
 
         {% else %}
 
-
-        <!-- =================================================
-             EMPTY STATE
-             ================================================= -->
+        <!-- EMPTY STATE -->
 
         <div class="history-empty">
 
             <div class="history-empty-icon">
-
                 <i class="fas fa-file-circle-xmark"></i>
-
             </div>
 
             <h3>
-
                 No Resume Analysis Yet
-
             </h3>
 
             <p>
-
                 Upload your first resume to start tracking your performance.
-
             </p>
 
         </div>
 
-
         {% endif %}
 
-
     </div>
-
 
 </div>
 
 {% endblock %}
-```
