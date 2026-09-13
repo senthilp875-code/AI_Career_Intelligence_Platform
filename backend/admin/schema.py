@@ -1,9 +1,9 @@
 import json
 
 import bcrypt
-import pymysql
 
 from database import get_connection
+
 
 DEFAULT_ADMIN_USERNAME = "admin"
 DEFAULT_ADMIN_PASSWORD = "Admin@123"
@@ -12,7 +12,7 @@ DEFAULT_ADMIN_PASSWORD = "Admin@123"
 def _column_exists(cursor, table, column):
     cursor.execute(
         """
-        SELECT COUNT(*) AS column_count
+        SELECT COUNT(*)
         FROM information_schema.COLUMNS
         WHERE TABLE_SCHEMA = DATABASE()
           AND TABLE_NAME = %s
@@ -22,13 +22,13 @@ def _column_exists(cursor, table, column):
     )
 
     row = cursor.fetchone()
-    return row["column_count"] > 0
+    return row[0] > 0
 
 
 def _table_exists(cursor, table):
     cursor.execute(
         """
-        SELECT COUNT(*) AS table_count
+        SELECT COUNT(*)
         FROM information_schema.TABLES
         WHERE TABLE_SCHEMA = DATABASE()
           AND TABLE_NAME = %s
@@ -37,7 +37,7 @@ def _table_exists(cursor, table):
     )
 
     row = cursor.fetchone()
-    return row["table_count"] > 0
+    return row[0] > 0
 
 
 def ensure_admin_schema():
@@ -173,7 +173,9 @@ def ensure_admin_schema():
             primary_key = cursor.fetchone()
 
             if not primary_key and not _column_exists(
-                cursor, "resume_analysis", "id"
+                cursor,
+                "resume_analysis",
+                "id",
             ):
                 cursor.execute(
                     """
@@ -225,12 +227,11 @@ def ensure_admin_schema():
         # ---------------------------------------------------------
         # DEFAULT ADMIN ACCOUNT
         # ---------------------------------------------------------
-        cursor.execute("SELECT COUNT(*) AS admin_count FROM admins")
+        cursor.execute("SELECT COUNT(*) FROM admins")
 
         row = cursor.fetchone()
 
-        if row["admin_count"] == 0:
-
+        if row[0] == 0:
             hashed = bcrypt.hashpw(
                 DEFAULT_ADMIN_PASSWORD.encode(),
                 bcrypt.gensalt(),
@@ -279,7 +280,6 @@ def ensure_admin_schema():
             )
 
             if not cursor.fetchone():
-
                 cursor.execute(
                     """
                     INSERT INTO app_settings (
