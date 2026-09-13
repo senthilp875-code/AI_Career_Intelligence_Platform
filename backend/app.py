@@ -317,7 +317,7 @@ def register():
 
 # ---------------- LOGIN ----------------
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
 
     username = request.form["username"].strip()
