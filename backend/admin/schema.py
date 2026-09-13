@@ -1,43 +1,56 @@
 import json
-
 import bcrypt
 
 from database import get_connection
 
 
-DEFAULT_ADMIN_USERNAME = "admin"
-DEFAULT_ADMIN_PASSWORD = "Admin@123"
+def _get_first_value(row):
+    """
+    Supports both PyMySQL tuple results and DictCursor results.
+    """
+    if isinstance(row, dict):
+        return next(iter(row.values()))
+
+    return row[0]
 
 
-def _column_exists(cursor, table, column):
+def _column_exists(cursor, table_name, column_name):
     cursor.execute(
         """
         SELECT COUNT(*)
-        FROM information_schema.COLUMNS
+        FROM INFORMATION_SCHEMA.COLUMNS
         WHERE TABLE_SCHEMA = DATABASE()
           AND TABLE_NAME = %s
           AND COLUMN_NAME = %s
         """,
-        (table, column),
+        (table_name, column_name),
     )
 
     row = cursor.fetchone()
-    return row[0] > 0
+    return _get_first_value(row) > 0
 
 
-def _table_exists(cursor, table):
+def _table_exists(cursor, table_name):
     cursor.execute(
         """
         SELECT COUNT(*)
-        FROM information_schema.TABLES
+        FROM INFORMATION_SCHEMA.TABLES
         WHERE TABLE_SCHEMA = DATABASE()
           AND TABLE_NAME = %s
         """,
-        (table,),
+        (table_name,),
     )
 
     row = cursor.fetchone()
-    return row[0] > 0
+    return _get_first_value(row) > 0
+
+
+def _add_column_if_missing(cursor, table_name, column_name, column_definition):
+    if not _column_exists(cursor, table_name, column_name):
+        cursor.execute(
+            f"ALTER TABLE `{table_name}` "
+            f"ADD COLUMN `{column_name}` {column_definition}"
+        )
 
 
 def ensure_admin_schema():
@@ -53,12 +66,12 @@ def ensure_admin_schema():
                 """
                 CREATE TABLE admins (
                     id INT AUTO_INCREMENT PRIMARY KEY,
-                    full_name VARCHAR(120) NOT NULL,
-                    username VARCHAR(80) NOT NULL UNIQUE,
-                    email VARCHAR(120) NOT NULL UNIQUE,
-                    password VARCHAR(255) NOT NULL,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    last_login TIMESTAMP NULL
+                    username VARCHAR(100) NOT NULL UNIQUE,
+                    email VARCHAR(255) UNIQUE,
+                    password_hash VARCHAR(255) NOT NULL,
+                    full_name VARCHAR(255),
+                    is_active TINYINT(1) DEFAULT 1,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
                 """
             )
@@ -70,8 +83,9 @@ def ensure_admin_schema():
             cursor.execute(
                 """
                 CREATE TABLE app_settings (
-                    setting_key VARCHAR(100) PRIMARY KEY,
-                    setting_value TEXT NOT NULL,
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    setting_key VARCHAR(150) NOT NULL UNIQUE,
+                    setting_value TEXT,
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                         ON UPDATE CURRENT_TIMESTAMP
                 )
@@ -86,14 +100,11 @@ def ensure_admin_schema():
                 """
                 CREATE TABLE ai_chat_sessions (
                     id INT AUTO_INCREMENT PRIMARY KEY,
-                    username VARCHAR(80) NOT NULL,
-                    session_key VARCHAR(64) NOT NULL,
-                    message_count INT DEFAULT 0,
-                    started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    last_activity_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                        ON UPDATE CURRENT_TIMESTAMP,
-                    INDEX idx_chat_user (username),
-                    INDEX idx_chat_session (session_key)
+                    username VARCHAR(100),
+                    session_title VARCHAR(255),
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                        ON UPDATE CURRENT_TIMESTAMP
                 )
                 """
             )
@@ -106,11 +117,10 @@ def ensure_admin_schema():
                 """
                 CREATE TABLE job_recommendation_log (
                     id INT AUTO_INCREMENT PRIMARY KEY,
-                    username VARCHAR(80) NOT NULL,
-                    resume_name VARCHAR(255),
-                    job_count INT DEFAULT 0,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    INDEX idx_job_rec_user (username)
+                    username VARCHAR(100),
+                    job_title VARCHAR(255),
+                    match_score DECIMAL(5,2),
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
                 """
             )
@@ -123,177 +133,162 @@ def ensure_admin_schema():
                 """
                 CREATE TABLE user_activity (
                     id INT AUTO_INCREMENT PRIMARY KEY,
-                    username VARCHAR(80) NOT NULL,
-                    activity_type VARCHAR(64) NOT NULL,
-                    description VARCHAR(512),
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    INDEX idx_activity_user (username),
-                    INDEX idx_activity_created (created_at)
+                    username VARCHAR(100),
+                    activity_type VARCHAR(150),
+                    activity_details TEXT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
                 """
             )
 
         # ---------------------------------------------------------
-        # USERS TABLE UPDATES
+        # USERS TABLE - ADD MISSING COLUMNS
         # ---------------------------------------------------------
         if _table_exists(cursor, "users"):
-
-            if not _column_exists(cursor, "users", "is_active"):
-                cursor.execute(
-                    """
-                    ALTER TABLE users
-                    ADD COLUMN is_active TINYINT(1) NOT NULL DEFAULT 1
-                    """
-                )
-
-            if not _column_exists(cursor, "users", "created_at"):
-                cursor.execute(
-                    """
-                    ALTER TABLE users
-                    ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    """
-                )
-
-        # ---------------------------------------------------------
-        # RESUME ANALYSIS TABLE UPDATES
-        # ---------------------------------------------------------
-        if _table_exists(cursor, "resume_analysis"):
-
-            cursor.execute(
-                """
-                SELECT COLUMN_NAME
-                FROM information_schema.KEY_COLUMN_USAGE
-                WHERE TABLE_SCHEMA = DATABASE()
-                  AND TABLE_NAME = 'resume_analysis'
-                  AND CONSTRAINT_NAME = 'PRIMARY'
-                LIMIT 1
-                """
+            _add_column_if_missing(
+                cursor,
+                "users",
+                "is_active",
+                "TINYINT(1) DEFAULT 1",
             )
 
-            primary_key = cursor.fetchone()
+            _add_column_if_missing(
+                cursor,
+                "users",
+                "created_at",
+                "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+            )
 
-            if not primary_key and not _column_exists(
+            _add_column_if_missing(
+                cursor,
+                "users",
+                "skills_json",
+                "TEXT",
+            )
+
+        # ---------------------------------------------------------
+        # RESUME ANALYSIS TABLE - ADD MISSING COLUMNS
+        # ---------------------------------------------------------
+        if _table_exists(cursor, "resume_analysis"):
+            _add_column_if_missing(
                 cursor,
                 "resume_analysis",
-                "id",
-            ):
-                cursor.execute(
-                    """
-                    ALTER TABLE resume_analysis
-                    ADD COLUMN id INT AUTO_INCREMENT PRIMARY KEY FIRST
-                    """
-                )
+                "skills_json",
+                "TEXT",
+            )
 
-            if not _column_exists(cursor, "resume_analysis", "skills_json"):
-                cursor.execute(
-                    """
-                    ALTER TABLE resume_analysis
-                    ADD COLUMN skills_json TEXT NULL
-                    """
-                )
+            _add_column_if_missing(
+                cursor,
+                "resume_analysis",
+                "skill_gap_json",
+                "TEXT",
+            )
 
-            if not _column_exists(cursor, "resume_analysis", "skill_gap_json"):
-                cursor.execute(
-                    """
-                    ALTER TABLE resume_analysis
-                    ADD COLUMN skill_gap_json TEXT NULL
-                    """
-                )
+            _add_column_if_missing(
+                cursor,
+                "resume_analysis",
+                "file_hash",
+                "VARCHAR(255)",
+            )
 
-            if not _column_exists(cursor, "resume_analysis", "file_hash"):
-                cursor.execute(
-                    """
-                    ALTER TABLE resume_analysis
-                    ADD COLUMN file_hash VARCHAR(128) NULL
-                    """
-                )
+            _add_column_if_missing(
+                cursor,
+                "resume_analysis",
+                "analysis_json",
+                "LONGTEXT",
+            )
 
-            if not _column_exists(cursor, "resume_analysis", "analysis_json"):
-                cursor.execute(
-                    """
-                    ALTER TABLE resume_analysis
-                    ADD COLUMN analysis_json LONGTEXT NULL
-                    """
-                )
-
-            if not _column_exists(cursor, "resume_analysis", "extracted_text"):
-                cursor.execute(
-                    """
-                    ALTER TABLE resume_analysis
-                    ADD COLUMN extracted_text LONGTEXT NULL
-                    """
-                )
+            _add_column_if_missing(
+                cursor,
+                "resume_analysis",
+                "extracted_text",
+                "LONGTEXT",
+            )
 
         # ---------------------------------------------------------
         # DEFAULT ADMIN ACCOUNT
         # ---------------------------------------------------------
-        cursor.execute("SELECT COUNT(*) FROM admins")
+        cursor.execute(
+            "SELECT COUNT(*) FROM admins"
+        )
 
         row = cursor.fetchone()
+        admin_count = _get_first_value(row)
 
-        if row[0] == 0:
-            hashed = bcrypt.hashpw(
-                DEFAULT_ADMIN_PASSWORD.encode(),
-                bcrypt.gensalt(),
-            )
+        if admin_count == 0:
+            default_password = "Admin@123"
+            password_hash = bcrypt.hashpw(
+                default_password.encode("utf-8"),
+                bcrypt.gensalt()
+            ).decode("utf-8")
 
             cursor.execute(
                 """
-                INSERT INTO admins (
-                    full_name,
+                INSERT INTO admins
+                (
                     username,
                     email,
-                    password
+                    password_hash,
+                    full_name,
+                    is_active
                 )
-                VALUES (%s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s)
                 """,
                 (
-                    "System Administrator",
-                    DEFAULT_ADMIN_USERNAME,
-                    "admin@talentiq.local",
-                    hashed,
+                    "admin",
+                    "admin@talentiq.com",
+                    password_hash,
+                    "TalentIQ Administrator",
+                    1,
                 ),
             )
 
         # ---------------------------------------------------------
-        # DEFAULT APPLICATION SETTINGS
+        # DEFAULT APP SETTINGS
         # ---------------------------------------------------------
-        defaults = {
+        default_settings = {
             "app_name": "TalentIQ AI",
-            "ai_provider": "local",
-            "ai_model": "career-assistant-v2",
-            "ai_max_message_length": "1000",
-            "supported_file_types": json.dumps(
-                ["pdf", "docx", "doc"]
-            ),
+            "maintenance_mode": "0",
+            "allow_registration": "1",
+            "default_resume_score": "0",
         }
 
-        for key, value in defaults.items():
-
+        for setting_key, setting_value in default_settings.items():
             cursor.execute(
                 """
-                SELECT setting_key
+                SELECT COUNT(*)
                 FROM app_settings
                 WHERE setting_key = %s
                 """,
-                (key,),
+                (setting_key,),
             )
 
-            if not cursor.fetchone():
+            row = cursor.fetchone()
+            setting_exists = _get_first_value(row)
+
+            if setting_exists == 0:
                 cursor.execute(
                     """
-                    INSERT INTO app_settings (
+                    INSERT INTO app_settings
+                    (
                         setting_key,
                         setting_value
                     )
                     VALUES (%s, %s)
                     """,
-                    (key, value),
+                    (
+                        setting_key,
+                        setting_value,
+                    ),
                 )
 
         connection.commit()
 
-        print("Admin database schema checked/created successfully.")
+        print("Admin database tables checked/created successfully.")
+
+    except Exception:
+        connection.rollback()
+        raise
 
     finally:
         cursor.close()
