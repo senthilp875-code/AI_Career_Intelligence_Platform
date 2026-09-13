@@ -131,7 +131,7 @@ TalentIQ AI Team
         return False
 
 from flask import request
-from database import get_connection
+from database import get_connection, ensure_core_schema
 from werkzeug.utils import secure_filename
 
 from resume_parser import extract_text
@@ -177,6 +177,11 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # ---------------- ADMIN PANEL ----------------
+
+try:
+    ensure_core_schema()
+except Exception as exc:
+    print("core schema:", exc)
 
 init_admin(app)
 
