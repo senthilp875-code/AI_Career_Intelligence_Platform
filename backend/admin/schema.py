@@ -12,28 +12,32 @@ DEFAULT_ADMIN_PASSWORD = "Admin@123"
 def _column_exists(cursor, table, column):
     cursor.execute(
         """
-        SELECT COUNT(*)
+        SELECT COUNT(*) AS column_count
         FROM information_schema.COLUMNS
         WHERE TABLE_SCHEMA = DATABASE()
-        AND TABLE_NAME = %s
-        AND COLUMN_NAME = %s
+          AND TABLE_NAME = %s
+          AND COLUMN_NAME = %s
         """,
         (table, column),
     )
-    return cursor.fetchone()[0] > 0
+
+    row = cursor.fetchone()
+    return row["column_count"] > 0
 
 
 def _table_exists(cursor, table):
     cursor.execute(
         """
-        SELECT COUNT(*)
+        SELECT COUNT(*) AS table_count
         FROM information_schema.TABLES
         WHERE TABLE_SCHEMA = DATABASE()
-        AND TABLE_NAME = %s
+          AND TABLE_NAME = %s
         """,
         (table,),
     )
-    return cursor.fetchone()[0] > 0
+
+    row = cursor.fetchone()
+    return row["table_count"] > 0
 
 
 def ensure_admin_schema():
@@ -41,6 +45,9 @@ def ensure_admin_schema():
     cursor = connection.cursor()
 
     try:
+        # ---------------------------------------------------------
+        # ADMINS TABLE
+        # ---------------------------------------------------------
         if not _table_exists(cursor, "admins"):
             cursor.execute(
                 """
@@ -56,6 +63,9 @@ def ensure_admin_schema():
                 """
             )
 
+        # ---------------------------------------------------------
+        # APP SETTINGS TABLE
+        # ---------------------------------------------------------
         if not _table_exists(cursor, "app_settings"):
             cursor.execute(
                 """
@@ -68,6 +78,9 @@ def ensure_admin_schema():
                 """
             )
 
+        # ---------------------------------------------------------
+        # AI CHAT SESSIONS TABLE
+        # ---------------------------------------------------------
         if not _table_exists(cursor, "ai_chat_sessions"):
             cursor.execute(
                 """
@@ -85,6 +98,9 @@ def ensure_admin_schema():
                 """
             )
 
+        # ---------------------------------------------------------
+        # JOB RECOMMENDATION LOG TABLE
+        # ---------------------------------------------------------
         if not _table_exists(cursor, "job_recommendation_log"):
             cursor.execute(
                 """
@@ -99,6 +115,9 @@ def ensure_admin_schema():
                 """
             )
 
+        # ---------------------------------------------------------
+        # USER ACTIVITY TABLE
+        # ---------------------------------------------------------
         if not _table_exists(cursor, "user_activity"):
             cursor.execute(
                 """
@@ -114,10 +133,17 @@ def ensure_admin_schema():
                 """
             )
 
+        # ---------------------------------------------------------
+        # USERS TABLE UPDATES
+        # ---------------------------------------------------------
         if _table_exists(cursor, "users"):
+
             if not _column_exists(cursor, "users", "is_active"):
                 cursor.execute(
-                    "ALTER TABLE users ADD COLUMN is_active TINYINT(1) NOT NULL DEFAULT 1"
+                    """
+                    ALTER TABLE users
+                    ADD COLUMN is_active TINYINT(1) NOT NULL DEFAULT 1
+                    """
                 )
 
             if not _column_exists(cursor, "users", "created_at"):
@@ -128,7 +154,11 @@ def ensure_admin_schema():
                     """
                 )
 
+        # ---------------------------------------------------------
+        # RESUME ANALYSIS TABLE UPDATES
+        # ---------------------------------------------------------
         if _table_exists(cursor, "resume_analysis"):
+
             cursor.execute(
                 """
                 SELECT COLUMN_NAME
@@ -140,7 +170,9 @@ def ensure_admin_schema():
                 """
             )
 
-            if not cursor.fetchone() and not _column_exists(
+            primary_key = cursor.fetchone()
+
+            if not primary_key and not _column_exists(
                 cursor, "resume_analysis", "id"
             ):
                 cursor.execute(
@@ -150,37 +182,55 @@ def ensure_admin_schema():
                     """
                 )
 
-            # IMPORTANT:
-            # All resume_analysis column checks are aligned at the same level.
-
             if not _column_exists(cursor, "resume_analysis", "skills_json"):
                 cursor.execute(
-                    "ALTER TABLE resume_analysis ADD COLUMN skills_json TEXT NULL"
+                    """
+                    ALTER TABLE resume_analysis
+                    ADD COLUMN skills_json TEXT NULL
+                    """
                 )
 
             if not _column_exists(cursor, "resume_analysis", "skill_gap_json"):
                 cursor.execute(
-                    "ALTER TABLE resume_analysis ADD COLUMN skill_gap_json TEXT NULL"
+                    """
+                    ALTER TABLE resume_analysis
+                    ADD COLUMN skill_gap_json TEXT NULL
+                    """
                 )
 
             if not _column_exists(cursor, "resume_analysis", "file_hash"):
                 cursor.execute(
-                    "ALTER TABLE resume_analysis ADD COLUMN file_hash VARCHAR(64) NULL"
+                    """
+                    ALTER TABLE resume_analysis
+                    ADD COLUMN file_hash VARCHAR(128) NULL
+                    """
                 )
 
             if not _column_exists(cursor, "resume_analysis", "analysis_json"):
                 cursor.execute(
-                    "ALTER TABLE resume_analysis ADD COLUMN analysis_json LONGTEXT NULL"
+                    """
+                    ALTER TABLE resume_analysis
+                    ADD COLUMN analysis_json LONGTEXT NULL
+                    """
                 )
 
             if not _column_exists(cursor, "resume_analysis", "extracted_text"):
                 cursor.execute(
-                    "ALTER TABLE resume_analysis ADD COLUMN extracted_text LONGTEXT NULL"
+                    """
+                    ALTER TABLE resume_analysis
+                    ADD COLUMN extracted_text LONGTEXT NULL
+                    """
                 )
 
-        cursor.execute("SELECT COUNT(*) FROM admins")
+        # ---------------------------------------------------------
+        # DEFAULT ADMIN ACCOUNT
+        # ---------------------------------------------------------
+        cursor.execute("SELECT COUNT(*) AS admin_count FROM admins")
 
-        if cursor.fetchone()[0] == 0:
+        row = cursor.fetchone()
+
+        if row["admin_count"] == 0:
+
             hashed = bcrypt.hashpw(
                 DEFAULT_ADMIN_PASSWORD.encode(),
                 bcrypt.gensalt(),
@@ -188,7 +238,12 @@ def ensure_admin_schema():
 
             cursor.execute(
                 """
-                INSERT INTO admins (full_name, username, email, password)
+                INSERT INTO admins (
+                    full_name,
+                    username,
+                    email,
+                    password
+                )
                 VALUES (%s, %s, %s, %s)
                 """,
                 (
@@ -199,30 +254,46 @@ def ensure_admin_schema():
                 ),
             )
 
+        # ---------------------------------------------------------
+        # DEFAULT APPLICATION SETTINGS
+        # ---------------------------------------------------------
         defaults = {
             "app_name": "TalentIQ AI",
             "ai_provider": "local",
             "ai_model": "career-assistant-v2",
             "ai_max_message_length": "1000",
-            "supported_file_types": json.dumps(["pdf", "docx", "doc"]),
+            "supported_file_types": json.dumps(
+                ["pdf", "docx", "doc"]
+            ),
         }
 
         for key, value in defaults.items():
+
             cursor.execute(
-                "SELECT setting_key FROM app_settings WHERE setting_key = %s",
+                """
+                SELECT setting_key
+                FROM app_settings
+                WHERE setting_key = %s
+                """,
                 (key,),
             )
 
             if not cursor.fetchone():
+
                 cursor.execute(
                     """
-                    INSERT INTO app_settings (setting_key, setting_value)
+                    INSERT INTO app_settings (
+                        setting_key,
+                        setting_value
+                    )
                     VALUES (%s, %s)
                     """,
                     (key, value),
                 )
 
         connection.commit()
+
+        print("Admin database schema checked/created successfully.")
 
     finally:
         cursor.close()
